@@ -51,6 +51,8 @@
   <ItemGroup>
     <Compile Include="clsAddress.cs" />
     <Compile Include="clsDataConnection.cs" />
+    <Compile Include="clsOrder.cs" />
+    <Compile Include="clsSupplier.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
