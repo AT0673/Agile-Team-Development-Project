@@ -1,7 +1,16 @@
-﻿namespace Testing3
+﻿using System;
+
+namespace ClassLibrary
 {
     public class clsOrder
     {
-        public int OrderID { get; internal set; }
+        public bool isGuestOrder { get; set; }
+
+        public int OrderID { get; set; }
+        public int CustomerID { get; set; }
+        public DateTime OrderDate { get; set; }
+        public decimal TotalPrice { get; set; }
+        public string Status { get; set; }
+        public int ProductID { get; set; }
     }
 }
