@@ -7,7 +7,6 @@
     <title></title>
 </head>
 <body>
-    this is OrderViewer.aspx
     <form id="form1" runat="server">
         <div>
         </div>
