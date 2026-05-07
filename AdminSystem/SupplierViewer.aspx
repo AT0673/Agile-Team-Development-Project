@@ -9,7 +9,7 @@
 <body>
     <form id="form1" runat="server">
         <div>
-        </div>
+            Supplier Viewer Page</div>
     </form>
 </body>
 </html>
