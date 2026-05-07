@@ -13,17 +13,17 @@ namespace ClassLibrary
         //Private data member for the TotalPrice property
         private Decimal mTotalPrice;
         //Private data member for the isGuestOrder property
-        private bool mIsGuestOrder;
+        private bool misGuestOrder;
         //Private data member for the ProductID property
         private int mProductID;
         //Private data member for the Status property
-        private String mStatus;
+        private String mOrderStatus;
 
         //isGuestOrder public property
         public bool isGuestOrder
         {
-            get { return mIsGuestOrder; }
-            set { mIsGuestOrder = value; }
+            get { return misGuestOrder; }
+            set { misGuestOrder = value; }
         }
 
         //OrderID public property
@@ -55,8 +55,8 @@ namespace ClassLibrary
         //Status public property
         public string Status
         {
-            get { return mStatus; }
-            set { mStatus = value; }
+            get { return mOrderStatus; }
+            set { mOrderStatus = value; }
         }
         //ProductID public property
         public int ProductID
@@ -67,16 +67,36 @@ namespace ClassLibrary
 
         public bool Find(int orderID)
         {
-            //Set the private data member to the test data value
-            mOrderID = 21;
-            mCustomerID = 13;
-            mOrderDate = Convert.ToDateTime("07/05/2026");
-            mTotalPrice = 20.00m;
-            mIsGuestOrder = false;
-            mProductID = 1;
-            mStatus = "Pending";
-            //always return true
-            return true;
+            //Create an instance of the data connection
+            clsDataConnection DB = new clsDataConnection();
+            //Add the parameter for the OrderID to search for
+            DB.AddParameter("@OrderID", orderID);
+            //Execute the stored procedure
+            DB.Execute("sproc_tblOrder_FilterByOrderID");
+            //If one record is found (there should be either one or zero!)
+            if (DB.Count == 1)
+            {
+                //Set the private data member to the test data value
+                mOrderID = Convert.ToInt32(DB.DataTable.Rows[0]["OrderID"]);
+                //Check if CustomerID is not DBNull before converting (this handles the case where CustomerID might be null in the database (e.g. a guest order))
+                if (DB.DataTable.Rows[0]["CustomerID"] != DBNull.Value)
+                    mCustomerID = Convert.ToInt32(DB.DataTable.Rows[0]["CustomerID"]);
+                else
+                    mCustomerID = 0; // or handle as appropriate
+                mOrderDate = Convert.ToDateTime(DB.DataTable.Rows[0]["OrderDate"]);
+                mTotalPrice = Convert.ToDecimal(DB.DataTable.Rows[0]["TotalPrice"]);
+                misGuestOrder = Convert.ToBoolean(DB.DataTable.Rows[0]["isGuestOrder"]);
+                mProductID = Convert.ToInt32(DB.DataTable.Rows[0]["ProductID"]);
+                mOrderStatus = Convert.ToString(DB.DataTable.Rows[0]["OrderStatus"])?.Trim();
+                //Return that everything worked OK
+                return true;
+            }
+            //if no record was found
+            else
+            {
+                //return false
+                return false;
+            }
         }
     }
 }
