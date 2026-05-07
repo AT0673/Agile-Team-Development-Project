@@ -47,6 +47,8 @@
         <asp:Button ID="btnOK"     runat="server" Text="OK"     style="position:absolute; left:130px; top:300px; width:60px;" OnClick="btnOK_Click" />
         <asp:Button ID="btnCancel" runat="server" Text="Cancel" style="position:absolute; left:200px; top:300px; width:60px;" />
 
+        <asp:Button ID="btnFind"   runat="server" Text="Find"   style="position:absolute; left:270px; top:300px; width:60px;" OnClick="btnFind_Click" />
+
     </form>
 </body>
 </html>

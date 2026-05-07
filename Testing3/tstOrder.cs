@@ -133,11 +133,11 @@ namespace Testing3
             //create a boolean to assume the data is OK (assume it is)
             Boolean OK = true;
             //create some test data to use with the method
-            Int32 OrderID = 21;
+            Int32 OrderID = 4;
             //invoke the method
             Found = AnOrder.Find(OrderID);
             //check the order id
-            if (AnOrder.OrderID != 21)
+            if (AnOrder.OrderID != 4)
             {
                 Found = false;
             }
@@ -155,7 +155,7 @@ namespace Testing3
             //create a boolean to assume the data is OK (assume it is)
             Boolean OK = true;
             //create some test data to use with the method
-            Int32 OrderID = 21;
+            Int32 OrderID = 4;
             //invoke the method
             Found = AnOrder.Find(OrderID);
             //check the customer id
@@ -177,7 +177,7 @@ namespace Testing3
             //create a boolean to assume the data is OK (assume it is)
             Boolean OK = true;
             //create some test data to use with the method
-            Int32 OrderID = 21;
+            Int32 OrderID = 4;
             //invoke the method
             Found = AnOrder.Find(OrderID);
             //Check the OrderDate property
@@ -200,7 +200,7 @@ namespace Testing3
             //create a boolean to assume the data is OK (assume it is)
             Boolean OK = true;
             //create some test data to use with the method
-            Int32 OrderID = 21;
+            Int32 OrderID = 4;
             //invoke the method
             Found = AnOrder.Find(OrderID);
             //Check the TotalPrice property
@@ -222,7 +222,7 @@ namespace Testing3
             //create a boolean to assume the data is OK (assume it is)
             Boolean OK = true;
             //Create some test data to use with the method
-            Int32 OrderID = 21;
+            Int32 OrderID = 4;
             //Invoke the method
             Found = AnOrder.Find(OrderID);
             //Check the Status property
@@ -244,9 +244,9 @@ namespace Testing3
             //create a boolean to assume the data is OK (assume it is)
             Boolean OK = true;
             //Create some test data to use with the method
-            Int32 ProductID = 21;
+            Int32 OrderID = 4;
             //Invoke the method
-            Found = AnOrder.Find(ProductID);
+            Found = AnOrder.Find(OrderID);
             //Check the ProductID property
             if (AnOrder.ProductID != 1)
             {
@@ -266,14 +266,15 @@ namespace Testing3
             //create a boolean to assume the data is OK (assume it is)
             Boolean OK = true;
             //Create some test data to use with the method
-            Int32 ProductID = 21;
+            Int32 OrderID = 1;
             //Invoke the method
-            Found = AnOrder.Find(ProductID);
+            Found = AnOrder.Find(OrderID);
             //Check the isGuestOrder property
             if (AnOrder.isGuestOrder != false)
             {
                 OK = false;
             }
+            Assert.IsTrue(OK);
         }
 
     }
