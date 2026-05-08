@@ -17,10 +17,15 @@ public partial class _1_DataEntry : System.Web.UI.Page
     {
         clsProduct AnProduct = new clsProduct();
 
+        AnProduct.ProductID = Convert.ToInt32(txtProductID.Text);
         AnProduct.ProductName = txtProductName.Text;
+        AnProduct.ProductAmount -= Convert.ToInt32(txtProductAmount.Text);
+        AnProduct.StockArrivalDate = Convert.ToDateTime(txtStockArrivalDate.Text);
+        AnProduct.SupplierID = Convert.ToInt32(txtSupplierID.Text);
+        AnProduct.InStock = InStock.Checked;
 
         Session["AnProduct"] = AnProduct;
 
-        Response.Redirect("StockViewer,aspx");
+        Response.Redirect("StockViewer.aspx");
     }
 }
