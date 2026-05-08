@@ -41,7 +41,7 @@ namespace Testing2
         }
 
         [TestMethod]
-        public void     StockArrivalDateOK()
+        public void StockArrivalDateOK()
         {
             clsProduct AnProduct = new clsProduct();
 
@@ -83,6 +83,101 @@ namespace Testing2
             AnProduct.ProductName = TestData;
 
             Assert.AreEqual(AnProduct.ProductName, TestData);
+        }
+        [TestMethod]
+        public void FindMethodOK()
+        {
+            clsProduct AnProduct = new clsProduct();
+            Boolean Found = false;
+            Int32 ProductID = 2;
+            Found = AnProduct.Find(ProductID);
+            Assert.IsTrue(Found);
+
+        }
+
+        [TestMethod]
+        public void TestProductIDFound()
+        {
+            clsProduct AnProduct = new clsProduct();
+            Boolean Found = false;
+            Boolean OK = true;
+            Int32 ProductID = 2;
+            Found = AnProduct.Find(ProductID);
+            if (AnProduct.ProductID != 2)
+            {
+                OK = false;
+            }
+            Assert.IsTrue(OK);
+        }
+        [TestMethod]
+        public void TestProductAmountFound()
+        {
+            clsProduct AnProduct = new clsProduct();
+            Boolean Found = false;
+            Boolean OK = true;
+            Int32 ProductID = 2;
+            Found = AnProduct.Find(ProductID);
+            if (AnProduct.ProductAmount != 0)
+            {
+                OK = false;
+            }
+            Assert.IsTrue(OK);
+        }
+        [TestMethod]
+        public void TestStockArrivalDateFound()
+        {
+            clsProduct AnProduct = new clsProduct();
+            Boolean Found = false;
+            Boolean OK = true;
+            Int32 ProductID = 2;
+            Found = AnProduct.Find(ProductID);
+            if (AnProduct.StockArrivalDate != DateTime.Now.Date)
+            {
+                OK = false;
+            }
+            Assert.IsTrue(OK);
+        }
+        [TestMethod]
+        public void TestSupplierIDFound()
+        {
+            clsProduct AnProduct = new clsProduct();
+            Boolean Found = false;
+            Boolean OK = true;
+            Int32 ProductID = 2;
+            Found = AnProduct.Find(ProductID);
+            if (AnProduct.SupplierID != 0)
+            {
+                OK = false;
+            }
+            Assert.IsTrue(OK);
+        }
+        [TestMethod]
+        public void TestInStockFound()
+        {
+            clsProduct AnProduct = new clsProduct();
+            Boolean Found = false;
+            Boolean OK = true;
+            Int32 ProductID = 2;
+            Found = AnProduct.Find(ProductID);
+            if (AnProduct.InStock != false)
+            {
+                OK = false;
+            }
+            Assert.IsTrue(OK);
+        }
+        [TestMethod]
+        public void TestProductNameFound()
+        {
+            clsProduct AnProduct = new clsProduct();
+            Boolean Found = false;
+            Boolean OK = true;
+            Int32 ProductID = 2;
+            Found = AnProduct.Find(ProductID);
+            if (AnProduct.ProductName != "Product")
+            {
+                OK = false;
+            }
+            Assert.IsTrue(OK);
         }
     }
 }
