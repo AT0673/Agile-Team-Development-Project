@@ -14,6 +14,12 @@ public partial class _1Viewer : System.Web.UI.Page
 
         AnProduct = (clsProduct)Session["AnProduct"];
 
-        Response.Write(AnProduct.ProductID);
+        Response.Write("Product ID: " + AnProduct.ProductID + "<br />");
+        Response.Write("Product Name: " + AnProduct.ProductName + "<br />");
+        Response.Write("Product Amount: " + AnProduct.ProductAmount + "<br />");
+        Response.Write("Stock Arrival Date: " + AnProduct.StockArrivalDate + "<br />");
+        Response.Write("Supplier ID: " + AnProduct.SupplierID + "<br />");
+        Response.Write("In Stock: " + AnProduct.InStock + "<br />");
+
     }
 }
