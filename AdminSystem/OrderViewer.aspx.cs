@@ -13,7 +13,15 @@ public partial class _1Viewer : System.Web.UI.Page
         //create a new instance of clsOrder
         clsOrder AnOrder = new clsOrder();
         //get the data from the session object
-        AnOrder = (clsOrder)Session["AnOrder"];
+        if (Session["AnOrder"] != null)
+        {
+            AnOrder = (clsOrder)Session["AnOrder"];
+        }
+        else
+        {
+            //Redirect to the data entry page if there is no order in the session
+            Response.Redirect("OrderEntry.aspx");
+        }
         //display the order details for this entry
         Response.Write("Order ID: " + AnOrder.OrderID + "<br />");
         Response.Write("Customer ID: " + AnOrder.CustomerID + "<br />");
@@ -21,6 +29,6 @@ public partial class _1Viewer : System.Web.UI.Page
         Response.Write("Total Price: " + AnOrder.TotalPrice + "<br />");
         Response.Write("Status: " + AnOrder.Status + "<br />");
         Response.Write("Product ID: " + AnOrder.ProductID + "<br />");
-        Response.Write("Is Guest Order: " + AnOrder.isGuestOrder + "<br />");
+        Response.Write("Is Guest Order: " + AnOrder.IsGuestOrder + "<br />");
     }
 }
