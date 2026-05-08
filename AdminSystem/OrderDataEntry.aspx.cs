@@ -30,7 +30,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
         //Capture the product ID
         AnOrder.ProductID = Convert.ToInt32(txtProductID.Text);
         //Capture whether this is a guest order
-        AnOrder.isGuestOrder = chkIsGuestOrder.Checked;
+        AnOrder.IsGuestOrder = chkIsGuestOrder.Checked;
         //Store the order in the session object
         Session["AnOrder"] = AnOrder;
         //navigate to the viewer page
@@ -50,7 +50,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
         //find the record
         Found = AnOrder.Find(OrderID);
         //if found
-        if (Found == true)
+        if (Found)
         {
             //display the values of the properties in the form
             txtCustomerID.Text = AnOrder.CustomerID.ToString();
@@ -58,7 +58,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
             txtTotalPrice.Text = AnOrder.TotalPrice.ToString();
             txtStatus.Text = AnOrder.Status;
             txtProductID.Text = AnOrder.ProductID.ToString();
-            chkIsGuestOrder.Checked = AnOrder.isGuestOrder;
+            chkIsGuestOrder.Checked = AnOrder.IsGuestOrder;
         }
     }
 }

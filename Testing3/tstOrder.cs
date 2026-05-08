@@ -83,7 +83,7 @@ namespace Testing3
         }
 
         [TestMethod]
-        public void isGuestOrderOK()
+        public void IsGuestOrderOK()
         {
             //create an instance of the class we want to create
             clsOrder AnOrder = new clsOrder();
@@ -266,7 +266,7 @@ namespace Testing3
             //create a boolean to assume the data is OK (assume it is)
             Boolean OK = true;
             //Create some test data to use with the method
-            Int32 OrderID = 1;
+            Int32 OrderID = 4;
             //Invoke the method
             Found = AnOrder.Find(OrderID);
             //Check the isGuestOrder property
