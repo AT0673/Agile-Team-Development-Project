@@ -50,7 +50,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
         //find the record
         Found = AnOrder.Find(OrderID);
         //if found
-        if (Found == true)
+        if (Found)
         {
             //display the values of the properties in the form
             txtCustomerID.Text = AnOrder.CustomerID.ToString();
