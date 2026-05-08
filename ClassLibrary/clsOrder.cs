@@ -5,19 +5,19 @@ namespace ClassLibrary
     public class clsOrder
     {
         //Private data member for the OrderID property
-        private Int32 mOrderID;
+        private int mOrderID;
         //Private data member for the CustomerID property
-        private Int32 mCustomerID;
+        private int mCustomerID;
         //Private data member for the OrderDate property
         private DateTime mOrderDate;
         //Private data member for the TotalPrice property
-        private Decimal mTotalPrice;
+        private decimal mTotalPrice;
         //Private data member for the isGuestOrder property
         private bool misGuestOrder;
         //Private data member for the ProductID property
         private int mProductID;
         //Private data member for the Status property
-        private String mOrderStatus;
+        private string mOrderStatus;
 
         //isGuestOrder public property
         public bool isGuestOrder
@@ -27,7 +27,7 @@ namespace ClassLibrary
         }
 
         //OrderID public property
-        public Int32 OrderID
+        public int OrderID
         {
             //this line of code sends data out of the property
             get { return mOrderID; }
