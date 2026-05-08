@@ -5,29 +5,29 @@ namespace ClassLibrary
     public class clsOrder
     {
         //Private data member for the OrderID property
-        private int mOrderID;
+        private Int32 mOrderID;
         //Private data member for the CustomerID property
-        private int mCustomerID;
+        private Int32 mCustomerID;
         //Private data member for the OrderDate property
         private DateTime mOrderDate;
         //Private data member for the TotalPrice property
-        private decimal mTotalPrice;
-        //Private data member for the IsGuestOrder property
-        private bool mIsGuestOrder;
+        private Decimal mTotalPrice;
+        //Private data member for the isGuestOrder property
+        private bool misGuestOrder;
         //Private data member for the ProductID property
         private int mProductID;
         //Private data member for the Status property
-        private string mOrderStatus;
+        private String mOrderStatus;
 
-        //IsGuestOrder public property
-        public bool IsGuestOrder
+        //isGuestOrder public property
+        public bool isGuestOrder
         {
-            get { return mIsGuestOrder; }
-            set { mIsGuestOrder = value; }
+            get { return misGuestOrder; }
+            set { misGuestOrder = value; }
         }
 
         //OrderID public property
-        public int OrderID
+        public Int32 OrderID
         {
             //this line of code sends data out of the property
             get { return mOrderID; }
@@ -85,7 +85,7 @@ namespace ClassLibrary
                     mCustomerID = 0; // or handle as appropriate
                 mOrderDate = Convert.ToDateTime(DB.DataTable.Rows[0]["OrderDate"]);
                 mTotalPrice = Convert.ToDecimal(DB.DataTable.Rows[0]["TotalPrice"]);
-                mIsGuestOrder = Convert.ToBoolean(DB.DataTable.Rows[0]["isGuestOrder"]);
+                misGuestOrder = Convert.ToBoolean(DB.DataTable.Rows[0]["isGuestOrder"]);
                 mProductID = Convert.ToInt32(DB.DataTable.Rows[0]["ProductID"]);
                 mOrderStatus = Convert.ToString(DB.DataTable.Rows[0]["OrderStatus"])?.Trim();
                 //Return that everything worked OK
