@@ -185,7 +185,7 @@ namespace Testing5
             //invoke the method 
             Found = aCustomer.Find(CustomerID);
             //check the house no property 
-            if (aCustomer.CustomerID != 123)
+            if (aCustomer.CustomerID != 3)
             {
                 OK = false;
             }
@@ -207,7 +207,7 @@ namespace Testing5
             //invoke the method 
             Found = aCustomer.Find(CustomerID);
             //check the house no property 
-            if (aCustomer.CustomerFirstName != "Lewis")
+            if (aCustomer.CustomerFirstName != "Mickey")
             {
                 OK = false;
             }
@@ -251,7 +251,7 @@ namespace Testing5
             //invoke the method 
             Found = aCustomer.Find(CustomerID);
             //check the house no property 
-            if (aCustomer.CustomerEmail != "lewis@email.com")
+            if (aCustomer.CustomerEmail != "mickeymouse@email.com")
             {
                 OK = false;
             }
@@ -317,7 +317,7 @@ namespace Testing5
             //invoke the method 
             Found = aCustomer.Find(CustomerID);
             //check the house no property 
-            if (aCustomer.CustomerAddress != "12 Leicester Road")
+            if (aCustomer.CustomerAddress != "14 Disney Road")
             {
                 OK = false;
             }

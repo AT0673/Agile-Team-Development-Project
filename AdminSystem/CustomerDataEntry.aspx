@@ -27,6 +27,11 @@
         <asp:Label ID="lblCustomerError" runat="server" style="z-index: 1; left: 16px; top: 332px; position: absolute" Text="lblError"></asp:Label>
         <asp:Button ID="btnOK" runat="server" OnClick="btnOK_Click" style="z-index: 1; left: 172px; top: 332px; position: absolute" Text="OK" />
         <asp:Button ID="btnCancel" runat="server" style="z-index: 1; left: 227px; top: 331px; position: absolute" Text="Cancel" />
+        <asp:Label ID ="lblError" runat="server" Text=""></asp:Label>
+        <asp:Label ID="lblDateAdded" runat="server" Text="Date Added"></asp:Label>
+        <asp:TextBox ID="txtDateAdded" runat="server"></asp:TextBox>
+        <asp:Label ID="lblActive" runat="server" Text="Active"></asp:Label>
+        <asp:CheckBox ID="chkActive" runat="server"></asp:CheckBox>
     </form>
 </body>
 </html>
