@@ -17,23 +17,67 @@ public partial class _1_DataEntry : System.Web.UI.Page
     {
         //create a new instance of clsOrder
         clsOrder AnOrder = new clsOrder();
-        //capture the order number
-        AnOrder.OrderID = Convert.ToInt32(txtOrderID.Text);
-        //capture the customer ID
-        AnOrder.CustomerID = Convert.ToInt32(txtCustomerID.Text);
-        //Capture the order date
-        AnOrder.OrderDate = Convert.ToDateTime(txtOrderDate.Text);
-        //Capture the order total
-        AnOrder.TotalPrice = Convert.ToDecimal(txtTotalPrice.Text);
-        //Capture the order status
+        //variable to store any error messages
+        String Error = "";
+        //validate the data first (Valid accepts strings)
+        Error = AnOrder.Valid(txtCustomerID.Text, txtOrderDate.Text, txtTotalPrice.Text,
+                                txtStatus.Text, chkIsGuestOrder.Checked.ToString(), txtProductID.Text);
+        if (Error != "")
+        {
+            //display the validation error(s)
+            lblError.Text = Error;
+            return;
+        }
+
+        // At this point validation passed, so perform safe conversions and assign
+        int tmpInt;
+        decimal tmpDec;
+        DateTime tmpDate;
+        bool tmpBool = chkIsGuestOrder.Checked;
+
+        // Try to convert and show a clear message if conversion fails (shouldn't for valid input)
+        if (!int.TryParse(txtOrderID.Text, out tmpInt))
+        {
+            lblError.Text = Error;
+            return;
+        }
+        AnOrder.OrderID = tmpInt;
+
+        if (!int.TryParse(txtCustomerID.Text, out tmpInt))
+        {
+            lblError.Text = Error;
+            return;
+        }
+        AnOrder.CustomerID = tmpInt;
+
+        if (!DateTime.TryParse(txtOrderDate.Text, out tmpDate))
+        {
+            lblError.Text = Error;
+            return;
+        }
+        AnOrder.OrderDate = tmpDate;
+
+        if (!decimal.TryParse(txtTotalPrice.Text, out tmpDec))
+        {
+            lblError.Text = Error;
+            return;
+        }
+        AnOrder.TotalPrice = tmpDec;
+
         AnOrder.Status = txtStatus.Text;
-        //Capture the product ID
-        AnOrder.ProductID = Convert.ToInt32(txtProductID.Text);
-        //Capture whether this is a guest order
-        AnOrder.isGuestOrder = chkIsGuestOrder.Checked;
-        //Store the order in the session object
+
+        if (!int.TryParse(txtProductID.Text, out tmpInt))
+        {
+            lblError.Text = Error;
+            return;
+        }
+        AnOrder.ProductID = tmpInt;
+
+        AnOrder.isGuestOrder = tmpBool;
+
+        //if there are no errors, store the order data in the session object
         Session["AnOrder"] = AnOrder;
-        //navigate to the viewer page
+        //redirect to the viewer page
         Response.Redirect("OrderViewer.aspx");
     }
 

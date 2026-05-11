@@ -112,16 +112,23 @@ namespace ClassLibrary
             }
             else
             {
-                try
+                long custVal;
+                if (!long.TryParse(CustomerID, out custVal))
                 {
-                    if (Convert.ToInt32(CustomerID) <= 0)
+                    // Not numeric or out of range for long
+                    Error = Error + "The CustomerID must be a valid number : ";
+                }
+                else
+                {
+                    if (custVal <= 0)
                     {
                         Error = Error + "The CustomerID must be greater than 0 : ";
                     }
-                }
-                catch
-                {
-                    Error = Error + "The CustomerID must be a valid number : ";
+                    else if (custVal > Int32.MaxValue)
+                    {
+                        // Detect values too large for an int and show your specific message
+                        Error = Error + "The CustomerID must be less than or equal to 2,147,483,647 : ";
+                    }
                 }
             }
 
