@@ -173,7 +173,7 @@ namespace ClassLibrary
             }
             else if (OrderStatus.Length > 50)
             {
-                Error = Error + "The OrderStatus must be less than 50 characters : ";
+                Error = Error + "The OrderStatus must be less than or equal to 50 characters : ";
             }
 
             //ProductID checks
