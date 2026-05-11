@@ -91,12 +91,112 @@ namespace ClassLibrary
                 //Return that everything worked OK
                 return true;
             }
-            //if no record was found
+            //If no record was found
             else
             {
-                //return false
+                //Return false, indicating a problem
                 return false;
             }
+        }
+
+        public string Valid(string CustomerID, string OrderDate, string TotalPrice,
+                            string OrderStatus, string isGuestOrder, string ProductID)
+        {
+            String Error = "";
+            DateTime DateTemp;
+
+            // CustomerID checks
+            if (CustomerID.Length == 0)
+            {
+                Error = Error + "The CustomerID may not be blank : ";
+            }
+            else
+            {
+                try
+                {
+                    if (Convert.ToInt32(CustomerID) <= 0)
+                    {
+                        Error = Error + "The CustomerID must be greater than 0 : ";
+                    }
+                }
+                catch
+                {
+                    Error = Error + "The CustomerID must be a valid number : ";
+                }
+            }
+
+            //Date checks
+            try
+            {
+                DateTemp = Convert.ToDateTime(OrderDate);
+                if (DateTemp < DateTime.Now.Date)
+                {
+                    Error = Error + "The OrderDate cannot be in the past : ";
+                }
+
+            }
+            catch
+            {
+                Error = Error + "The OrderDate is not a valid date : ";
+            }
+
+
+            //TotalPrice checks
+            if (TotalPrice.Length == 0)
+            {
+                Error = Error + "The total price should not be blank : ";
+            }
+            else
+            {
+                try
+                {
+                    decimal TotalPriceValue = Convert.ToDecimal(TotalPrice);
+                    if (TotalPriceValue <= 0)
+                    {
+                        Error = Error + "TotalPrice must be greater then 0 : ";
+                    }
+                    else if (TotalPriceValue >= 10000000m) // Reject 10,000,000.00 and above
+                    {
+                        Error = Error + "TotalPrice must be less than 10,000,000 : ";
+                    }
+                }
+                catch
+                {
+                    Error = Error + "The TotalPrice is not a valid decimal number : ";
+                }
+            }
+
+            //OrderStatus checks
+            if (OrderStatus.Length == 0)
+            {
+                Error = Error + "The OrderStatus may not be blank : ";
+            }
+            else if (OrderStatus.Length > 50)
+            {
+                Error = Error + "The OrderStatus must be less than 50 characters : ";
+            }
+
+            //ProductID checks
+            if (ProductID.Length == 0)
+            {
+                Error = Error + "The ProductID may not be blank : ";
+            }
+            else
+            {
+                try
+                {
+                    if (Convert.ToInt32(ProductID) <= 0)
+                    {
+                        Error = Error + "The ProductID must be greater than 0 : ";
+                    }
+                }
+                catch
+                {
+                    Error = Error + "The ProductID must be a valid number : ";
+                }
+            }
+
+            return Error;
         }
     }
 }

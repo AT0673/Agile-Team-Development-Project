@@ -16,7 +16,6 @@
 
         .row1 { top: 20px;  } .row2 { top: 55px;  } .row3 { top: 90px;  }
         .row4 { top: 125px; } .row5 { top: 160px; } .row6 { top: 195px; }
-        .row7 { top: 230px; } .row8 { top: 265px; } .row9 { top: 300px; }
     </style>
 </head>
 <body>
