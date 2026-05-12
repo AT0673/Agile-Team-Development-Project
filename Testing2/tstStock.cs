@@ -131,7 +131,7 @@ namespace Testing2
             Boolean OK = true;
             Int32 ProductID = 2;
             Found = AnProduct.Find(ProductID);
-            if (AnProduct.StockArrivalDate != DateTime.Now.Date)
+            if (AnProduct.StockArrivalDate != new DateTime(2026, 6, 1))
             {
                 OK = false;
             }
@@ -145,7 +145,7 @@ namespace Testing2
             Boolean OK = true;
             Int32 ProductID = 2;
             Found = AnProduct.Find(ProductID);
-            if (AnProduct.SupplierID != 0)
+            if (AnProduct.SupplierID != 1)
             {
                 OK = false;
             }
@@ -173,7 +173,7 @@ namespace Testing2
             Boolean OK = true;
             Int32 ProductID = 2;
             Found = AnProduct.Find(ProductID);
-            if (AnProduct.ProductName != "Product")
+            if (AnProduct.ProductName.Trim() != "Product")
             {
                 OK = false;
             }

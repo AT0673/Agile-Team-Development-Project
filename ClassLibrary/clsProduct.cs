@@ -11,9 +11,6 @@ namespace ClassLibrary
         private bool mInStock;
         private DateTime mStockArrivalDate;
 
-
-
-
         public int ProductAmount
         {
             get
@@ -83,13 +80,26 @@ namespace ClassLibrary
 
         public bool Find(int productID)
         {
-            mProductID = 2;
-            mProductAmount = 0;
-            mStockArrivalDate = DateTime.Now.Date;
-            msupplierID = 0;
-            mInStock = false;
-            mProductName = "Product";
-            return true;
+            clsDataConnection DB = new clsDataConnection();
+                
+            DB.AddParameter("@ProductID", productID);  
+
+            DB.Execute("sproc_tblProduct_FilterByProductID");
+
+            if (DB.Count == 1)
+            {
+                mProductID = Convert.ToInt32(DB.DataTable.Rows[0]["ProductID"]);
+                mProductName = Convert.ToString(DB.DataTable.Rows[0]["ProductName"]);
+                mProductAmount = Convert.ToInt32(DB.DataTable.Rows[0]["ProductAmount"]);
+                msupplierID = Convert.ToInt32(DB.DataTable.Rows[0]["SupplierID"]);
+                mInStock = Convert.ToBoolean(DB.DataTable.Rows[0]["InStock"]);
+                mStockArrivalDate = Convert.ToDateTime(DB.DataTable.Rows[0]["StockArrivalDate"]);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }
