@@ -4,6 +4,12 @@ using System;
 
 namespace Testing4
 {
+    string SupplierName = "Michael Jordan";
+    string SupplierAddress = "964 Garry Street";
+    string SupplierEmail = "michael@outlook.com";
+    string SupplierPhoneNumber = "26816018680168016";
+    DateTime SupplierCreatedDate = Convert.ToDateTime("24/04/2023");
+
     [TestClass]
     public class tstSupplier
     {
@@ -82,7 +88,7 @@ namespace Testing4
         {
             clsSupplier aSupplier = new clsSupplier();
             Boolean Found = false;
-            Int32 SupplierID = 21;
+            Int32 SupplierID = 5;
             Found = aSupplier.Find(SupplierID);
             Assert.IsTrue(Found);
         }
@@ -93,9 +99,9 @@ namespace Testing4
             clsSupplier aSupplier = new clsSupplier();
             Boolean Found = false;
             Boolean OK = true;
-            Int32 SupplierID = 21;
+            Int32 SupplierID = 5;
             Found = aSupplier.Find(SupplierID);
-            if (aSupplier.SupplierID != 21)
+            if (aSupplier.SupplierID != 5)
             {
                 OK = false;
             }
@@ -109,9 +115,9 @@ namespace Testing4
             clsSupplier aSupplier = new clsSupplier();
             Boolean Found = false;
             Boolean OK = true;
-            Int32 SupplierID = 21;
+            Int32 SupplierID = 5;
             Found = aSupplier.Find(SupplierID);
-            if (aSupplier.SupplierCreatedDate != Convert.ToDateTime("23/12/2022"))
+            if (aSupplier.SupplierCreatedDate != Convert.ToDateTime("24/04/2023"))
             {
                 OK = false;
             }
@@ -125,9 +131,9 @@ namespace Testing4
             clsSupplier aSupplier = new clsSupplier();
             Boolean Found = false;
             Boolean OK = true;
-            Int32 SupplierID = 21;
+            Int32 SupplierID = 5;
             Found = aSupplier.Find(SupplierID);
-            if (aSupplier.SupplierName != "Test Name") 
+            if (aSupplier.SupplierName != "Michael Jordan") 
             {
                 OK = false;
             }
@@ -141,9 +147,9 @@ namespace Testing4
             clsSupplier aSupplier = new clsSupplier();
             Boolean Found = false;
             Boolean OK = true;
-            Int32 SupplierID = 21;
+            Int32 SupplierID = 5;
             Found = aSupplier.Find(SupplierID);
-            if (aSupplier.SupplierAddress != "Test Street 123")
+            if (aSupplier.SupplierAddress != "964 Garry Street")
             {
                 OK = false;
             }
@@ -159,7 +165,7 @@ namespace Testing4
             Boolean OK = true;
             Int32 SupplierID = 21;
             Found = aSupplier.Find(SupplierID);
-            if (aSupplier.SupplierEmail != "supplier@gmail.com")
+            if (aSupplier.SupplierEmail != "michael@outlook.com")
             {
                 OK = false;
             }
@@ -173,9 +179,9 @@ namespace Testing4
             clsSupplier aSupplier = new clsSupplier();
             Boolean Found = false;
             Boolean OK = true;
-            Int32 SupplierID = 21;
+            Int32 SupplierID = 5;
             Found = aSupplier.Find(SupplierID);
-            if (aSupplier.SupplierPhoneNumber != "123456789" )
+            if (aSupplier.SupplierPhoneNumber != "26816018680168016")
             {
                 OK = false;
             }
@@ -190,7 +196,7 @@ namespace Testing4
             clsSupplier aSupplier = new clsSupplier();
             Boolean Found = false;
             Boolean OK = true;
-            Int32 SupplierID = 21;
+            Int32 SupplierID = 5;
             Found = aSupplier.Find(SupplierID);
             if (aSupplier.SupplierActive != true )
             {
@@ -199,5 +205,15 @@ namespace Testing4
             Assert.IsTrue(OK);
         }
 
-    }
+        [TestMethod]
+
+        public void ValidMethodOK()
+        {
+            clsSupplier aSupplier = new clsSupplier();
+            String Error = "";
+            Error = aSupplier.Valid(SupplierName, SupplierAddress, SupplierEmail, SupplierPhoneNumber, SupplierCreatedDate.ToString(), SupplierActive.ToString());
+            Assert.AreEqual(Error, "");
+
+
+        }
 }

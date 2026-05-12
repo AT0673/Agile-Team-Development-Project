@@ -32,10 +32,10 @@ namespace ClassLibrary
             }
             set
             {
-                 name = value;
+                name = value;
             }
         }
-            
+
         public string SupplierPhoneNumber
         {
             get
@@ -93,17 +93,29 @@ namespace ClassLibrary
             }
         }
 
-        public bool Find(int supplierID)
+        public bool Find(int SupplierID)
         {
-            mSupplierID = 21;
-            dateCreated = Convert.ToDateTime("23/12/2022");
-            email = "supplier@gmail.com";
-            name = "Test Name";
-            isActive = true;
-            address = "Test Street 123";
-            phoneNumber = "123456789";
-            return true;
+            clsDataConnection DB = new clsDataConnection();
+            DB.AddParameter("@SupplierID", SupplierID);
+            DB.Execute("sproc_tblSupplier_FilterBySupplierID", SupplierID);
 
+            if (DB.Count == 1)
+            {
+                mSupplierID = Convert.ToInt32(DB.DataTable.Rows[0]["SupplierID"]);
+                dateCreated = Convert.ToDateTime(DB.DataTable.Rows[0]["SupplierCreatedDate"]);
+                email = Convert.ToString(DB.DataTable.Rows[0]["SupplierEmail"]);
+                name = Convert.ToString(DB.DataTable.Rows[0]["SupplerName"]);
+                isActive = Convert.ToBoolean(DB.DataTable.Rows[0]["SupplierActive"]);
+                address = Convert.ToString(DB.DataTable.Rows[0]["SupplierAddress"]);
+                phoneNumber = Convert.ToString(DB.DataTable.Rows[0]["SupplierPhoneNumber"]);
+                return true;
+
+            }
+            else { return false; }
         }
-    }
+
+        public string Valid(string supplierName, string supplierPhoneNumber, string supplierAddress, string supplierEmail, DateTime supplierCreatedDate)
+        {
+            return "";
+        }
 }
