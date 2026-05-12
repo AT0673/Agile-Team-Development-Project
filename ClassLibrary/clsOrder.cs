@@ -16,8 +16,8 @@ namespace ClassLibrary
         private bool misGuestOrder;
         //Private data member for the ProductID property
         private int mProductID;
-        //Private data member for the Status property
-        private string mStatus;
+        //Private data member for the OrderStatus property
+        private string mOrderStatus;
 
         //isGuestOrder public property
         public bool isGuestOrder
@@ -52,11 +52,11 @@ namespace ClassLibrary
             get { return mTotalPrice; }
             set { mTotalPrice = value; }
         }
-        //Status public property
-        public string Status
+        //OrderStatus public property
+        public string OrderStatus
         {
-            get { return mStatus; }
-            set { mStatus = value; }
+            get { return mOrderStatus; }
+            set { mOrderStatus = value; }
         }
         //ProductID public property
         public int ProductID
@@ -87,7 +87,7 @@ namespace ClassLibrary
                 mTotalPrice = Convert.ToDecimal(DB.DataTable.Rows[0]["TotalPrice"]);
                 misGuestOrder = Convert.ToBoolean(DB.DataTable.Rows[0]["isGuestOrder"]);
                 mProductID = Convert.ToInt32(DB.DataTable.Rows[0]["ProductID"]);
-                mStatus = Convert.ToString(DB.DataTable.Rows[0]["Status"])?.Trim();
+                mOrderStatus = Convert.ToString(DB.DataTable.Rows[0]["Status"])?.Trim();
                 //Return that everything worked OK
                 return true;
             }
@@ -100,7 +100,7 @@ namespace ClassLibrary
         }
 
         public string Valid(string CustomerID, string OrderDate, string TotalPrice,
-                            string Status, string isGuestOrder, string ProductID)
+                            string OrderStatus, string isGuestOrder, string ProductID)
         {
             String Error = "";
             DateTime DateTemp;
@@ -160,7 +160,7 @@ namespace ClassLibrary
                     decimal TotalPriceValue = Convert.ToDecimal(TotalPrice);
                     if (TotalPriceValue <= 0)
                     {
-                        Error = Error + "TotalPrice must be greater then 0 : ";
+                        Error = Error + "TotalPrice must be greater than 0 : ";
                     }
                     else if (TotalPriceValue >= 10000000m) // Reject 10,000,000.00 and above
                     {
@@ -174,11 +174,11 @@ namespace ClassLibrary
             }
 
             //OrderStatus checks
-            if (Status.Length == 0)
+            if (OrderStatus.Length == 0)
             {
                 Error = Error + "The OrderStatus may not be blank : ";
             }
-            else if (Status.Length > 50)
+            else if (OrderStatus.Length > 50)
             {
                 Error = Error + "The OrderStatus must be less than or equal to 50 characters : ";
             }

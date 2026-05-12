@@ -79,14 +79,14 @@ namespace Testing3
         }
 
         [TestMethod]
-        public void StatusOK()
+        public void OrderStatusOK()
         {
             //create an instance of the class we want to create
             clsOrder AnOrder = new clsOrder();
             //create some test data to assign to the property
             string TestData = "Pending";
             //assign the data to the property
-            AnOrder.Status = TestData;
+            AnOrder.OrderStatus = TestData;
             //test to see that the two values are the same
             Assert.AreEqual(AnOrder.Status, TestData);
         }

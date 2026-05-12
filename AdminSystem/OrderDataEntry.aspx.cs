@@ -21,7 +21,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
         String Error = "";
         //validate the data first (Valid accepts strings)
         Error = AnOrder.Valid(txtCustomerID.Text, txtOrderDate.Text, txtTotalPrice.Text,
-                                txtStatus.Text, chkIsGuestOrder.Checked.ToString(), txtProductID.Text);
+                                txtOrderStatus.Text, chkIsGuestOrder.Checked.ToString(), txtProductID.Text);
         if (Error != "")
         {
             //display the validation error(s)
@@ -38,37 +38,37 @@ public partial class _1_DataEntry : System.Web.UI.Page
         // Try to convert and show a clear message if conversion fails (shouldn't for valid input)
         if (!int.TryParse(txtOrderID.Text, out tmpInt))
         {
-            lblError.Text = Error;
+            lblError.Text = Error + " (Order ID must be an integer)";
             return;
         }
         AnOrder.OrderID = tmpInt;
 
         if (!int.TryParse(txtCustomerID.Text, out tmpInt))
         {
-            lblError.Text = Error;
+            lblError.Text = Error + " (Customer ID must be an integer)";
             return;
         }
         AnOrder.CustomerID = tmpInt;
 
         if (!DateTime.TryParse(txtOrderDate.Text, out tmpDate))
         {
-            lblError.Text = Error;
+            lblError.Text = Error + " (Order Date is not a valid date)";
             return;
         }
         AnOrder.OrderDate = tmpDate;
 
         if (!decimal.TryParse(txtTotalPrice.Text, out tmpDec))
         {
-            lblError.Text = Error;
+            lblError.Text = Error + " (Total Price must be a decimal)";
             return;
         }
         AnOrder.TotalPrice = tmpDec;
 
-        AnOrder.Status = txtStatus.Text;
+        AnOrder.OrderStatus = txtOrderStatus.Text;
 
         if (!int.TryParse(txtProductID.Text, out tmpInt))
         {
-            lblError.Text = Error;
+            lblError.Text = Error + " (Product ID must be an integer)";
             return;
         }
         AnOrder.ProductID = tmpInt;
@@ -90,7 +90,11 @@ public partial class _1_DataEntry : System.Web.UI.Page
         //variable to store the result of the find operation
         Boolean Found = false;
         //get the primary key entered by the user
-        OrderID = Convert.ToInt32(txtOrderID.Text);
+        if (!int.TryParse(txtOrderID.Text, out OrderID))
+        {
+            lblError.Text = "Order ID must be a valid integer";
+            return;
+        }
         //find the record
         Found = AnOrder.Find(OrderID);
         //if found
@@ -100,7 +104,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
             txtCustomerID.Text = AnOrder.CustomerID.ToString();
             txtOrderDate.Text = AnOrder.OrderDate.ToString("yyyy-MM-dd");
             txtTotalPrice.Text = AnOrder.TotalPrice.ToString();
-            txtStatus.Text = AnOrder.Status;
+            txtOrderStatus.Text = AnOrder.OrderStatus;
             txtProductID.Text = AnOrder.ProductID.ToString();
             chkIsGuestOrder.Checked = AnOrder.isGuestOrder;
         }
