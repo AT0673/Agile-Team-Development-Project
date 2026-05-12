@@ -109,8 +109,8 @@ namespace Testing4
         }
 
         [TestMethod]
-        
-       public void TestDateCreatedFound()
+
+        public void TestDateCreatedFound()
         {
             clsSupplier aSupplier = new clsSupplier();
             Boolean Found = false;
@@ -127,13 +127,13 @@ namespace Testing4
         [TestMethod]
         public void TestSupplierNameFound()
         {
-            
+
             clsSupplier aSupplier = new clsSupplier();
             Boolean Found = false;
             Boolean OK = true;
             Int32 SupplierID = 5;
             Found = aSupplier.Find(SupplierID);
-            if (aSupplier.SupplierName != "Michael Jordan") 
+            if (aSupplier.SupplierName != "Michael Jordan")
             {
                 OK = false;
             }
@@ -198,7 +198,7 @@ namespace Testing4
             Boolean OK = true;
             Int32 SupplierID = 5;
             Found = aSupplier.Find(SupplierID);
-            if (aSupplier.SupplierActive != true )
+            if (aSupplier.SupplierActive != true)
             {
                 OK = false;
             }
@@ -216,4 +216,5 @@ namespace Testing4
 
 
         }
+    }
 }

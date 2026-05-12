@@ -97,7 +97,7 @@ namespace ClassLibrary
         {
             clsDataConnection DB = new clsDataConnection();
             DB.AddParameter("@SupplierID", SupplierID);
-            DB.Execute("sproc_tblSupplier_FilterBySupplierID", SupplierID);
+            DB.Execute("sproc_tblSupplier_FilterBySupplierID");
 
             if (DB.Count == 1)
             {
@@ -118,4 +118,5 @@ namespace ClassLibrary
         {
             return "";
         }
+    }
 }

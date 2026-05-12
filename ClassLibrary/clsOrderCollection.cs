@@ -42,9 +42,9 @@ namespace ClassLibrary
                 AnOrder.TotalPrice = DB.DataTable.Rows[Index]["TotalPrice"] == DBNull.Value
                     ? 0
                     : Convert.ToDecimal(DB.DataTable.Rows[Index]["TotalPrice"]);
-                AnOrder.Status = DB.DataTable.Rows[Index]["Status"] == DBNull.Value
+                AnOrder.OrderStatus = DB.DataTable.Rows[Index]["OrderStatus"] == DBNull.Value
                     ? string.Empty
-                    : Convert.ToString(DB.DataTable.Rows[Index]["Status"]);
+                    : Convert.ToString(DB.DataTable.Rows[Index]["OrderStatus"]);
                 AnOrder.isGuestOrder = DB.DataTable.Rows[Index]["isGuestOrder"] == DBNull.Value
                     ? false
                     : Convert.ToBoolean(DB.DataTable.Rows[Index]["isGuestOrder"]);
