@@ -28,4 +28,27 @@ public partial class _1_DataEntry : System.Web.UI.Page
 
         Response.Redirect("StockViewer.aspx");
     }
+
+    protected void btnFind_Click(object sender, EventArgs e)
+    {
+        clsProduct AnProduct = new clsProduct();
+
+        Int32 ProductID;
+
+        Boolean Found = false;
+
+        ProductID = Convert.ToInt32(txtProductID.Text);
+
+        Found = AnProduct.Find(ProductID);
+
+        if (Found)
+        {
+            txtProductName.Text = AnProduct.ProductName;
+            txtProductAmount.Text = AnProduct.ProductAmount.ToString();
+            txtStockArrivalDate.Text = AnProduct.StockArrivalDate.ToString();
+            txtSupplierID.Text = AnProduct.SupplierID.ToString();
+            InStock.Checked = AnProduct.InStock;
+        }
+
+        }
 }
