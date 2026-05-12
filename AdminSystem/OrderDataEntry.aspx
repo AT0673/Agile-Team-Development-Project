@@ -34,8 +34,8 @@
         <asp:Label   ID="lblTotalPrice"   runat="server" CssClass="lbl row4" Text="Total Price"></asp:Label>
         <asp:TextBox ID="txtTotalPrice"   runat="server" CssClass="txt row4"></asp:TextBox>
 
-        <asp:Label   ID="lblOrderStatus"  runat="server" CssClass="lbl row5" Text="Order Status"></asp:Label>
-        <asp:TextBox ID="txtOrderStatus"  runat="server" CssClass="txt row5"></asp:TextBox>
+        <asp:Label   ID="lblStatus"       runat="server" CssClass="lbl row5" Text="Status"></asp:Label>
+        <asp:TextBox ID="txtStatus"       runat="server" CssClass="txt row5"></asp:TextBox>
 
         <asp:Label   ID="lblProductID"    runat="server" CssClass="lbl row6" Text="Product ID"></asp:Label>
         <asp:TextBox ID="txtProductID"    runat="server" CssClass="txt row6"></asp:TextBox>
