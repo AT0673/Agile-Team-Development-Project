@@ -33,7 +33,7 @@ namespace Testing3
             TestItem.CustomerID = 1;
             TestItem.OrderDate = DateTime.Now.Date;
             TestItem.TotalPrice = 10.00m;
-            TestItem.Status = "Processing";
+            TestItem.OrderStatus = "Processing";
             TestItem.isGuestOrder = false;
             TestItem.ProductID = 1;
             //add the item to the test list
@@ -56,7 +56,7 @@ namespace Testing3
             TestOrder.CustomerID = 1;
             TestOrder.OrderDate = DateTime.Now.Date;
             TestOrder.TotalPrice = 10.00m;
-            TestOrder.Status = "Processing";
+            TestOrder.OrderStatus = "Processing";
             TestOrder.isGuestOrder = false;
             TestOrder.ProductID = 1;
             //assign the data to the property
@@ -80,7 +80,7 @@ namespace Testing3
             TestItem.CustomerID = 1;
             TestItem.OrderDate = DateTime.Now.Date;
             TestItem.TotalPrice = 10.00m;
-            TestItem.Status = "Processing";
+            TestItem.OrderStatus = "Processing";
             TestItem.isGuestOrder = false;
             TestItem.ProductID = 1;
             //add the item to the test list

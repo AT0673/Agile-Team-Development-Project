@@ -86,9 +86,9 @@ namespace Testing3
             //create some test data to assign to the property
             string TestData = "Pending";
             //assign the data to the property
-            AnOrder.Status = TestData;
+            AnOrder.OrderStatus = TestData;
             //test to see that the two values are the same
-            Assert.AreEqual(AnOrder.Status, TestData);
+            Assert.AreEqual(AnOrder.OrderStatus, TestData);
         }
 
         [TestMethod]
@@ -235,7 +235,7 @@ namespace Testing3
             //Invoke the method
             Found = AnOrder.Find(OrderID);
             //Check the Status property
-            if (AnOrder.Status != "Pending")
+            if (AnOrder.OrderStatus != "Pending")
             {
                 OK = false;
             }
