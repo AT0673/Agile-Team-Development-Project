@@ -17,7 +17,7 @@ namespace ClassLibrary
         //Private data member for the ProductID property
         private int mProductID;
         //Private data member for the Status property
-        private string mOrderStatus;
+        private string mStatus;
 
         //isGuestOrder public property
         public bool isGuestOrder
@@ -55,8 +55,8 @@ namespace ClassLibrary
         //Status public property
         public string Status
         {
-            get { return mOrderStatus; }
-            set { mOrderStatus = value; }
+            get { return mStatus; }
+            set { mStatus = value; }
         }
         //ProductID public property
         public int ProductID
@@ -87,7 +87,7 @@ namespace ClassLibrary
                 mTotalPrice = Convert.ToDecimal(DB.DataTable.Rows[0]["TotalPrice"]);
                 misGuestOrder = Convert.ToBoolean(DB.DataTable.Rows[0]["isGuestOrder"]);
                 mProductID = Convert.ToInt32(DB.DataTable.Rows[0]["ProductID"]);
-                mOrderStatus = Convert.ToString(DB.DataTable.Rows[0]["OrderStatus"])?.Trim();
+                mStatus = Convert.ToString(DB.DataTable.Rows[0]["Status"])?.Trim();
                 //Return that everything worked OK
                 return true;
             }
@@ -100,7 +100,7 @@ namespace ClassLibrary
         }
 
         public string Valid(string CustomerID, string OrderDate, string TotalPrice,
-                            string OrderStatus, string isGuestOrder, string ProductID)
+                            string Status, string isGuestOrder, string ProductID)
         {
             String Error = "";
             DateTime DateTemp;
@@ -174,11 +174,11 @@ namespace ClassLibrary
             }
 
             //OrderStatus checks
-            if (OrderStatus.Length == 0)
+            if (Status.Length == 0)
             {
                 Error = Error + "The OrderStatus may not be blank : ";
             }
-            else if (OrderStatus.Length > 50)
+            else if (Status.Length > 50)
             {
                 Error = Error + "The OrderStatus must be less than or equal to 50 characters : ";
             }
