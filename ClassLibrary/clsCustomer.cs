@@ -77,21 +77,20 @@ namespace ClassLibrary
                 mCustomerFirstName = value;
             }
         }
-
         //private data member for the address id property
-        private string mCustomerLastName;
+        private Boolean mCustomerIsActive;
         //CustomerID public property
-        public string CustomerLastName
+        public bool CustomerIsActive
         {
             get
             {
                 //this line of code sends data out of the property
-                return mCustomerLastName;
+                return mCustomerIsActive;
             }
             set
             {
                 //this line of code allows data into the property
-                mCustomerLastName = value;
+                mCustomerIsActive = value;
             }
         }
 
@@ -128,21 +127,20 @@ namespace ClassLibrary
                 mCustomerPassword = value;
             }
         }
-
         //private data member for the address id property
-        private string mCustomerPhone;
+        private DateTime mCustomerDOB;
         //CustomerID public property
-        public string CustomerPhone
+        public DateTime CustomerDOB
         {
             get
             {
                 //this line of code sends data out of the property
-                return mCustomerPhone;
+                return mCustomerDOB;
             }
             set
             {
                 //this line of code allows data into the property
-                mCustomerPhone = value;
+                mCustomerDOB = value;
             }
         }
 
@@ -178,13 +176,11 @@ namespace ClassLibrary
                 //copy the data from the database to the private data members
                 mCustomerID = Convert.ToInt32(DB.DataTable.Rows[0]["CustomerID"]);
                 mCustomerFirstName = Convert.ToString(DB.DataTable.Rows[0]["CustomerFirstName"]);
-                mCustomerLastName = Convert.ToString(DB.DataTable.Rows[0]["CustomerLastName"]);
+                mCustomerIsActive = Convert.ToBoolean(DB.DataTable.Rows[0]["CustomerIsActive"]);
                 mCustomerEmail = Convert.ToString(DB.DataTable.Rows[0]["CustomerEmail"]);
                 mCustomerPassword = Convert.ToString(DB.DataTable.Rows[0]["CustomerPassword"]);
-                mCustomerPhone = Convert.ToString(DB.DataTable.Rows[0]["CustomerPhone"]);
+                mCustomerDOB = Convert.ToDateTime(DB.DataTable.Rows[0]["CustomerDOB"]);
                 mCustomerAddress = Convert.ToString(DB.DataTable.Rows[0]["CustomerAddress"]);
-                mDateAdded = Convert.ToDateTime(DB.DataTable.Rows[0]["DateAdded"]);
-                mActive = Convert.ToBoolean(DB.DataTable.Rows[0]["Active"]);
                 //return that everything worked OK
                 return true;
             }
@@ -196,5 +192,85 @@ namespace ClassLibrary
             }
         }
 
-    } 
+        /****** VALIDATION METHOD ******/
+
+        public string Valid(int customerID, string customerFirstName, bool customerIsActive, string customerEmail, string customerPassword, DateTime customerDOB, string customerAddress, DateTime dateAdded)
+        {
+            //create a string variable to store the error
+            String Error = "";
+            //create a temporary variable to store the data values
+            DateTime DateTemp;
+            //if the ID is less than 1
+            if (customerID < 0)
+            {
+                //record the error
+                Error = Error + "The Customer ID number may not be less than 0 : ";
+            }
+            //copy the dateAdded value to the DateTemp variable
+            DateTemp = Convert.ToDateTime(dateAdded);
+            //check to see if the date is less than today's date
+            if (DateTemp < DateTime.Now.Date)
+            {
+                Error = Error + "The date cannot be in the past : ";
+            }
+            //check to see if the date is greater than today's date 
+            if (DateTemp > DateTime.Now.Date)
+            {
+                //record the error 
+                Error = Error + "The date cannot be in the future : ";
+            }
+            //if the customer first name is blank
+            if (customerFirstName.Length == 0)
+            {
+                //record the error
+                Error = Error + "The customer first name may not be blank : ";
+            }
+            //if the customer first name is greater than 50 characters
+            if (customerFirstName.Length > 50)
+            {
+                //record the error
+                Error = Error + "The customer first name must be less than 50 characters : ";
+            }
+            //if the customer email is blank
+            if (customerEmail.Length == 0)
+            {
+                //record the error
+                Error = Error + "The customer email may not be blank : ";
+            }
+            //if the customer email is greater than 50 characters
+            if (customerEmail.Length > 50)
+            {
+                //record the error
+                Error = Error + "The customer email must be less than 50 characters : ";
+            }
+            //if the customer password is blank
+            if (customerPassword.Length == 0)
+            {
+                //record the error
+                Error = Error + "The customer password may not be blank : ";
+            }
+            //if the customer password is greater than 50 characters
+            if (customerPassword.Length > 50)
+            {
+                //record the error
+                Error = Error + "The customer password must be less than 50 characters : ";
+            }
+            //if the customer address is blank
+            if (customerAddress.Length == 0)
+            {
+                //record the error
+                Error = Error + "The customer address may not be blank : ";
+            }
+            //if the customer address is greater than 50 characters
+            if (customerAddress.Length > 50)
+            {
+                //record the error
+                Error = Error + "The customer address must be less than 50 characters : ";
+            }
+            //return any error messages
+            return Error;
+        }
+
+        
+    }
 }
