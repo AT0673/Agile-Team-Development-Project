@@ -9,7 +9,7 @@ namespace ClassLibrary
     {
 
 
-        //private data member for the address id property
+        //private data member for the customer id property
         private Boolean mActive;
         //CustomerID public property
         public bool Active
@@ -34,7 +34,7 @@ namespace ClassLibrary
         {
             get
             {
-                //this line of code sends data oit of the property
+                //this line of code sends data out of the property
                 return mDateAdded;
             }
             set
@@ -44,7 +44,7 @@ namespace ClassLibrary
             }
         }
 
-        //private data member for the address id property
+        //private data member for the customer id property
         private Int32 mCustomerID;
         //CustomerID public property
         public int CustomerID
@@ -61,7 +61,7 @@ namespace ClassLibrary
             }
         }
 
-        //private data member for the address id property
+        //private data member for the customer id property
         private string mCustomerFirstName;
         //CustomerID public property
         public string CustomerFirstName
@@ -77,7 +77,7 @@ namespace ClassLibrary
                 mCustomerFirstName = value;
             }
         }
-        //private data member for the address id property
+        //private data member for the customer id property
         private Boolean mCustomerIsActive;
         //CustomerID public property
         public bool CustomerIsActive
@@ -94,7 +94,7 @@ namespace ClassLibrary
             }
         }
 
-        //private data member for the address id property
+        //private data member for the customer id property
         private string mCustomerEmail;
         //CustomerID public property
         public string CustomerEmail
@@ -111,7 +111,7 @@ namespace ClassLibrary
             }
         }
 
-        //private data member for the address id property
+        //private data member for the customer id property
         private string mCustomerPassword;
         //CustomerID public property
         public string CustomerPassword
@@ -127,7 +127,7 @@ namespace ClassLibrary
                 mCustomerPassword = value;
             }
         }
-        //private data member for the address id property
+        //private data member for the customer id property
         private DateTime mCustomerDOB;
         //CustomerID public property
         public DateTime CustomerDOB
@@ -144,7 +144,7 @@ namespace ClassLibrary
             }
         }
 
-        //private data member for the address id property
+        //private data member for the customer id property
         private string mCustomerAddress;
         //CustomerID public property
         public string CustomerAddress
@@ -166,7 +166,7 @@ namespace ClassLibrary
         {
             //create an instance of the data connection
             clsDataConnection DB = new clsDataConnection();
-            //add the parameter for the address id to search for
+            //add the parameter for the customer id to search for
             DB.AddParameter("@CustomerID", CustomerID);
             //execute the stored procedure
             DB.Execute("sproc_tblCustomer_FilterByCustomerID");
@@ -255,17 +255,17 @@ namespace ClassLibrary
                 //record the error
                 Error = Error + "The customer password must be less than 50 characters : ";
             }
-            //if the customer address is blank
+            //if the customer customer is blank
             if (customerAddress.Length == 0)
             {
                 //record the error
-                Error = Error + "The customer address may not be blank : ";
+                Error = Error + "The customer customer may not be blank : ";
             }
-            //if the customer address is greater than 50 characters
+            //if the customer customer is greater than 50 characters
             if (customerAddress.Length > 50)
             {
                 //record the error
-                Error = Error + "The customer address must be less than 50 characters : ";
+                Error = Error + "The customer customer must be less than 50 characters : ";
             }
             //return any error messages
             return Error;
