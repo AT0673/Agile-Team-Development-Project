@@ -34,7 +34,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
     protected void btnFind_Click(object sender, EventArgs e)
     {
         //create an instance of the customer class
-        clsCustomer ACustomer = new clsCustomer();
+        clsCustomer aCustomer = new clsCustomer();
         //variable to store the primary key
         Int32 CustomerID;
         //variable to store the result of the find operation
@@ -42,19 +42,17 @@ public partial class _1_DataEntry : System.Web.UI.Page
         //get the primary key entered by the user
         CustomerID = Convert.ToInt32(txtCustomerID.Text);
         //find the record
-        Found = ACustomer.Find(CustomerID);
+        Found = aCustomer.Find(CustomerID);
         //if found
         if (Found == true)
         {
             //display the values of the properties in the labels
-            lblCustomerFirstName.Text = ACustomer.CustomerFirstName;
-            lblCustomerLastName.Text = ACustomer.CustomerLastName;
-            lblCustomerEmail.Text = ACustomer.CustomerEmail;
-            lblCustomerPassword.Text = ACustomer.CustomerPassword;
-            lblCustomerPhone.Text = ACustomer.CustomerPhone;
-            lblCustomerAddress.Text = ACustomer.CustomerAddress;
-            lblDateAdded.Text = ACustomer.DateAdded.ToString();
-            lblActive.Text = ACustomer.Active.ToString();
+            lblCustomerFirstName.Text = aCustomer.CustomerFirstName;
+            lblCustomerEmail.Text = aCustomer.CustomerEmail;
+            lblCustomerPassword.Text = aCustomer.CustomerPassword;
+            lblCustomerAddress.Text = aCustomer.CustomerAddress;
+            lblDateAdded.Text = aCustomer.DateAdded.ToString();
+            lblActive.Text = aCustomer.Active.ToString();
         }
         else
         {
