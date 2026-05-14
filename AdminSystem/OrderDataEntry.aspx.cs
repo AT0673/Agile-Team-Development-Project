@@ -64,7 +64,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
         }
         AnOrder.TotalPrice = tmpDec;
 
-        AnOrder.Status = txtStatus.Text;
+        AnOrder.OrderStatus = txtStatus.Text;
 
         if (!int.TryParse(txtProductID.Text, out tmpInt))
         {
@@ -100,7 +100,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
             txtCustomerID.Text = AnOrder.CustomerID.ToString();
             txtOrderDate.Text = AnOrder.OrderDate.ToString("yyyy-MM-dd");
             txtTotalPrice.Text = AnOrder.TotalPrice.ToString();
-            txtStatus.Text = AnOrder.Status;
+            txtStatus.Text = AnOrder.OrderStatus;
             txtProductID.Text = AnOrder.ProductID.ToString();
             chkIsGuestOrder.Checked = AnOrder.isGuestOrder;
         }
