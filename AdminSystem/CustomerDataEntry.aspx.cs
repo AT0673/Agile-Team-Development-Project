@@ -34,37 +34,25 @@ public partial class _1_DataEntry : System.Web.UI.Page
         //capture the customer address
         aCustomer.CustomerAddress = txtCustomerAddress.Text;
         //capture the date added
-        aCustomer.DateAdded = Convert.ToDateTime(txtDateAdded.Text);
+        aCustomer.DateAdded = DateTime.Now.Date;
         //capture the active status
-        aCustomer.Active = Convert.ToBoolean(chkActive.Text);
+        aCustomer.Active = chkActive.Checked;
         //capture the customer DOB
-        aCustomer.CustomerDOB = Convert.ToDateTime(txtCustomerDOB.Text);
+        aCustomer.CustomerDOB = calCustomerDOB.SelectedDate;
         //variable to store any error messages
         String Error = "";
         //validate the data
         Error = aCustomer.Valid(aCustomer.CustomerID, aCustomer.CustomerFirstName, aCustomer.Active, aCustomer.CustomerEmail, aCustomer.CustomerPassword, aCustomer.CustomerDOB, aCustomer.CustomerAddress, aCustomer.DateAdded);
         if (Error == "")
         {
-            //capture the customer ID
-            aCustomer.CustomerID = Convert.ToInt32(txtCustomerID.Text);
-            //capture the customer first name
-            aCustomer.CustomerFirstName = txtCustomerFirstName.Text;
-            //capture the customer email
-            aCustomer.CustomerEmail = txtCustomerEmail.Text;
-            //capture the customer password
-            aCustomer.CustomerPassword = txtCustomerPassword.Text;
-            //capture the customer address
-            aCustomer.CustomerAddress = txtCustomerAddress.Text;
-            //capture the date added
-            aCustomer.DateAdded = Convert.ToDateTime(txtDateAdded.Text);
-            //capture the active status
-            aCustomer.Active = Convert.ToBoolean(chkActive.Text);
-            //capture the customer DOB
-            aCustomer.CustomerDOB = Convert.ToDateTime(txtCustomerDOB.Text);
-            //store the customer object in the session object
-            Session["aCustomer"] = aCustomer;
-            //navigate to the view page
-            Response.Redirect("CustomerViewer.aspx");
+            Response.Redirect("CustomerViewer.aspx?CustomerID=" + aCustomer.CustomerID
+                + "&CustomerFirstName=" + aCustomer.CustomerFirstName
+                + "&CustomerEmail=" + aCustomer.CustomerEmail
+                + "&CustomerPassword=" + aCustomer.CustomerPassword
+                + "&CustomerAddress=" + aCustomer.CustomerAddress
+                + "&CustomerIsActive=" + aCustomer.CustomerIsActive
+                + "&CustomerDOB=" + aCustomer.CustomerDOB.ToShortDateString()
+                + "&DateAdded=" + aCustomer.DateAdded.ToShortDateString());
         }
         else
         {
