@@ -114,9 +114,82 @@ namespace ClassLibrary
             else { return false; }
         }
 
-        public string Valid(string supplierName, string supplierPhoneNumber, string supplierAddress, string supplierEmail, DateTime supplierCreatedDate)
+        public string Valid(string supplierName,
+                    string supplierEmail,
+                    string supplierAddress,
+                    string supplierPhoneNumber,
+                    DateTime supplierCreatedDate)
         {
-            return "";
+            // create error variable
+            String Error = "";
+
+            // ---------------- Supplier Name Validation ----------------
+
+            if (supplierName.Length == 0)
+            {
+                Error = Error + "Supplier name cannot be blank : ";
+            }
+
+            if (supplierName.Length > 50)
+            {
+                Error = Error + "Supplier name must be less than 50 characters : ";
+            }
+
+            // ---------------- Supplier Address Validation ----------------
+
+            if (supplierAddress.Length == 0)
+            {
+                Error = Error + "Supplier address cannot be blank : ";
+            }
+
+            if (supplierAddress.Length > 50)
+            {
+                Error = Error + "Supplier address must be less than 50 characters : ";
+            }
+
+            // ---------------- Supplier Email Validation ----------------
+
+            if (supplierEmail.Length == 0)
+            {
+                Error = Error + "Supplier email cannot be blank : ";
+            }
+
+            if (supplierEmail.Length > 50)
+            {
+                Error = Error + "Supplier email must be less than 50 characters : ";
+            }
+
+            if (!supplierEmail.Contains("@"))
+            {
+                Error = Error + "Email must contain @ : ";
+            }
+
+            // ---------------- Supplier Phone Number Validation ----------------
+
+            if (supplierPhoneNumber.Length == 0)
+            {
+                Error = Error + "Phone number cannot be blank : ";
+            }
+
+            if (supplierPhoneNumber.Length > 20)
+            {
+                Error = Error + "Phone number must be less than 20 characters : ";
+            }
+
+            // ---------------- Supplier Created Date Validation ----------------
+
+            if (supplierCreatedDate < DateTime.Now.Date)
+            {
+                Error = Error + "Date cannot be in the past : ";
+            }
+
+            if (supplierCreatedDate > DateTime.Now.Date)
+            {
+                Error = Error + "Date cannot be in the future : ";
+            }
+
+            // return any error messages
+            return Error;
         }
 
     }

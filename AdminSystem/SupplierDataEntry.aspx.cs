@@ -17,34 +17,29 @@ public partial class _1_DataEntry : System.Web.UI.Page
     {
         clsSupplier aSupplier = new clsSupplier();
         string SupplierName = txtSupplierName.Text;
-        string SupplierPhoneNumber = txtSupplierPhoneNumber.Text;
+        string SupplierEmail = txtSupplierEmail.Text;   
         string SupplierAddress = txtSupplierAddress.Text;
-        string SupplierEmail = txtSupplierEmail.Text;
-        string SupplierCreatedDate = txtSupplierCreatedDate.Text;
+        string SupplierPhoneNumber = txtSupplierPhoneNumber.Text;
+        DateTime SupplierCreatedDate = Convert.ToDateTime(txtSupplierCreatedDate.Text);
         string Active = chkSupplierActive.Checked.ToString();
         string Error = "";
-        Error = aSupplier.Valid(SupplierName, SupplierPhoneNumber, SupplierAddress, SupplierEmail, SupplierCreatedDate);
+        Error = aSupplier.Valid(SupplierName, SupplierEmail, SupplierAddress, SupplierPhoneNumber, SupplierCreatedDate);
         if (Error == "")
         {
             aSupplier.SupplierName = SupplierName;
+            aSupplier.SupplierEmail = SupplierEmail;
             aSupplier.SupplierPhoneNumber = SupplierPhoneNumber;
             aSupplier.SupplierAddress = SupplierAddress;
-            aSupplier.SupplierEmail = SupplierEmail;
+            aSupplier.SupplierPhoneNumber = SupplierPhoneNumber;
             aSupplier.SupplierCreatedDate = Convert.ToDateTime(SupplierCreatedDate);
             Session["aSupplier"] = aSupplier;
             Response.Redirect("SupplierViewer.aspx");
 
         }
-        else {
+        else
+        {
             lblError.Text = Error;
         }
-
-
-
-
-            Session["aSupplier"] = aSupplier;
-        //navigate to view page
-        Response.Redirect("SupplierViewer.aspx");
     }
 
     protected void btnFind_Click(object sender, EventArgs e)
@@ -57,9 +52,9 @@ public partial class _1_DataEntry : System.Web.UI.Page
         if (Found == true)
         {
             txtSupplierName.Text = aSupplier.SupplierName;
-            txtSupplierPhoneNumber.Text = aSupplier.SupplierPhoneNumber;
-            txtSupplierAddress.Text = aSupplier.SupplierAddress;
             txtSupplierEmail.Text = aSupplier.SupplierEmail;
+            txtSupplierAddress.Text = aSupplier.SupplierAddress;
+            txtSupplierPhoneNumber.Text = aSupplier.SupplierPhoneNumber;
             txtSupplierCreatedDate.Text = aSupplier.SupplierCreatedDate.ToString();
         }
     }
