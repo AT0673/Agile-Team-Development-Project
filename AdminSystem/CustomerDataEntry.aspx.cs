@@ -25,10 +25,52 @@ public partial class _1_DataEntry : System.Web.UI.Page
         clsCustomer aCustomer = new clsCustomer();
         //capture the customer ID
         aCustomer.CustomerID = Convert.ToInt32(txtCustomerID.Text);
-
-        Session["aCustomer"] = aCustomer;
-        //navigate to the view page
-        Response.Redirect("CustomerViewer.aspx");
+        //capture the customer first name
+        aCustomer.CustomerFirstName = txtCustomerFirstName.Text;
+        //capture the customer email
+        aCustomer.CustomerEmail = txtCustomerEmail.Text;
+        //capture the customer password
+        aCustomer.CustomerPassword = txtCustomerPassword.Text;
+        //capture the customer address
+        aCustomer.CustomerAddress = txtCustomerAddress.Text;
+        //capture the date added
+        aCustomer.DateAdded = Convert.ToDateTime(txtDateAdded.Text);
+        //capture the active status
+        aCustomer.Active = Convert.ToBoolean(chkActive.Text);
+        //capture the customer DOB
+        aCustomer.CustomerDOB = Convert.ToDateTime(txtCustomerDOB.Text);
+        //variable to store any error messages
+        String Error = "";
+        //validate the data
+        Error = aCustomer.Valid(aCustomer.CustomerID, aCustomer.CustomerFirstName, aCustomer.Active, aCustomer.CustomerEmail, aCustomer.CustomerPassword, aCustomer.CustomerDOB, aCustomer.CustomerAddress, aCustomer.DateAdded);
+        if (Error == "")
+        {
+            //capture the customer ID
+            aCustomer.CustomerID = Convert.ToInt32(txtCustomerID.Text);
+            //capture the customer first name
+            aCustomer.CustomerFirstName = txtCustomerFirstName.Text;
+            //capture the customer email
+            aCustomer.CustomerEmail = txtCustomerEmail.Text;
+            //capture the customer password
+            aCustomer.CustomerPassword = txtCustomerPassword.Text;
+            //capture the customer address
+            aCustomer.CustomerAddress = txtCustomerAddress.Text;
+            //capture the date added
+            aCustomer.DateAdded = Convert.ToDateTime(txtDateAdded.Text);
+            //capture the active status
+            aCustomer.Active = Convert.ToBoolean(chkActive.Text);
+            //capture the customer DOB
+            aCustomer.CustomerDOB = Convert.ToDateTime(txtCustomerDOB.Text);
+            //store the customer object in the session object
+            Session["aCustomer"] = aCustomer;
+            //navigate to the view page
+            Response.Redirect("CustomerViewer.aspx");
+        }
+        else
+        {
+            //display the error message
+            lblError.Text = Error;
+        }
     }
 
     protected void btnFind_Click(object sender, EventArgs e)
