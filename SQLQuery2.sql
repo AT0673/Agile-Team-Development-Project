@@ -4,7 +4,7 @@ GO
 DECLARE	@return_value Int
 
 EXEC	@return_value = [dbo].[sproc_tblSupplier_FilterBySupplierID]
-		@SupplierID = 1
+		@SupplierID = 5
 
 SELECT	@return_value as 'Return Value'
 

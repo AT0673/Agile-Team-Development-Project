@@ -101,13 +101,13 @@ namespace ClassLibrary
 
             if (DB.Count == 1)
             {
-                mSupplierID = Convert.ToInt32(DB.DataTable.Rows[0]["SupplierID"]);
-                dateCreated = Convert.ToDateTime(DB.DataTable.Rows[0]["SupplierCreatedDate"]);
-                email = Convert.ToString(DB.DataTable.Rows[0]["SupplierEmail"]);
-                name = Convert.ToString(DB.DataTable.Rows[0]["SupplerName"]);
-                isActive = Convert.ToBoolean(DB.DataTable.Rows[0]["SupplierActive"]);
-                address = Convert.ToString(DB.DataTable.Rows[0]["SupplierAddress"]);
-                phoneNumber = Convert.ToString(DB.DataTable.Rows[0]["SupplierPhoneNumber"]);
+                mSupplierID   = Convert.ToInt32(DB.DataTable.Rows[0]["SupplierID"]);
+                dateCreated   = Convert.ToDateTime(DB.DataTable.Rows[0]["CreatedDate"]);
+                email         = Convert.ToString(DB.DataTable.Rows[0]["ContactEmail"]);
+                name          = Convert.ToString(DB.DataTable.Rows[0]["SupplierName"]); 
+                isActive      = Convert.ToBoolean(DB.DataTable.Rows[0]["IsActive"]);
+                address       = Convert.ToString(DB.DataTable.Rows[0]["Address"]);
+                phoneNumber   = Convert.ToString(DB.DataTable.Rows[0]["ContactPhone"]);
                 return true;
 
             }
@@ -118,5 +118,6 @@ namespace ClassLibrary
         {
             return "";
         }
+
     }
 }

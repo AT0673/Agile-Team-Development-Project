@@ -164,7 +164,7 @@ namespace Testing4
             clsSupplier aSupplier = new clsSupplier();
             Boolean Found = false;
             Boolean OK = true;
-            Int32 SupplierID = 21;
+            Int32 SupplierID = 5;
             Found = aSupplier.Find(SupplierID);
             if (aSupplier.SupplierEmail != "michael@outlook.com")
             {
