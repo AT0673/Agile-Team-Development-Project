@@ -21,4 +21,9 @@ public partial class _1_DataEntry : System.Web.UI.Page
         //navigate to view page
         Response.Redirect("SupplierViewer.aspx");
     }
+
+    protected void btnFind_Click(object sender, EventArgs e)
+    {
+
+    }
 }
