@@ -291,5 +291,60 @@ namespace Testing3
             //test to see that only records for this customer were returned
             Assert.IsTrue(OK);
         }
+
+        [TestMethod]
+        public void ReportByGuestOrderMethodOK()
+        {
+            //create an instance of the filtered data
+            clsOrderCollection FilteredOrders = new clsOrderCollection();
+            //apply the guest order filter
+            FilteredOrders.ReportByGuestOrder(true);
+            //test to see that the method runs and returns a valid count
+            Assert.IsTrue(FilteredOrders.Count >= 0);
+        }
+
+        [TestMethod]
+        public void ReportByGuestOrderTestDataFound()
+        {
+            //create an instance of the filtered data
+            clsOrderCollection FilteredOrders = new clsOrderCollection();
+            //variable to store outcome
+            Boolean OK = true;
+            //apply the guest order filter
+            FilteredOrders.ReportByGuestOrder(true);
+
+            foreach (clsOrder AnOrder in FilteredOrders.OrderList)
+            {
+                if (AnOrder.isGuestOrder != true)
+                {
+                    OK = false;
+                }
+            }
+
+            //test to see that only guest orders were returned
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void ReportByCustomerOrderTestDataFound()
+        {
+            //create an instance of the filtered data
+            clsOrderCollection FilteredOrders = new clsOrderCollection();
+            //variable to store outcome
+            Boolean OK = true;
+            //apply the customer order filter
+            FilteredOrders.ReportByGuestOrder(false);
+
+            foreach (clsOrder AnOrder in FilteredOrders.OrderList)
+            {
+                if (AnOrder.isGuestOrder != false)
+                {
+                    OK = false;
+                }
+            }
+
+            //test to see that only customer orders were returned
+            Assert.IsTrue(OK);
+        }
     }
 }

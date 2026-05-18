@@ -87,9 +87,26 @@ public partial class _1_List : System.Web.UI.Page
         //clear any previous error message
         lblError.Text = "";
         //make sure only one filter is used at a time
-        if (txtFilter.Text.Length != 0 && txtCustomerIDFilter.Text.Length != 0)
+        Int32 FilterCount = 0;
+
+        if (txtFilter.Text.Length != 0)
         {
-            lblError.Text = "Please filter by Order Status or Customer ID, not both";
+            FilterCount++;
+        }
+
+        if (txtCustomerIDFilter.Text.Length != 0)
+        {
+            FilterCount++;
+        }
+
+        if (ddlGuestFilter.SelectedValue.Length != 0)
+        {
+            FilterCount++;
+        }
+
+        if (FilterCount > 1)
+        {
+            lblError.Text = "Please use one filter at a time";
             return;
         }
 
@@ -114,6 +131,13 @@ public partial class _1_List : System.Web.UI.Page
                 return;
             }
         }
+
+        //retrieve the guest order filter
+        if (ddlGuestFilter.SelectedValue.Length != 0)
+        {
+            Boolean isGuestOrder = Convert.ToBoolean(ddlGuestFilter.SelectedValue);
+            Orders.ReportByGuestOrder(isGuestOrder);
+        }
         //set the data source to the list of orders in the collection
         lstOrderList.DataSource = Orders.OrderList;
         //set the name of the primary key
@@ -136,6 +160,7 @@ public partial class _1_List : System.Web.UI.Page
         //clear any existing filter to tidy up the interface
         txtFilter.Text = "";
         txtCustomerIDFilter.Text = "";
+        ddlGuestFilter.SelectedValue = "";
         //set the data source to the list of orders in the collection
         lstOrderList.DataSource = Orders.OrderList;
         //set the name of the primary key

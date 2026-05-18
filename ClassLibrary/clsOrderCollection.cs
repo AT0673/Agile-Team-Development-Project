@@ -158,5 +158,18 @@ namespace ClassLibrary
             //populate the array list with the data table
             PopulateArray(DB);
         }
+
+        public void ReportByGuestOrder(Boolean isGuestOrder)
+        {
+            //filters the records by guest order status
+            //connect to the database
+            clsDataConnection DB = new clsDataConnection();
+            //send the guest order parameter to the database
+            DB.AddParameter("@isGuestOrder", isGuestOrder);
+            //execute the stored procedure
+            DB.Execute("sproc_tblOrder_FilterByGuestOrder");
+            //populate the array list with the data table
+            PopulateArray(DB);
+        }
     }
 }
