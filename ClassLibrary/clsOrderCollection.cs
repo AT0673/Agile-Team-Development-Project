@@ -99,7 +99,19 @@ namespace ClassLibrary
 
         public void Update()
         {
-            throw new NotImplementedException();
+            //Update an existing record based on the values of ThisOrder
+            //connect to the database
+            clsDataConnection DB = new clsDataConnection();
+            //Add the parameters for the record
+            DB.AddParameter("@OrderID", mThisOrder.OrderID);
+            DB.AddParameter("@CustomerID", mThisOrder.CustomerID);
+            DB.AddParameter("@OrderDate", mThisOrder.OrderDate);
+            DB.AddParameter("@TotalPrice", mThisOrder.TotalPrice);
+            DB.AddParameter("@OrderStatus", mThisOrder.OrderStatus);
+            DB.AddParameter("@isGuestOrder", mThisOrder.isGuestOrder);
+            DB.AddParameter("@ProductID", mThisOrder.ProductID);
+            //Execute the query returning the primary key value
+            DB.Execute("sproc_tblOrder_Update");
         }
     }
 }

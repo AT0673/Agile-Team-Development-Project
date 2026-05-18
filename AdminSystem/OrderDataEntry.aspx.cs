@@ -8,9 +8,36 @@ using ClassLibrary;
 
 public partial class _1_DataEntry : System.Web.UI.Page
 {
+    Int32 OrderID;
     protected void Page_Load(object sender, EventArgs e)
     {
+        //get the number of the order to be processed
+        OrderID = Convert.ToInt32(Session["OrderID"]);
+        if (IsPostBack == false)
+        {
+            //if this is not a new record
+            if (OrderID != -1)
+            {
+                //display the current data for the record
+                DisplayOrder();
+            }
+        }
+    }
 
+    void DisplayOrder()
+    {
+        //create an instance of the order collection
+        clsOrderCollection OrderList = new clsOrderCollection();
+        //find the record to update
+        OrderList.ThisOrder.Find(OrderID);
+        //display the data for this record
+        txtOrderID.Text = OrderList.ThisOrder.OrderID.ToString();
+        txtCustomerID.Text = OrderList.ThisOrder.CustomerID.ToString();
+        txtOrderDate.Text = OrderList.ThisOrder.OrderDate.ToString("yyyy-MM-dd");
+        txtTotalPrice.Text = OrderList.ThisOrder.TotalPrice.ToString();
+        txtStatus.Text = OrderList.ThisOrder.OrderStatus;
+        chkIsGuestOrder.Checked = OrderList.ThisOrder.isGuestOrder;
+        txtProductID.Text = OrderList.ThisOrder.ProductID.ToString();
     }
 
     protected void btnOK_Click(object sender, EventArgs e)
@@ -78,24 +105,25 @@ public partial class _1_DataEntry : System.Web.UI.Page
         //if there are no errors, store the order data in the session object
         Session["AnOrder"] = AnOrder;
 
-        // Create a new instance of the order collection
+        // Assign the OrderID from session BEFORE the Add/Update branch
+        AnOrder.OrderID = Convert.ToInt32(Session["OrderID"]);
+
+        // Create an instance of the order collection
         clsOrderCollection OrderList = new clsOrderCollection();
 
-        //Check if this is a new record or an update
         if (Convert.ToInt32(Session["OrderID"]) == -1)
         {
-            //This is a new record, so add it to the collection
             OrderList.ThisOrder = AnOrder;
             OrderList.Add();
         }
         else
         {
-            //This is an update, so find the record to update
             OrderList.ThisOrder.Find(AnOrder.OrderID);
-            //Update the record
             OrderList.ThisOrder = AnOrder;
             OrderList.Update();
         }
+
+        Response.Redirect("OrderList.aspx");
 
         //redirect to the list page
         Response.Redirect("OrderList.aspx");
