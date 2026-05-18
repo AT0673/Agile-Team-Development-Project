@@ -14,8 +14,29 @@ public partial class _1_ConfirmDelete : System.Web.UI.Page
     {
         //get the number of the order to be deleted from the session object
         OrderID = Convert.ToInt32(Session["OrderID"]);
-        //display the order number for this record
+        if (IsPostBack == false)
+        {
+            //display the order summary for this record
+            DisplayOrder();
+        }
+    }
 
+    void DisplayOrder()
+    {
+        //Create a new instance of the order collection
+        clsOrderCollection Orders = new clsOrderCollection();
+        //find the record to delete
+        Boolean Found = Orders.ThisOrder.Find(OrderID);
+
+        if (Found)
+        {
+            lblOrderSummary.Text = Orders.ThisOrder.OrderSummary;
+        }
+        else
+        {
+            lblOrderSummary.Text = "The selected order could not be found.";
+            btnYes.Enabled = false;
+        }
     }
 
     protected void btnYes_Click(object sender, EventArgs e)

@@ -4,50 +4,119 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
+    <title>Order Details</title>
     <style type="text/css">
         body {
             font-family: Arial, sans-serif;
-            font-size: 13px;
+            font-size: 14px;
+            margin: 0;
+            background-color: #f4f6f8;
+            color: #1f2933;
         }
-
-        .lbl { position: absolute; left: 20px; height: 20px; line-height: 20px; width: 100px; text-align: right; }
-        .txt { position: absolute; left: 130px; width: 180px; }
-
-        .row1 { top: 20px;  } .row2 { top: 55px;  } .row3 { top: 90px;  }
-        .row4 { top: 125px; } .row5 { top: 160px; } .row6 { top: 195px; }
-        .row8 { top: 265px; }
+        .page {
+            max-width: 620px;
+            margin: 32px auto;
+            padding: 24px;
+            background-color: #ffffff;
+            border: 1px solid #d8dee4;
+            border-radius: 8px;
+        }
+        h1 {
+            margin: 0 0 18px 0;
+            font-size: 24px;
+            font-weight: 700;
+        }
+        .form-grid {
+            display: grid;
+            grid-template-columns: 150px 1fr;
+            gap: 12px 16px;
+            align-items: center;
+        }
+        .lbl {
+            font-weight: 700;
+            text-align: right;
+        }
+        .txt,
+        .select {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 8px;
+            border: 1px solid #b8c2cc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        .check-row {
+            grid-column: 2;
+        }
+        .button-row {
+            margin-top: 20px;
+            display: flex;
+            gap: 8px;
+        }
+        .button {
+            padding: 8px 14px;
+            border: 1px solid #1f5f99;
+            border-radius: 4px;
+            background-color: #256fae;
+            color: #ffffff;
+            cursor: pointer;
+        }
+        .button-secondary {
+            background-color: #ffffff;
+            color: #1f5f99;
+        }
+        .error-label {
+            display: block;
+            margin-top: 14px;
+            color: #b42318;
+            font-weight: 700;
+        }
     </style>
 </head>
 <body>
     <form id="form1" runat="server">
+        <div class="page">
+            <h1>Order Details</h1>
 
-        <asp:Label   ID="lblOrderID"      runat="server" CssClass="lbl row1" Text="Order ID"></asp:Label>
-        <asp:TextBox ID="txtOrderID"      runat="server" CssClass="txt row1"></asp:TextBox>
+            <div class="form-grid">
+                <asp:Label ID="lblOrderID" runat="server" CssClass="lbl" Text="Order ID"></asp:Label>
+                <asp:TextBox ID="txtOrderID" runat="server" CssClass="txt"></asp:TextBox>
 
-        <asp:Label   ID="lblCustomerID"   runat="server" CssClass="lbl row2" Text="Customer ID"></asp:Label>
-        <asp:TextBox ID="txtCustomerID"   runat="server" CssClass="txt row2"></asp:TextBox>
+                <asp:Label ID="lblCustomerID" runat="server" CssClass="lbl" Text="Customer ID"></asp:Label>
+                <asp:TextBox ID="txtCustomerID" runat="server" CssClass="txt" TextMode="Number"></asp:TextBox>
 
-        <asp:Label   ID="lblOrderDate"    runat="server" CssClass="lbl row3" Text="Order Date"></asp:Label>
-        <asp:TextBox ID="txtOrderDate"    runat="server" CssClass="txt row3" TextMode="Date"></asp:TextBox>
+                <asp:Label ID="lblOrderDate" runat="server" CssClass="lbl" Text="Order Date"></asp:Label>
+                <asp:TextBox ID="txtOrderDate" runat="server" CssClass="txt" TextMode="Date"></asp:TextBox>
 
-        <asp:Label   ID="lblTotalPrice"   runat="server" CssClass="lbl row4" Text="Total Price"></asp:Label>
-        <asp:TextBox ID="txtTotalPrice"   runat="server" CssClass="txt row4"></asp:TextBox>
+                <asp:Label ID="lblTotalPrice" runat="server" CssClass="lbl" Text="Total Price"></asp:Label>
+                <asp:TextBox ID="txtTotalPrice" runat="server" CssClass="txt"></asp:TextBox>
 
-        <asp:Label   ID="lblStatus"       runat="server" CssClass="lbl row5" Text="Status"></asp:Label>
-        <asp:TextBox ID="txtStatus"       runat="server" CssClass="txt row5"></asp:TextBox>
+                <asp:Label ID="lblStatus" runat="server" CssClass="lbl" Text="Status"></asp:Label>
+                <asp:DropDownList ID="ddlStatus" runat="server" CssClass="select">
+                    <asp:ListItem Text="Pending" Value="Pending"></asp:ListItem>
+                    <asp:ListItem Text="Processing" Value="Processing"></asp:ListItem>
+                    <asp:ListItem Text="Dispatched" Value="Dispatched"></asp:ListItem>
+                    <asp:ListItem Text="Delivered" Value="Delivered"></asp:ListItem>
+                    <asp:ListItem Text="Cancelled" Value="Cancelled"></asp:ListItem>
+                </asp:DropDownList>
 
-        <asp:Label   ID="lblProductID"    runat="server" CssClass="lbl row6" Text="Product ID"></asp:Label>
-        <asp:TextBox ID="txtProductID"    runat="server" CssClass="txt row6"></asp:TextBox>
+                <asp:Label ID="lblProductID" runat="server" CssClass="lbl" Text="Product ID"></asp:Label>
+                <asp:TextBox ID="txtProductID" runat="server" CssClass="txt" TextMode="Number"></asp:TextBox>
 
-        <asp:CheckBox ID="chkIsGuestOrder"  runat="server" style="position:absolute; left:130px; top:233px;" Text="isGuestOrder" />
+                <span></span>
+                <div class="check-row">
+                    <asp:CheckBox ID="chkIsGuestOrder" runat="server" Text="Guest order" />
+                </div>
+            </div>
 
-        <asp:Label ID="lblError" runat="server" CssClass="lbl row8" Text="" style="width:300px;"></asp:Label>
+            <asp:Label ID="lblError" runat="server" CssClass="error-label" Text=""></asp:Label>
 
-        <asp:Button ID="btnOK"     runat="server" Text="OK"     style="position:absolute; left:130px; top:300px; width:60px;" OnClick="btnOK_Click" />
-        <asp:Button ID="btnCancel" runat="server" Text="Cancel" style="position:absolute; left:200px; top:300px; width:60px;" />
-
-        <asp:Button ID="btnFind"   runat="server" Text="Find"   style="position:absolute; left:270px; top:300px; width:60px;" OnClick="btnFind_Click" />
+            <div class="button-row">
+                <asp:Button ID="btnOK" runat="server" Text="Save Order" CssClass="button" OnClick="btnOK_Click" />
+                <asp:Button ID="btnCancel" runat="server" Text="Cancel" CssClass="button button-secondary" OnClick="btnCancel_Click" />
+                <asp:Button ID="btnFind" runat="server" Text="Find Order" CssClass="button button-secondary" OnClick="btnFind_Click" />
+            </div>
+        </div>
 
     </form>
 </body>
