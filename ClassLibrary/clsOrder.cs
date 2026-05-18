@@ -65,6 +65,19 @@ namespace ClassLibrary
             set { mProductID = value; }
         }
 
+        //OrderSummary public property used to make the order list easier to read
+        public string OrderSummary
+        {
+            get
+            {
+                return "Order " + mOrderID.ToString()
+                    + " | Customer " + mCustomerID.ToString()
+                    + " | " + mOrderStatus
+                    + " | GBP " + mTotalPrice.ToString("0.00")
+                    + " | " + mOrderDate.ToShortDateString();
+            }
+        }
+
         public bool Find(int orderID)
         {
             //Create an instance of the data connection
@@ -210,9 +223,23 @@ namespace ClassLibrary
             {
                 Error = Error + "The OrderStatus may not be blank : ";
             }
-            else if (OrderStatus.Length > 50)
+            else
             {
-                Error = Error + "The OrderStatus must be less than or equal to 50 characters : ";
+                string[] ValidStatuses = { "Pending", "Processing", "Dispatched", "Delivered", "Cancelled" };
+                Boolean StatusFound = false;
+
+                foreach (string ValidStatus in ValidStatuses)
+                {
+                    if (String.Equals(OrderStatus, ValidStatus, StringComparison.OrdinalIgnoreCase))
+                    {
+                        StatusFound = true;
+                    }
+                }
+
+                if (StatusFound == false)
+                {
+                    Error = Error + "The OrderStatus must be Pending, Processing, Dispatched, Delivered or Cancelled : ";
+                }
             }
 
             //ProductID checks

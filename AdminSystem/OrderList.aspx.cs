@@ -27,7 +27,7 @@ public partial class _1_List : System.Web.UI.Page
         //set the name of the primary key
         lstOrderList.DataValueField = "OrderID";
         //set the data field to display
-        lstOrderList.DataTextField = "TotalPrice";
+        lstOrderList.DataTextField = "OrderSummary";
         //bind the data to the list
         lstOrderList.DataBind();
     }
@@ -84,14 +84,42 @@ public partial class _1_List : System.Web.UI.Page
     {
         //create an instance of the order collection
         clsOrderCollection Orders = new clsOrderCollection();
+        //clear any previous error message
+        lblError.Text = "";
+        //make sure only one filter is used at a time
+        if (txtFilter.Text.Length != 0 && txtCustomerIDFilter.Text.Length != 0)
+        {
+            lblError.Text = "Please filter by Order Status or Customer ID, not both";
+            return;
+        }
+
         //retrieve the order status to filter by
-        Orders.ReportByOrderStatus(txtFilter.Text);
+        if (txtFilter.Text.Length != 0)
+        {
+            Orders.ReportByOrderStatus(txtFilter.Text);
+        }
+
+        //retrieve the customer id to filter by
+        if (txtCustomerIDFilter.Text.Length != 0)
+        {
+            Int32 CustomerID;
+
+            if (Int32.TryParse(txtCustomerIDFilter.Text, out CustomerID))
+            {
+                Orders.ReportByCustomerID(CustomerID);
+            }
+            else
+            {
+                lblError.Text = "Please enter a valid Customer ID";
+                return;
+            }
+        }
         //set the data source to the list of orders in the collection
         lstOrderList.DataSource = Orders.OrderList;
         //set the name of the primary key
         lstOrderList.DataValueField = "OrderID";
         //set the data field to display
-        lstOrderList.DataTextField = "OrderStatus";
+        lstOrderList.DataTextField = "OrderSummary";
         //bind the data to the list
         lstOrderList.DataBind();
 
@@ -101,16 +129,19 @@ public partial class _1_List : System.Web.UI.Page
     {
         //create an instance of the order collection
         clsOrderCollection Orders = new clsOrderCollection();
+        //clear any previous error message
+        lblError.Text = "";
         //set an empty string to the order status to filter by
         Orders.ReportByOrderStatus("");
         //clear any existing filter to tidy up the interface
         txtFilter.Text = "";
+        txtCustomerIDFilter.Text = "";
         //set the data source to the list of orders in the collection
         lstOrderList.DataSource = Orders.OrderList;
         //set the name of the primary key
         lstOrderList.DataValueField = "OrderID";
         //set the data field to display
-        lstOrderList.DataTextField = "OrderStatus";
+        lstOrderList.DataTextField = "OrderSummary";
         //bind the data to the list
         lstOrderList.DataBind();
     }
