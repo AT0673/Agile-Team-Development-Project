@@ -7,8 +7,6 @@ namespace Testing3
     [TestClass]
     public class tstOrderUser
     {
-        public object AnUser { get; private set; }
-
         [TestMethod]
         public void InstanceOK()
         {
@@ -31,10 +29,11 @@ namespace Testing3
             Assert.AreEqual(AnUser.UserID, TestData);
         }
 
-        public void UserNamePropertyOK()
+        [TestMethod]
+        public void UsernamePropertyOK()
         {
             //create an instance of the class we want to create
-            clsOrderStatus AnUser = new clsOrderStatus();
+            clsOrderUser AnUser = new clsOrderUser();
             //create some test data to assign to the property
             string TestData = "Dawn";
             //assign the data to the property
@@ -100,7 +99,12 @@ namespace Testing3
             //invoke method
             Found = AnUser.FindUser(Username, Password);
             //check the userID property
-            if (AnUser.Username != Username && AnUser.Password != Password)
+            if (Found == false)
+            {
+                OK = false;
+            }
+
+            if (AnUser.Username != Username || AnUser.Password != Password)
             {
                 OK = false;            
             }
