@@ -242,5 +242,58 @@ namespace Testing3
             //test to see that there are no records
             Assert.IsTrue(OK);
         }
+
+        [TestMethod]
+        public void ReportByCustomerIDMethodOK()
+        {
+            //create an instance of the class we want to create
+            clsOrderCollection AllOrders = new clsOrderCollection();
+            //create an instance of the filtered data
+            clsOrderCollection FilteredOrders = new clsOrderCollection();
+            //apply a customer id that should exist in the test data
+            FilteredOrders.ReportByCustomerID(13);
+            //test to see that filtered records were found
+            Assert.AreNotEqual(0, FilteredOrders.Count);
+        }
+
+        [TestMethod]
+        public void ReportByCustomerIDNoneFound()
+        {
+            //create an instance of the filtered data
+            clsOrderCollection FilteredOrders = new clsOrderCollection();
+            //apply a customer id that should not exist
+            FilteredOrders.ReportByCustomerID(999999);
+            //test to see that there are no records
+            Assert.AreEqual(0, FilteredOrders.Count);
+        }
+
+        [TestMethod]
+        public void ReportByCustomerIDTestDataFound()
+        {
+            //create an instance of the filtered data
+            clsOrderCollection FilteredOrders = new clsOrderCollection();
+            //variable to store outcome
+            Boolean OK = true;
+            //apply a customer id known to be in the test data
+            FilteredOrders.ReportByCustomerID(13);
+
+            if (FilteredOrders.Count > 0)
+            {
+                foreach (clsOrder AnOrder in FilteredOrders.OrderList)
+                {
+                    if (AnOrder.CustomerID != 13)
+                    {
+                        OK = false;
+                    }
+                }
+            }
+            else
+            {
+                OK = false;
+            }
+
+            //test to see that only records for this customer were returned
+            Assert.IsTrue(OK);
+        }
     }
 }

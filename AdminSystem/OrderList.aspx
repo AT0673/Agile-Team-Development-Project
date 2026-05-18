@@ -39,14 +39,15 @@
 <body>
     <form id="form1" runat="server">
 
-        <span class="filter-label">Order Status:</span>
+        <span class="filter-label">Order Filters:</span>
         <div class="filter-row">
             <asp:TextBox ID="txtFilter" runat="server" placeholder="Enter an Order Status" />
+            <asp:TextBox ID="txtCustomerIDFilter" runat="server" placeholder="Enter a Customer ID" />
             <asp:Button ID="btnApply"       runat="server" Text="Apply"        OnClick="btnApply_Click" />
             <asp:Button ID="btnClearFilter" runat="server" Text="Clear Filter" OnClick="btnClearFilter_Click" />
         </div>
 
-        <asp:ListBox ID="lstOrderList" runat="server" Height="200px" Width="360px" />
+        <asp:ListBox ID="lstOrderList" runat="server" Height="200px" Width="560px" />
 
         <div class="action-row">
             <asp:Button ID="btnAdd"    runat="server" Text="Add"    OnClick="btnAdd_Click" />

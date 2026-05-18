@@ -145,5 +145,18 @@ namespace ClassLibrary
             //populate the array list with the data table
             PopulateArray(DB);
         }
+
+        public void ReportByCustomerID(Int32 CustomerID)
+        {
+            //filters the records by customer id
+            //connect to the database
+            clsDataConnection DB = new clsDataConnection();
+            //send the customer id parameter to the database
+            DB.AddParameter("@CustomerID", CustomerID);
+            //execute the stored procedure
+            DB.Execute("sproc_tblOrder_FilterByCustomerID");
+            //populate the array list with the data table
+            PopulateArray(DB);
+        }
     }
 }
