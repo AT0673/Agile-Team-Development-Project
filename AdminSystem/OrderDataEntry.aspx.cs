@@ -62,13 +62,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
         DateTime tmpDate;
         bool tmpBool = chkIsGuestOrder.Checked;
 
-        // Try to convert and show a clear message if conversion fails (shouldn't for valid input)
-        if (!int.TryParse(txtOrderID.Text, out tmpInt))
-        {
-            lblError.Text = Error;
-            return;
-        }
-        AnOrder.OrderID = tmpInt;
+        AnOrder.OrderID = Convert.ToInt32(Session["OrderID"]);
 
         if (!int.TryParse(txtCustomerID.Text, out tmpInt))
         {
@@ -105,9 +99,6 @@ public partial class _1_DataEntry : System.Web.UI.Page
         //if there are no errors, store the order data in the session object
         Session["AnOrder"] = AnOrder;
 
-        // Assign the OrderID from session BEFORE the Add/Update branch
-        AnOrder.OrderID = Convert.ToInt32(Session["OrderID"]);
-
         // Create an instance of the order collection
         clsOrderCollection OrderList = new clsOrderCollection();
 
@@ -123,8 +114,6 @@ public partial class _1_DataEntry : System.Web.UI.Page
             OrderList.Update();
         }
 
-        Response.Redirect("OrderList.aspx");
-
         //redirect to the list page
         Response.Redirect("OrderList.aspx");
     }
@@ -138,7 +127,11 @@ public partial class _1_DataEntry : System.Web.UI.Page
         //variable to store the result of the find operation
         Boolean Found = false;
         //get the primary key entered by the user
-        OrderID = Convert.ToInt32(txtOrderID.Text);
+        if (!Int32.TryParse(txtOrderID.Text, out OrderID))
+        {
+            lblError.Text = "Please enter a valid Order ID";
+            return;
+        }
         //find the record
         Found = AnOrder.Find(OrderID);
         //if found

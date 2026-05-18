@@ -41,7 +41,7 @@
 
         <span class="filter-label">Order Status:</span>
         <div class="filter-row">
-            <asp:TextBox ID="txtFilter" runat="server" placeholder="Enter an Order Status" OnTextChanged="txtOrderStatus_TextChanged" />
+            <asp:TextBox ID="txtFilter" runat="server" placeholder="Enter an Order Status" />
             <asp:Button ID="btnApply"       runat="server" Text="Apply"        OnClick="btnApply_Click" />
             <asp:Button ID="btnClearFilter" runat="server" Text="Clear Filter" OnClick="btnClearFilter_Click" />
         </div>
@@ -58,3 +58,4 @@
 
     </form>
 </body>
+</html>
