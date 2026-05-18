@@ -77,8 +77,28 @@ public partial class _1_DataEntry : System.Web.UI.Page
 
         //if there are no errors, store the order data in the session object
         Session["AnOrder"] = AnOrder;
-        //redirect to the viewer page
-        Response.Redirect("OrderViewer.aspx");
+
+        // Create a new instance of the order collection
+        clsOrderCollection OrderList = new clsOrderCollection();
+
+        //Check if this is a new record or an update
+        if (Convert.ToInt32(Session["OrderID"]) == -1)
+        {
+            //This is a new record, so add it to the collection
+            OrderList.ThisOrder = AnOrder;
+            OrderList.Add();
+        }
+        else
+        {
+            //This is an update, so find the record to update
+            OrderList.ThisOrder.Find(AnOrder.OrderID);
+            //Update the record
+            OrderList.ThisOrder = AnOrder;
+            OrderList.Update();
+        }
+
+        //redirect to the list page
+        Response.Redirect("OrderList.aspx");
     }
 
     protected void btnFind_Click(object sender, EventArgs e)

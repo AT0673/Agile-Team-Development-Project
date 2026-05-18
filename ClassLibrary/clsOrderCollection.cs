@@ -6,6 +6,10 @@ namespace ClassLibrary
 {
     public class clsOrderCollection
     {
+        //private data member for ThisOrder
+        clsOrder mThisOrder = new clsOrder();
+
+
         //constructor for the class
         public clsOrderCollection()
         {
@@ -68,6 +72,34 @@ namespace ClassLibrary
             set { /* do nothing */ }
         }
 
-        public clsOrder ThisOrder { get; set; }
+        public clsOrder ThisOrder
+        {
+            //Return the private data member
+            get { return mThisOrder; }
+            //Set the private data member to the value passed in
+            set { mThisOrder = value; }
+        }
+
+        public int Add()
+        {
+            //Adds a new record to the database based on the values of ThisOrder
+            //Set the primary key value of the new record
+            clsDataConnection DB = new clsDataConnection();
+            //Add the parameters for the record
+            DB.AddParameter("@CustomerID", mThisOrder.CustomerID);
+            DB.AddParameter("@OrderDate", mThisOrder.OrderDate);
+            DB.AddParameter("@TotalPrice", mThisOrder.TotalPrice);
+            DB.AddParameter("@OrderStatus", mThisOrder.OrderStatus);
+            DB.AddParameter("@isGuestOrder", mThisOrder.isGuestOrder);
+            DB.AddParameter("@ProductID", mThisOrder.ProductID);
+
+            //Execute the query returning the primary key value
+            return DB.Execute("sproc_tblOrder_Insert");
+        }
+
+        public void Update()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
