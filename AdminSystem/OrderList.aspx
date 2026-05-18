@@ -45,6 +45,13 @@
             border-radius: 4px;
             font-size: 14px;
         }
+        .filter-row select {
+            width: 170px;
+            padding: 8px;
+            border: 1px solid #b8c2cc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
         .action-row {
             margin-top: 12px;
             display: flex;
@@ -91,6 +98,11 @@
             <div class="filter-row">
                 <asp:TextBox ID="txtFilter" runat="server" placeholder="Enter an Order Status" />
                 <asp:TextBox ID="txtCustomerIDFilter" runat="server" placeholder="Enter a Customer ID" />
+                <asp:DropDownList ID="ddlGuestFilter" runat="server">
+                    <asp:ListItem Text="All Orders" Value=""></asp:ListItem>
+                    <asp:ListItem Text="Guest Orders" Value="true"></asp:ListItem>
+                    <asp:ListItem Text="Customer Orders" Value="false"></asp:ListItem>
+                </asp:DropDownList>
                 <asp:Button ID="btnApply" runat="server" Text="Apply Filter" CssClass="button" OnClick="btnApply_Click" />
                 <asp:Button ID="btnClearFilter" runat="server" Text="Clear Filter" CssClass="button button-secondary" OnClick="btnClearFilter_Click" />
             </div>
