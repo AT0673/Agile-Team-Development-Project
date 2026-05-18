@@ -185,4 +185,62 @@ namespace Testing3
             //test to see that the record was not found
             Assert.IsFalse(Found);
         }
+
+        [TestMethod]
+        public void ReportByOrderStatusMethodOK()
+        {
+            //create an instance of the class we want to create
+            clsOrderCollection AllOrders = new clsOrderCollection();
+            //create an instance of the filtered data
+            clsOrderCollection FilteredOrders = new clsOrderCollection();
+            //apply a blank string (should return all records)
+            FilteredOrders.ReportByOrderStatus("");
+            //test to see that the two values are the same
+            Assert.AreEqual(AllOrders.Count, FilteredOrders.Count);
+        }
+
+        [TestMethod]
+        public void ReportByOrderStatusNoneFound()
+        {
+            //create an instance of the class we want to create
+            clsOrderCollection AllOrders = new clsOrderCollection();
+            //create an instance of the filtered data
+            clsOrderCollection FilteredOrders = new clsOrderCollection();
+            //apply a OrderStatus that doesn't exist
+            FilteredOrders.ReportByOrderStatus("This is not a valid OrderStatus");
+            //test to see that there are no records
+            Assert.AreEqual(0, FilteredOrders.Count);
+        }
+
+        [TestMethod]
+        public void ReportByOrderStatusTestDataFound()
+        {
+            //Create an instance of the filtered data
+            clsOrderCollection FilteredOrders = new clsOrderCollection();
+            //variable to store outcome
+            Boolean OK = true;
+            //apply a OrderStatus that doesn't exist
+            FilteredOrders.ReportByOrderStatus("Processing");
+            //test to see that there are records
+            if (FilteredOrders.Count == 2)
+            {
+                //check that the first record is ID 1
+                if (FilteredOrders.OrderList[0].OrderID != 1)
+                {
+                    OK = false;
+                }
+                //check that the second record is ID 2
+                if (FilteredOrders.OrderList[1].OrderID != 2)
+                {
+                    OK = false;
+                }
+            }
+            else
+            {
+                OK = false;
+            }
+            //test to see that there are no records
+            Assert.IsTrue(OK);
+        }
+    }
 }
