@@ -154,4 +154,5 @@ namespace Testing3
             //test to see that the two values are the same
             Assert.AreEqual(AllOrders.ThisOrder, TestItem);
         }
+    }
 }
