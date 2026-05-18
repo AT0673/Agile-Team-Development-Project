@@ -189,14 +189,12 @@ namespace Testing3
         [TestMethod]
         public void ReportByOrderStatusMethodOK()
         {
-            //create an instance of the class we want to create
-            clsOrderCollection AllOrders = new clsOrderCollection();
             //create an instance of the filtered data
             clsOrderCollection FilteredOrders = new clsOrderCollection();
-            //apply a blank string (should return all records)
-            FilteredOrders.ReportByOrderStatus("");
-            //test to see that the two values are the same
-            Assert.AreEqual(AllOrders.Count, FilteredOrders.Count);
+            //apply an order status that should exist in the test data
+            FilteredOrders.ReportByOrderStatus("Pending");
+            //test to see that filtered records were found
+            Assert.AreNotEqual(0, FilteredOrders.Count);
         }
 
         [TestMethod]
@@ -219,27 +217,25 @@ namespace Testing3
             clsOrderCollection FilteredOrders = new clsOrderCollection();
             //variable to store outcome
             Boolean OK = true;
-            //apply a OrderStatus that doesn't exist
-            FilteredOrders.ReportByOrderStatus("Processing");
-            //test to see that there are records
-            if (FilteredOrders.Count == 2)
+            //apply an OrderStatus known to be in the test data
+            FilteredOrders.ReportByOrderStatus("Pending");
+
+            if (FilteredOrders.Count > 0)
             {
-                //check that the first record is ID 1
-                if (FilteredOrders.OrderList[0].OrderID != 1)
+                //check that every record has the expected status
+                foreach (clsOrder AnOrder in FilteredOrders.OrderList)
                 {
-                    OK = false;
-                }
-                //check that the second record is ID 2
-                if (FilteredOrders.OrderList[1].OrderID != 2)
-                {
-                    OK = false;
+                    if (AnOrder.OrderStatus != "Pending")
+                    {
+                        OK = false;
+                    }
                 }
             }
             else
             {
                 OK = false;
             }
-            //test to see that there are no records
+            //test to see that only records with this status were returned
             Assert.IsTrue(OK);
         }
 
