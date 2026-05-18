@@ -225,18 +225,9 @@ namespace ClassLibrary
             }
             else
             {
-                string[] ValidStatuses = { "Pending", "Processing", "Dispatched", "Delivered", "Cancelled" };
-                Boolean StatusFound = false;
+                clsOrderStatus OrderStatusRules = new clsOrderStatus();
 
-                foreach (string ValidStatus in ValidStatuses)
-                {
-                    if (String.Equals(OrderStatus, ValidStatus, StringComparison.OrdinalIgnoreCase))
-                    {
-                        StatusFound = true;
-                    }
-                }
-
-                if (StatusFound == false)
+                if (OrderStatusRules.IsValidStatus(OrderStatus) == false)
                 {
                     Error = Error + "The OrderStatus must be Pending, Processing, Dispatched, Delivered or Cancelled : ";
                 }

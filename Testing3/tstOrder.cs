@@ -9,7 +9,6 @@ namespace Testing3
     {
 
         /********************************** Declaring some test data **********************************/
-        string OrderID = "1";
         string CustomerID = "1";
         string OrderDate = DateTime.Now.ToShortDateString();
         string TotalPrice = "10.00";
@@ -156,8 +155,6 @@ namespace Testing3
             clsOrder AnOrder = new clsOrder();
             //boolean variable to store the results of the validation
             Boolean Found = false;
-            //create a boolean to assume the data is OK (assume it is)
-            Boolean OK = true;
             //create some test data to use with the method
             Int32 OrderID = 4;
             //invoke the method
@@ -178,8 +175,6 @@ namespace Testing3
             clsOrder AnOrder = new clsOrder();
             //boolean variable to store the results of the validation
             Boolean Found = false;
-            //create a boolean to assume the data is OK (assume it is)
-            Boolean OK = true;
             //create some test data to use with the method
             Int32 OrderID = 4;
             //invoke the method
