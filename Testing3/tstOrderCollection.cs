@@ -154,5 +154,35 @@ namespace Testing3
             //test to see that the two values are the same
             Assert.AreEqual(AllOrders.ThisOrder, TestItem);
         }
-    }
+
+        [TestMethod]
+        public void DeleteMethodOK()
+        {
+            //create an instance of the class we want to create
+            clsOrderCollection AllOrders = new clsOrderCollection();
+            //create some test data to assign to the property
+            clsOrder TestItem = new clsOrder();
+            //Set Primary key to an initial value
+            Int32 PrimaryKey = 0;
+            //set its properties
+            TestItem.OrderID = 1;
+            TestItem.CustomerID = 1;
+            TestItem.OrderDate = DateTime.Now.Date;
+            TestItem.TotalPrice = 10.00m;
+            TestItem.OrderStatus = "Processing";
+            TestItem.isGuestOrder = false;
+            TestItem.ProductID = 1;
+            //assign the data to the property
+            AllOrders.ThisOrder = TestItem;
+            //add the record
+            PrimaryKey = AllOrders.Add();
+            //set the primary key of the test data
+            TestItem.OrderID = PrimaryKey;
+            //delete the record
+            AllOrders.Delete();
+            //now find the record
+            Boolean Found = AllOrders.ThisOrder.Find(PrimaryKey);
+            //test to see that the record was not found
+            Assert.IsFalse(Found);
+        }
 }
