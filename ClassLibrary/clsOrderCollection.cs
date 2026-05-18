@@ -9,54 +9,62 @@ namespace ClassLibrary
         //private data member for ThisOrder
         clsOrder mThisOrder = new clsOrder();
 
+        void PopulateArray(clsDataConnection DB)
+        {
+            {
+                //variable for the index
+                Int32 Index = 0;
+                //variable to store the record count
+                Int32 RecordCount = 0;
+                //get the count of records
+                RecordCount = DB.Count;
+                //clear the private array list
+                mOrderList = new List<clsOrder>();
+                //while there are records to process
+                while (Index < RecordCount)
+                {
+                    //create a blank order
+                    clsOrder AnOrder = new clsOrder();
+                    //read in the fields from the current record
+                    AnOrder.OrderID = DB.DataTable.Rows[Index]["OrderID"] == DBNull.Value
+                        ? 0
+                        : Convert.ToInt32(DB.DataTable.Rows[Index]["OrderID"]);
+                    AnOrder.CustomerID = DB.DataTable.Rows[Index]["CustomerID"] == DBNull.Value
+                        ? 0
+                        : Convert.ToInt32(DB.DataTable.Rows[Index]["CustomerID"]);
+                    AnOrder.ProductID = DB.DataTable.Rows[Index]["ProductID"] == DBNull.Value
+                        ? 0
+                        : Convert.ToInt32(DB.DataTable.Rows[Index]["ProductID"]);
+                    AnOrder.OrderDate = DB.DataTable.Rows[Index]["OrderDate"] == DBNull.Value
+                        ? DateTime.MinValue
+                        : Convert.ToDateTime(DB.DataTable.Rows[Index]["OrderDate"]);
+                    AnOrder.TotalPrice = DB.DataTable.Rows[Index]["TotalPrice"] == DBNull.Value
+                        ? 0
+                        : Convert.ToDecimal(DB.DataTable.Rows[Index]["TotalPrice"]);
+                    AnOrder.OrderStatus = DB.DataTable.Rows[Index]["OrderStatus"] == DBNull.Value
+                        ? string.Empty
+                        : Convert.ToString(DB.DataTable.Rows[Index]["OrderStatus"]);
+                    AnOrder.isGuestOrder = DB.DataTable.Rows[Index]["isGuestOrder"] == DBNull.Value
+                        ? false
+                        : Convert.ToBoolean(DB.DataTable.Rows[Index]["isGuestOrder"]);
+                    //add the record to the private data member
+                    mOrderList.Add(AnOrder);
+                    //point at the next record
+                    Index++;
+                }
+            }
+        }
+
 
         //constructor for the class
         public clsOrderCollection()
         {
-            //variable for the index
-            Int32 Index = 0;
-            //variable to store the record count
-            Int32 RecordCount = 0;
             //object for data connection
             clsDataConnection DB = new clsDataConnection();
             //execute the stored procedure
             DB.Execute("sproc_tblOrder_SelectAll");
-            //get the count of records
-            RecordCount = DB.Count;
-            //while there are records to process
-            while (Index < RecordCount)
-            {
-                //create a blank order
-                clsOrder AnOrder = new clsOrder();
-                //read in the fields from the current record
-                AnOrder.OrderID = DB.DataTable.Rows[Index]["OrderID"] == DBNull.Value
-                    ? 0
-                    : Convert.ToInt32(DB.DataTable.Rows[Index]["OrderID"]);
-
-                AnOrder.CustomerID = DB.DataTable.Rows[Index]["CustomerID"] == DBNull.Value
-                    ? 0
-                    : Convert.ToInt32(DB.DataTable.Rows[Index]["CustomerID"]);
-
-                AnOrder.ProductID = DB.DataTable.Rows[Index]["ProductID"] == DBNull.Value
-                    ? 0
-                    : Convert.ToInt32(DB.DataTable.Rows[Index]["ProductID"]);
-                AnOrder.OrderDate = DB.DataTable.Rows[Index]["OrderDate"] == DBNull.Value
-                    ? DateTime.MinValue
-                    : Convert.ToDateTime(DB.DataTable.Rows[Index]["OrderDate"]);
-                AnOrder.TotalPrice = DB.DataTable.Rows[Index]["TotalPrice"] == DBNull.Value
-                    ? 0
-                    : Convert.ToDecimal(DB.DataTable.Rows[Index]["TotalPrice"]);
-                AnOrder.OrderStatus = DB.DataTable.Rows[Index]["OrderStatus"] == DBNull.Value
-                    ? string.Empty
-                    : Convert.ToString(DB.DataTable.Rows[Index]["OrderStatus"]);
-                AnOrder.isGuestOrder = DB.DataTable.Rows[Index]["isGuestOrder"] == DBNull.Value
-                    ? false
-                    : Convert.ToBoolean(DB.DataTable.Rows[Index]["isGuestOrder"]);
-                //add the record to the private data member
-                mOrderList.Add(AnOrder);
-                //point at the next record
-                Index++;
-            }
+            //populate the array list with the data table
+            PopulateArray(DB);
         }
         //Private data member for the list
         List<clsOrder> mOrderList = new List<clsOrder>();
@@ -123,6 +131,19 @@ namespace ClassLibrary
             DB.AddParameter("@OrderID", mThisOrder.OrderID);
             //Execute the query returning the primary key value
             DB.Execute("sproc_tblOrder_Delete");
+        }
+
+        public void ReportByOrderStatus(string OrderStatus)
+        {
+            //filters the records by order status
+            //connect to the database
+            clsDataConnection DB = new clsDataConnection();
+            //send the order status parameter to the database
+            DB.AddParameter("@OrderStatus", OrderStatus);
+            //execute the stored procedure
+            DB.Execute("sproc_tblOrder_FilterByOrderStatus");
+            //populate the array list with the data table
+            PopulateArray(DB);
         }
     }
 }
