@@ -35,7 +35,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
         txtCustomerID.Text = OrderList.ThisOrder.CustomerID.ToString();
         txtOrderDate.Text = OrderList.ThisOrder.OrderDate.ToString("yyyy-MM-dd");
         txtTotalPrice.Text = OrderList.ThisOrder.TotalPrice.ToString();
-        txtStatus.Text = OrderList.ThisOrder.OrderStatus;
+        SetSelectedStatus(OrderList.ThisOrder.OrderStatus);
         chkIsGuestOrder.Checked = OrderList.ThisOrder.isGuestOrder;
         txtProductID.Text = OrderList.ThisOrder.ProductID.ToString();
     }
@@ -48,7 +48,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
         String Error = "";
         //validate the data first (Valid accepts strings)
         Error = AnOrder.Valid(txtCustomerID.Text, txtOrderDate.Text, txtTotalPrice.Text,
-                                txtStatus.Text, chkIsGuestOrder.Checked.ToString(), txtProductID.Text);
+                                ddlStatus.SelectedValue, chkIsGuestOrder.Checked.ToString(), txtProductID.Text);
         if (Error != "")
         {
             //display the validation error(s)
@@ -85,7 +85,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
         }
         AnOrder.TotalPrice = tmpDec;
 
-        AnOrder.OrderStatus = txtStatus.Text;
+        AnOrder.OrderStatus = ddlStatus.SelectedValue;
 
         if (!int.TryParse(txtProductID.Text, out tmpInt))
         {
@@ -141,9 +141,30 @@ public partial class _1_DataEntry : System.Web.UI.Page
             txtCustomerID.Text = AnOrder.CustomerID.ToString();
             txtOrderDate.Text = AnOrder.OrderDate.ToString("yyyy-MM-dd");
             txtTotalPrice.Text = AnOrder.TotalPrice.ToString();
-            txtStatus.Text = AnOrder.OrderStatus;
+            SetSelectedStatus(AnOrder.OrderStatus);
             txtProductID.Text = AnOrder.ProductID.ToString();
             chkIsGuestOrder.Checked = AnOrder.isGuestOrder;
         }
+    }
+
+    void SetSelectedStatus(string OrderStatus)
+    {
+        //select the order status safely in case old data contains a removed status
+        ListItem StatusItem = ddlStatus.Items.FindByValue(OrderStatus);
+
+        if (StatusItem != null)
+        {
+            ddlStatus.SelectedValue = OrderStatus;
+        }
+        else
+        {
+            ddlStatus.SelectedValue = "Pending";
+        }
+    }
+
+    protected void btnCancel_Click(object sender, EventArgs e)
+    {
+        //redirect to the list page without saving
+        Response.Redirect("OrderList.aspx");
     }
 }
