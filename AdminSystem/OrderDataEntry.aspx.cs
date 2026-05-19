@@ -8,9 +8,36 @@ using ClassLibrary;
 
 public partial class _1_DataEntry : System.Web.UI.Page
 {
+    Int32 OrderID;
     protected void Page_Load(object sender, EventArgs e)
     {
+        //get the number of the order to be processed
+        OrderID = Convert.ToInt32(Session["OrderID"]);
+        if (IsPostBack == false)
+        {
+            //if this is not a new record
+            if (OrderID != -1)
+            {
+                //display the current data for the record
+                DisplayOrder();
+            }
+        }
+    }
 
+    void DisplayOrder()
+    {
+        //create an instance of the order collection
+        clsOrderCollection OrderList = new clsOrderCollection();
+        //find the record to update
+        OrderList.ThisOrder.Find(OrderID);
+        //display the data for this record
+        txtOrderID.Text = OrderList.ThisOrder.OrderID.ToString();
+        txtCustomerID.Text = OrderList.ThisOrder.CustomerID.ToString();
+        txtOrderDate.Text = OrderList.ThisOrder.OrderDate.ToString("yyyy-MM-dd");
+        txtTotalPrice.Text = OrderList.ThisOrder.TotalPrice.ToString();
+        SetSelectedStatus(OrderList.ThisOrder.OrderStatus);
+        chkIsGuestOrder.Checked = OrderList.ThisOrder.isGuestOrder;
+        txtProductID.Text = OrderList.ThisOrder.ProductID.ToString();
     }
 
     protected void btnOK_Click(object sender, EventArgs e)
@@ -21,7 +48,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
         String Error = "";
         //validate the data first (Valid accepts strings)
         Error = AnOrder.Valid(txtCustomerID.Text, txtOrderDate.Text, txtTotalPrice.Text,
-                                txtStatus.Text, chkIsGuestOrder.Checked.ToString(), txtProductID.Text);
+                                ddlStatus.SelectedValue, chkIsGuestOrder.Checked.ToString(), txtProductID.Text);
         if (Error != "")
         {
             //display the validation error(s)
@@ -35,13 +62,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
         DateTime tmpDate;
         bool tmpBool = chkIsGuestOrder.Checked;
 
-        // Try to convert and show a clear message if conversion fails (shouldn't for valid input)
-        if (!int.TryParse(txtOrderID.Text, out tmpInt))
-        {
-            lblError.Text = Error;
-            return;
-        }
-        AnOrder.OrderID = tmpInt;
+        AnOrder.OrderID = Convert.ToInt32(Session["OrderID"]);
 
         if (!int.TryParse(txtCustomerID.Text, out tmpInt))
         {
@@ -64,7 +85,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
         }
         AnOrder.TotalPrice = tmpDec;
 
-        AnOrder.OrderStatus = txtStatus.Text;
+        AnOrder.OrderStatus = ddlStatus.SelectedValue;
 
         if (!int.TryParse(txtProductID.Text, out tmpInt))
         {
@@ -77,8 +98,24 @@ public partial class _1_DataEntry : System.Web.UI.Page
 
         //if there are no errors, store the order data in the session object
         Session["AnOrder"] = AnOrder;
-        //redirect to the viewer page
-        Response.Redirect("OrderViewer.aspx");
+
+        // Create an instance of the order collection
+        clsOrderCollection OrderList = new clsOrderCollection();
+
+        if (Convert.ToInt32(Session["OrderID"]) == -1)
+        {
+            OrderList.ThisOrder = AnOrder;
+            OrderList.Add();
+        }
+        else
+        {
+            OrderList.ThisOrder.Find(AnOrder.OrderID);
+            OrderList.ThisOrder = AnOrder;
+            OrderList.Update();
+        }
+
+        //redirect to the list page
+        Response.Redirect("OrderList.aspx");
     }
 
     protected void btnFind_Click(object sender, EventArgs e)
@@ -90,7 +127,11 @@ public partial class _1_DataEntry : System.Web.UI.Page
         //variable to store the result of the find operation
         Boolean Found = false;
         //get the primary key entered by the user
-        OrderID = Convert.ToInt32(txtOrderID.Text);
+        if (!Int32.TryParse(txtOrderID.Text, out OrderID))
+        {
+            lblError.Text = "Please enter a valid Order ID";
+            return;
+        }
         //find the record
         Found = AnOrder.Find(OrderID);
         //if found
@@ -100,9 +141,30 @@ public partial class _1_DataEntry : System.Web.UI.Page
             txtCustomerID.Text = AnOrder.CustomerID.ToString();
             txtOrderDate.Text = AnOrder.OrderDate.ToString("yyyy-MM-dd");
             txtTotalPrice.Text = AnOrder.TotalPrice.ToString();
-            txtStatus.Text = AnOrder.OrderStatus;
+            SetSelectedStatus(AnOrder.OrderStatus);
             txtProductID.Text = AnOrder.ProductID.ToString();
             chkIsGuestOrder.Checked = AnOrder.isGuestOrder;
         }
+    }
+
+    void SetSelectedStatus(string OrderStatus)
+    {
+        //select the order status safely in case old data contains a removed status
+        ListItem StatusItem = ddlStatus.Items.FindByValue(OrderStatus);
+
+        if (StatusItem != null)
+        {
+            ddlStatus.SelectedValue = OrderStatus;
+        }
+        else
+        {
+            ddlStatus.SelectedValue = "Pending";
+        }
+    }
+
+    protected void btnCancel_Click(object sender, EventArgs e)
+    {
+        //redirect to the list page without saving
+        Response.Redirect("OrderList.aspx");
     }
 }

@@ -9,7 +9,6 @@ namespace Testing3
     {
 
         /********************************** Declaring some test data **********************************/
-        string OrderID = "1";
         string CustomerID = "1";
         string OrderDate = DateTime.Now.ToShortDateString();
         string TotalPrice = "10.00";
@@ -116,6 +115,23 @@ namespace Testing3
             //test to see that the two values are the same
             Assert.AreEqual(AnOrder.ProductID, TestData);
         }
+
+        [TestMethod]
+        public void OrderSummaryOK()
+        {
+            //create an instance of the class we want to create
+            clsOrder AnOrder = new clsOrder();
+            //create a date for the summary
+            DateTime TestDate = Convert.ToDateTime("18/05/2026");
+            //assign test data to the order
+            AnOrder.OrderID = 1;
+            AnOrder.CustomerID = 2;
+            AnOrder.OrderDate = TestDate;
+            AnOrder.TotalPrice = 10.00m;
+            AnOrder.OrderStatus = "Pending";
+            //test to see that the summary contains the key order details
+            Assert.AreEqual("Order 1 | Customer 2 | Pending | GBP 10.00 | " + TestDate.ToShortDateString(), AnOrder.OrderSummary);
+        }
         /*********************************** Testing the Find method **********************************/
         [TestMethod]
         public void FindMethodOK()
@@ -139,8 +155,6 @@ namespace Testing3
             clsOrder AnOrder = new clsOrder();
             //boolean variable to store the results of the validation
             Boolean Found = false;
-            //create a boolean to assume the data is OK (assume it is)
-            Boolean OK = true;
             //create some test data to use with the method
             Int32 OrderID = 4;
             //invoke the method
@@ -161,8 +175,6 @@ namespace Testing3
             clsOrder AnOrder = new clsOrder();
             //boolean variable to store the results of the validation
             Boolean Found = false;
-            //create a boolean to assume the data is OK (assume it is)
-            Boolean OK = true;
             //create some test data to use with the method
             Int32 OrderID = 4;
             //invoke the method
@@ -719,7 +731,7 @@ namespace Testing3
             //invoke the method
             Error = AnOrder.Valid(CustomerID, OrderDate, TotalPrice, OrderStatus, isGuestOrder, ProductID);
             //test to see that the result is correct
-            Assert.AreEqual(Error, "");
+            Assert.AreNotEqual(Error, "");
         }
 
         [TestMethod]
@@ -734,7 +746,7 @@ namespace Testing3
             //invoke the method
             Error = AnOrder.Valid(CustomerID, OrderDate, TotalPrice, OrderStatus, isGuestOrder, ProductID);
             //test to see that the result is correct
-            Assert.AreEqual(Error, "");
+            Assert.AreNotEqual(Error, "");
         }
 
         [TestMethod]
@@ -749,7 +761,7 @@ namespace Testing3
             //invoke the method
             Error = AnOrder.Valid(CustomerID, OrderDate, TotalPrice, OrderStatus, isGuestOrder, ProductID);
             //test to see that the result is correct
-            Assert.AreEqual(Error, "");
+            Assert.AreNotEqual(Error, "");
         }
 
         [TestMethod]
@@ -764,7 +776,7 @@ namespace Testing3
             //invoke the method
             Error = AnOrder.Valid(CustomerID, OrderDate, TotalPrice, OrderStatus, isGuestOrder, ProductID);
             //test to see that the result is correct
-            Assert.AreEqual(Error, "");
+            Assert.AreNotEqual(Error, "");
         }
 
         [TestMethod]
@@ -794,7 +806,7 @@ namespace Testing3
             //invoke the method
             Error = AnOrder.Valid(CustomerID, OrderDate, TotalPrice, OrderStatus, isGuestOrder, ProductID);
             //test to see that the result is correct
-            Assert.AreEqual(Error, "");
+            Assert.AreNotEqual(Error, "");
         }
 
         [TestMethod]
@@ -810,6 +822,58 @@ namespace Testing3
             Error = AnOrder.Valid(CustomerID, OrderDate, TotalPrice, OrderStatus, isGuestOrder, ProductID);
             //test to see that the result is correct
             Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void OrderStatusProcessingOK()
+        {
+            //create an instance of the class we want to create
+            clsOrder AnOrder = new clsOrder();
+            //string variable to store any error message
+            String Error = "";
+            //invoke the method
+            Error = AnOrder.Valid(CustomerID, OrderDate, TotalPrice, "Processing", isGuestOrder, ProductID);
+            //test to see that the result is correct
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void OrderStatusDispatchedOK()
+        {
+            //create an instance of the class we want to create
+            clsOrder AnOrder = new clsOrder();
+            //string variable to store any error message
+            String Error = "";
+            //invoke the method
+            Error = AnOrder.Valid(CustomerID, OrderDate, TotalPrice, "Dispatched", isGuestOrder, ProductID);
+            //test to see that the result is correct
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void OrderStatusDeliveredOK()
+        {
+            //create an instance of the class we want to create
+            clsOrder AnOrder = new clsOrder();
+            //string variable to store any error message
+            String Error = "";
+            //invoke the method
+            Error = AnOrder.Valid(CustomerID, OrderDate, TotalPrice, "Delivered", isGuestOrder, ProductID);
+            //test to see that the result is correct
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void OrderStatusCancelledOK()
+        {
+            //create an instance of the class we want to create
+            clsOrder AnOrder = new clsOrder();
+            //string variable to store any error message
+            String Error = "";
+            //invoke the method
+            Error = AnOrder.Valid(CustomerID, OrderDate, TotalPrice, "Cancelled", isGuestOrder, ProductID);
+            //test to see that the result is correct
+            Assert.AreEqual(Error, "");
         }
 
         /***** Testing the PropertyID property of the Valid method ***/

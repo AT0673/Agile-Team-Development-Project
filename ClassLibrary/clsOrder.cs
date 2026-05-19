@@ -65,6 +65,19 @@ namespace ClassLibrary
             set { mProductID = value; }
         }
 
+        //OrderSummary public property used to make the order list easier to read
+        public string OrderSummary
+        {
+            get
+            {
+                return "Order " + mOrderID.ToString()
+                    + " | Customer " + mCustomerID.ToString()
+                    + " | " + mOrderStatus
+                    + " | GBP " + mTotalPrice.ToString("0.00")
+                    + " | " + mOrderDate.ToShortDateString();
+            }
+        }
+
         public bool Find(int orderID)
         {
             //Create an instance of the data connection
@@ -76,18 +89,50 @@ namespace ClassLibrary
             //If one record is found (there should be either one or zero!)
             if (DB.Count == 1)
             {
-                //Set the private data member to the test data value
-                mOrderID = Convert.ToInt32(DB.DataTable.Rows[0]["OrderID"]);
-                //Check if CustomerID is not DBNull before converting (this handles the case where CustomerID might be null in the database (e.g. a guest order))
-                if (DB.DataTable.Rows[0]["CustomerID"] != DBNull.Value)
-                    mCustomerID = Convert.ToInt32(DB.DataTable.Rows[0]["CustomerID"]);
+                var row = DB.DataTable.Rows[0];
+
+                // OrderID is required - if it's DBNull treat as not found
+                if (row["OrderID"] != DBNull.Value)
+                    mOrderID = Convert.ToInt32(row["OrderID"]);
                 else
-                    mCustomerID = 0; // or handle as appropriate
-                mOrderDate = Convert.ToDateTime(DB.DataTable.Rows[0]["OrderDate"]);
-                mTotalPrice = Convert.ToDecimal(DB.DataTable.Rows[0]["TotalPrice"]);
-                misGuestOrder = Convert.ToBoolean(DB.DataTable.Rows[0]["isGuestOrder"]);
-                mProductID = Convert.ToInt32(DB.DataTable.Rows[0]["ProductID"]);
-                mOrderStatus = Convert.ToString(DB.DataTable.Rows[0]["OrderStatus"])?.Trim();
+                    return false;
+
+                // CustomerID might be null for guest orders
+                if (row["CustomerID"] != DBNull.Value)
+                    mCustomerID = Convert.ToInt32(row["CustomerID"]);
+                else
+                    mCustomerID = 0;
+
+                // OrderDate - guard against DBNull
+                if (row["OrderDate"] != DBNull.Value)
+                    mOrderDate = Convert.ToDateTime(row["OrderDate"]);
+                else
+                    mOrderDate = DateTime.MinValue;
+
+                // TotalPrice - guard against DBNull
+                if (row["TotalPrice"] != DBNull.Value)
+                    mTotalPrice = Convert.ToDecimal(row["TotalPrice"]);
+                else
+                    mTotalPrice = 0m;
+
+                // isGuestOrder - guard against DBNull
+                if (row["isGuestOrder"] != DBNull.Value)
+                    misGuestOrder = Convert.ToBoolean(row["isGuestOrder"]);
+                else
+                    misGuestOrder = false;
+
+                // ProductID - guard against DBNull
+                if (row["ProductID"] != DBNull.Value)
+                    mProductID = Convert.ToInt32(row["ProductID"]);
+                else
+                    mProductID = 0;
+
+                // OrderStatus - guard against DBNull
+                if (row["OrderStatus"] != DBNull.Value)
+                    mOrderStatus = Convert.ToString(row["OrderStatus"]).Trim();
+                else
+                    mOrderStatus = string.Empty;
+
                 //Return that everything worked OK
                 return true;
             }
@@ -178,9 +223,14 @@ namespace ClassLibrary
             {
                 Error = Error + "The OrderStatus may not be blank : ";
             }
-            else if (OrderStatus.Length > 50)
+            else
             {
-                Error = Error + "The OrderStatus must be less than or equal to 50 characters : ";
+                clsOrderStatus OrderStatusRules = new clsOrderStatus();
+
+                if (OrderStatusRules.IsValidStatus(OrderStatus) == false)
+                {
+                    Error = Error + "The OrderStatus must be Pending, Processing, Dispatched, Delivered or Cancelled : ";
+                }
             }
 
             //ProductID checks

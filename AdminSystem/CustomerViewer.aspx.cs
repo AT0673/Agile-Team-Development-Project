@@ -10,11 +10,13 @@ public partial class _1Viewer : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        //create a new instance of clsCustomer
-        clsCustomer aCustomer = new clsCustomer();
-        //get the data from the session object
-        aCustomer = (clsCustomer)Session["aCustomer"];
-        //display the customer ID for this entry
-        Response.Write(aCustomer.CustomerID);
+        Response.Write(Request.QueryString["CustomerID"] + "<br />");
+        Response.Write(Request.QueryString["CustomerFirstName"] + "<br />");
+        Response.Write(Request.QueryString["CustomerEmail"] + "<br />");
+        Response.Write(Request.QueryString["CustomerPassword"] + "<br />");
+        Response.Write(Request.QueryString["CustomerAddress"] + "<br />");
+        Response.Write(Request.QueryString["CustomerIsActive"] + "<br />");
+        Response.Write(Request.QueryString["CustomerDOB"] + "<br />");
+        Response.Write(Request.QueryString["DateAdded"] + "<br />");
     }
 }
