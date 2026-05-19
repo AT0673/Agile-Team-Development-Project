@@ -72,5 +72,17 @@ namespace ClassLibrary
             DB.AddParameter("@StockArrivalDate", mThisProduct.StockArrivalDate);
             return DB.Execute("sproc_tblProduct_Insert");
         }
+
+        public void Update()
+        {
+            clsDataConnection DB = new clsDataConnection();
+            DB.AddParameter("@ProductID", mThisProduct.ProductID);
+            DB.AddParameter("@ProductName", mThisProduct.ProductName);
+            DB.AddParameter("@ProductAmount", mThisProduct.ProductAmount);
+            DB.AddParameter("@SupplierID", mThisProduct.SupplierID);
+            DB.AddParameter("@InStock", mThisProduct.InStock);
+            DB.AddParameter("@StockArrivalDate", mThisProduct.StockArrivalDate);
+            DB.Execute("sproc_tblProduct_Update");
+        }
     }
 }
