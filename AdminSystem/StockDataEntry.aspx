@@ -116,7 +116,7 @@
 
             <asp:Button ID="btnCancel"
                 runat="server"
-                Text="Cancel" />
+                Text="Cancel" OnClick="btnCancel_Click" />
             <asp:Button ID="btnFind" runat="server" OnClick="btnFind_Click" style="z-index: 1; left: 103px; top: 277px; position: absolute" Text="Find" />
         </div>
 
