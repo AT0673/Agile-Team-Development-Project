@@ -45,14 +45,30 @@ public partial class _1_DataEntry : System.Web.UI.Page
         Error = aCustomer.Valid(aCustomer.CustomerID, aCustomer.CustomerFirstName, aCustomer.Active, aCustomer.CustomerEmail, aCustomer.CustomerPassword, aCustomer.CustomerDOB, aCustomer.CustomerAddress, aCustomer.DateAdded);
         if (Error == "")
         {
-            Response.Redirect("CustomerViewer.aspx?CustomerID=" + aCustomer.CustomerID
-                + "&CustomerFirstName=" + aCustomer.CustomerFirstName
-                + "&CustomerEmail=" + aCustomer.CustomerEmail
-                + "&CustomerPassword=" + aCustomer.CustomerPassword
-                + "&CustomerAddress=" + aCustomer.CustomerAddress
-                + "&CustomerIsActive=" + aCustomer.CustomerIsActive
-                + "&CustomerDOB=" + aCustomer.CustomerDOB.ToShortDateString()
-                + "&DateAdded=" + aCustomer.DateAdded.ToShortDateString());
+            //capture the customer ID
+            aCustomer.CustomerID = Convert.ToInt32(txtCustomerID.Text);
+            //capture the customer first name
+            aCustomer.CustomerFirstName = txtCustomerFirstName.Text;
+            //capture the customer email
+            aCustomer.CustomerEmail = txtCustomerEmail.Text;
+            //capture the customer password
+            aCustomer.CustomerPassword = txtCustomerPassword.Text;
+            //capture the customer address
+            aCustomer.CustomerAddress = txtCustomerAddress.Text;
+            //capture the date added
+            aCustomer.DateAdded = DateTime.Now.Date;
+            //capture the active status
+            aCustomer.Active = chkActive.Checked;
+            //capture the customer DOB
+            aCustomer.CustomerDOB = calCustomerDOB.SelectedDate;
+            //create a new instance of the customer collection
+            clsCustomerCollection CustomerList = new clsCustomerCollection();
+            //set the ThisCustomer property to the customer we just created
+            CustomerList.ThisCustomer = aCustomer;
+            //add the customer to the collection
+            CustomerList.Add();
+            //redirect to the list page
+            Response.Redirect("CustomerList.aspx");
         }
         else
         {
