@@ -8,14 +8,21 @@ using ClassLibrary;
 
 public partial class _1_List : System.Web.UI.Page
 {
+    //variable to store the primary key with page level scope
+    Int32 CustomerID;
     protected void Page_Load(object sender, EventArgs e)
     {
-        //if this is the first time the page is displayed
+        //get the number of the customer to be processed
+        CustomerID = Convert.ToInt32(Session["CustomerID"]);
         if (IsPostBack == false)
         {
-            //update the list box
-            DisplayCustomers();
-        }
+            //if this is not a new record
+            if (CustomerID != -1)
+            {
+                //display the current data for the record
+                DisplayCustomers();
+            }
+        }   
     }
 
     protected void btnAdd_Click(object sender, EventArgs e)
@@ -24,6 +31,26 @@ public partial class _1_List : System.Web.UI.Page
         Session["CustomerID"] = -1;
         //redirect to the data entry page
         Response.Redirect("CustomerDataEntry.aspx");
+    }
+
+    protected void btnEdit_Click(object sender, EventArgs e)
+    {
+        //var to store the primary key value of the record to edit
+        Int32 CustomerID;
+        //if a record has been selected from the list
+        if (lstCustomerList.SelectedIndex != -1)
+        {
+            //get the primary key value of the record to edit
+            CustomerID = Convert.ToInt32(lstCustomerList.SelectedValue);
+            //store the data in the session object
+            Session["CustomerID"] = CustomerID;
+            //redirect to the edit page
+            Response.Redirect("CustomerDataEntry.aspx");
+        }
+        else //if no record has been selected
+        {
+            //lblError.Text = "Please select a record to edit from the list";
+        }
     }
 
     void DisplayCustomers()
