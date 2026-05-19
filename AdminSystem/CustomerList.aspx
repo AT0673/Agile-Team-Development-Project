@@ -16,6 +16,12 @@
         <asp:Button ID="btnAdd" runat="server" height="40px"  Text="Add" width="100px"></asp:Button>
         <asp:Button ID="btnEdit" runat="server" height="40px"  Text="Edit" width="100px"></asp:Button>
         <asp:Button ID="btnDelete" runat="server" height="40px"  Text="Edit" width="100px"></asp:Button>
+
+        <asp:Label ID="lblEnterFirstName" runat="server"  Text="Enter a first name" width="145px"></asp:Label>
+        <asp:TextBox ID="txtEnterFirstName" runat="server" height="29px"  width="188px"></asp:TextBox>
+
+        <asp:Button ID="btnApply" runat="server" height="40px"  Text="Edit" width="100px"></asp:Button>
+        <asp:Button ID="btnClear" runat="server" height="40px"  Text="Edit" width="100px"></asp:Button>
     </form>
 </body>
 </html>
