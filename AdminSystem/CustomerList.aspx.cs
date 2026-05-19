@@ -74,6 +74,40 @@ public partial class _1_List : System.Web.UI.Page
         }
      }
 
+    protected void btnApply_Click(object sender, EventArgs e)
+    {
+        //create an instance of the customer collection
+        clsCustomerCollection aCustomer = new clsCustomerCollection();
+        //retrieve the value of first name from presentation layer
+        aCustomer.ReportByCustomerFirstName(txtEnterFirstName.Text);
+        //set the data source to the list of customers in the collection
+        lstCustomerList.DataSource = aCustomer.CustomerList;
+        //set the name of the primary key
+        lstCustomerList.DataValueField = "CustomerID";
+        //set the data field to display
+        lstCustomerList.DataTextField = "CustomerFirstName";
+        //bind the data to the list
+        lstCustomerList.DataBind();
+    }
+
+    protected void btnClear_Click(object sender, EventArgs e)
+    {
+        //create an instance of the customer collection
+        clsCustomerCollection aCustomer = new clsCustomerCollection();
+        //retrieve all the data from the database
+        aCustomer.ReportByCustomerFirstName("");
+        //clear any existing filter to tidy up the interface
+        txtEnterFirstName.Text = "";
+        //set the data source to the list of customers in the collection
+        lstCustomerList.DataSource = aCustomer.CustomerList;
+        //set the name of the primary key
+        lstCustomerList.DataValueField = "CustomerID";
+        //set the data field to display
+        lstCustomerList.DataTextField = "CustomerFirstName";
+        //bind the data to the list
+        lstCustomerList.DataBind();
+    }
+
     void DisplayCustomers()
     {
         //create an instance of the customer collection

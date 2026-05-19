@@ -94,19 +94,29 @@ namespace ClassLibrary
             DB.Execute("sproc_tblCustomer_Delete");
         }
 
-        //constructor for the class
-        public clsCustomerCollection()
+        public void ReportByCustomerFirstName(string v)
+        {
+            //filters the records based on a full or partial first name
+            //connect to the database
+            clsDataConnection DB = new clsDataConnection();
+            //send the first name parameter to the database
+            DB.AddParameter("@CustomerFirstName", v);
+            //execute the stored procedure
+            DB.Execute("sproc_tblCustomer_FilterByCustomerFirstName");
+            //populate the array list with the data table
+            PopulateArray(DB);
+        }
+
+        void PopulateArray(clsDataConnection DB)
         {
             //variable for the index
             Int32 Index = 0;
             //variable to store the record count
             Int32 RecordCount = 0;
-            //object for data connection
-            clsDataConnection DB = new clsDataConnection();
-            //execute the stored procedure
-            DB.Execute("sproc_tblCustomer_SelectAll");
             //get the count of records
             RecordCount = DB.Count;
+            //clear the private array list
+            mCustomerList = new List<clsCustomer>();
             //while there are records to process
             while (Index < RecordCount)
             {
@@ -127,7 +137,17 @@ namespace ClassLibrary
                 //point at the next record
                 Index++;
             }
-            
+        }
+
+        //constructor for the class
+        public clsCustomerCollection()
+        {
+            //object for data connection
+            clsDataConnection DB = new clsDataConnection();
+            //execute the stored procedure
+            DB.Execute("sproc_tblCustomer_SelectAll");
+            //populate the array list with the data table
+            PopulateArray(DB);
         }
     }
 }
