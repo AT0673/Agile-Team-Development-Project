@@ -8,8 +8,9 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <div>
-        </div>
+        <asp:Label ID="lblDelete" runat="server" Text="Are you sure you want to delete this record?" width="145px"></asp:Label>
+        <asp:Button ID="btnYes" runat="server" height="40px"  Text="Add" width="100px"></asp:Button>
+        <asp:Button ID="btnNo" runat="server" height="40px"  Text="Add" width="100px"></asp:Button>
     </form>
 </body>
 </html>
