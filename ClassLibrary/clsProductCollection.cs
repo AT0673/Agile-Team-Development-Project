@@ -7,6 +7,9 @@ namespace ClassLibrary
 {
     public class clsProductCollection
     {
+        List<clsProduct> mProductList = new List<clsProduct>();
+
+        clsProduct mThisProduct = new clsProduct();
         public clsProductCollection()
         {
             Int32 Index = 0;
@@ -27,7 +30,7 @@ namespace ClassLibrary
                 Index++;
             }
         }
-        List<clsProduct> mProductList = new List<clsProduct>();
+
         public List<clsProduct> ProductList
         {             get
             {
@@ -49,6 +52,25 @@ namespace ClassLibrary
                 // This setter is not necessary as Count is derived from the list, but it's included for testing purposes.
             }
         }
-        public clsProduct ThisProduct { get; set; }
+        public clsProduct ThisProduct
+        {   get
+            {
+                return mThisProduct;
+            }
+            set
+            {
+                mThisProduct = value;
+            }
+        }
+        public int Add()
+        {
+            clsDataConnection DB = new clsDataConnection();
+            DB.AddParameter("@ProductName", mThisProduct.ProductName);
+            DB.AddParameter("@ProductAmount", mThisProduct.ProductAmount);
+            DB.AddParameter("@SupplierID", mThisProduct.SupplierID);
+            DB.AddParameter("@InStock", mThisProduct.InStock);
+            DB.AddParameter("@StockArrivalDate", mThisProduct.StockArrivalDate);
+            return DB.Execute("sproc_tblProduct_Insert");
+        }
     }
 }

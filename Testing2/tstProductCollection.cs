@@ -32,8 +32,8 @@ namespace Testing2
             AllStocks.ProductList = TestList;
             Assert.AreEqual(AllStocks.ProductList, TestList);
         }
- 
-       [TestMethod]
+
+        [TestMethod]
         public void ThisProductPropertyOK()
         {
             clsProductCollection AllProducts = new clsProductCollection();
@@ -62,6 +62,25 @@ namespace Testing2
             TestList.Add(TestItem);
             AllProducts.ProductList = TestList;
             Assert.AreEqual(AllProducts.Count, TestList.Count);
+        }
+        [TestMethod]
+        public void AddMethodOK()
+        {
+            clsProductCollection AllProducts = new clsProductCollection();
+            clsProduct TestItem = new clsProduct();
+            Int32 PrimaryKey = 0;
+            TestItem.ProductID = 1;
+            TestItem.ProductName = "Test Product";
+            TestItem.ProductAmount = 10;
+            TestItem.SupplierID = 1;
+            TestItem.InStock = true;
+            TestItem.StockArrivalDate = DateTime.Now.Date;
+            AllProducts.ThisProduct = TestItem;
+            PrimaryKey = AllProducts.Add();
+            TestItem.ProductID = PrimaryKey;
+            AllProducts.ThisProduct.Find(PrimaryKey);
+            Assert.AreEqual(AllProducts.ThisProduct, TestItem);
+
         }
     }
 }

@@ -36,8 +36,9 @@ public partial class _1_DataEntry : System.Web.UI.Page
             AnProduct.StockArrivalDate = Convert.ToDateTime(txtStockArrivalDate.Text);
             AnProduct.SupplierID = Convert.ToInt32(txtSupplierID.Text);
             AnProduct.InStock = InStock.Checked;
-            //store as a session
-            Session["AnProduct"] = AnProduct;
+            clsProductCollection ProductList = new clsProductCollection();
+            ProductList.ThisProduct = AnProduct;
+            ProductList.Add();
             //redirect to the viewer page
             Response.Redirect("StockViewer.aspx");
         }
