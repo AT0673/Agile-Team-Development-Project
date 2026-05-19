@@ -17,9 +17,6 @@ namespace ClassLibrary
             }
         }
 
-        public string UserName { get; set; }
-        public string Username { get; set; }
-
         public bool IsValidStatus(string OrderStatus)
         {
             if (OrderStatus == null)
