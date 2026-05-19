@@ -213,7 +213,7 @@ namespace Testing4
             clsSupplier aSupplier = new clsSupplier();
             String Error = "";
             Error = aSupplier.Valid(supplierName, supplierPhoneNumber, supplierAddress, supplierEmail, supplierCreatedDate);
-            Assert.Equals("", Error);
+            Assert.AreEqual("", Error);
         }
 
         // -----------------------Supplier Name Tests-----------------------

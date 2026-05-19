@@ -60,6 +60,7 @@
     <Compile Include="clsStaff.cs" />
     <Compile Include="clsProductCollection.cs" />
     <Compile Include="clsSupplier.cs" />
+    <Compile Include="clsSupplierCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
