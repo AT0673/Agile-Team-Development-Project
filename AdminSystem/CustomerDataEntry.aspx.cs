@@ -19,6 +19,21 @@ public partial class _1_DataEntry : System.Web.UI.Page
 
     }
 
+    void DisplayCustomer()
+    {
+        //create an instance of the customer collection
+        clsCustomerCollection Customers = new clsCustomerCollection();
+        //find the record to update
+        Customers.ThisCustomer.Find(Convert.ToInt32(txtCustomerID.Text));
+        //display the data for this record
+        txtCustomerFirstName.Text = Customers.ThisCustomer.CustomerFirstName;
+        txtCustomerEmail.Text = Customers.ThisCustomer.CustomerEmail;
+        txtCustomerPassword.Text = Customers.ThisCustomer.CustomerPassword;
+        txtCustomerAddress.Text = Customers.ThisCustomer.CustomerAddress;
+        calCustomerDOB.SelectedDate = Customers.ThisCustomer.CustomerDOB;
+        chkActive.Checked = Customers.ThisCustomer.Active;
+    }
+
     protected void btnOK_Click(object sender, EventArgs e)
     {
         //create a new instance of clsCustomer
@@ -46,7 +61,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
         if (Error == "")
         {
             //capture the customer ID
-            aCustomer.CustomerID = Convert.ToInt32(txtCustomerID.Text);
+            aCustomer.CustomerID = Convert.ToInt32(txtCustomerID.Text); //IMPORTANT
             //capture the customer first name
             aCustomer.CustomerFirstName = txtCustomerFirstName.Text;
             //capture the customer email
@@ -63,11 +78,25 @@ public partial class _1_DataEntry : System.Web.UI.Page
             aCustomer.CustomerDOB = calCustomerDOB.SelectedDate;
             //create a new instance of the customer collection
             clsCustomerCollection CustomerList = new clsCustomerCollection();
-            //set the ThisCustomer property to the customer we just created
-            CustomerList.ThisCustomer = aCustomer;
-            //add the customer to the collection
-            CustomerList.Add();
-            //redirect to the list page
+            //if this is a new record i.e. CustomerID = -1 then add the data
+            if (aCustomer.CustomerID == -1)
+            {
+                //set the ThisCustomer property
+                CustomerList.ThisCustomer = aCustomer;
+                //add the new record
+                CustomerList.Add();
+            }
+            //otherwise it must be an update
+            else
+            {
+                //find the record to update
+                CustomerList.ThisCustomer.Find(aCustomer.CustomerID);
+                //set the ThisCustomer property
+                CustomerList.ThisCustomer = aCustomer;
+                //update the record
+                CustomerList.Update();
+            }
+            //redirect back to the list page
             Response.Redirect("CustomerList.aspx");
         }
         else
