@@ -66,5 +66,53 @@ namespace Testing4
             AllSuppliers.Supplierlist = TestList;
             Assert.AreEqual(AllSuppliers.Count, TestList.Count);
         }
+
+        [TestMethod]
+        public void AddMethodOK()
+        {
+            clsSupplierCollection AllSuppliers = new clsSupplierCollection();
+            clsSupplier TestItem = new clsSupplier();
+            TestItem.SupplierActive = true;
+            TestItem.SupplierID = 1;
+            TestItem.SupplierName = "Test Supplier";
+            TestItem.SupplierEmail = "test@supplier.com";
+            TestItem.SupplierAddress = "123 Test Street";
+            TestItem.SupplierPhoneNumber = "1234567890";
+            TestItem.SupplierCreatedDate = DateTime.Now;
+            AllSuppliers.ThisSupplier = TestItem;
+            int PrimaryKey = AllSuppliers.Add();
+            TestItem.SupplierID = PrimaryKey;
+            AllSuppliers.ThisSupplier.Find(PrimaryKey);
+            Assert.AreEqual(AllSuppliers.ThisSupplier, TestItem);
+        }
+
+        [TestMethod]
+        public void UpdateMethodOK()
+        {
+            clsSupplierCollection AllSuppliers = new clsSupplierCollection();
+            clsSupplier TestItem = new clsSupplier();
+            Int32 PrimaryKey = 0;
+            TestItem.SupplierActive = true;
+            TestItem.SupplierID = 1;
+            TestItem.SupplierName = "Test Supplier";
+            TestItem.SupplierEmail = "test@supplier.com";
+            TestItem.SupplierAddress = "123 Test Street";
+            TestItem.SupplierPhoneNumber = "1234567890";
+            TestItem.SupplierCreatedDate = DateTime.Now;
+            AllSuppliers.ThisSupplier = TestItem;
+            PrimaryKey = AllSuppliers.Add();
+            TestItem.SupplierID = PrimaryKey;
+            TestItem.SupplierActive = false;
+            TestItem.SupplierName = "Updated Supplier";
+            TestItem.SupplierEmail = "updated@supplier.com";
+            TestItem.SupplierAddress = "456 Updated Street";
+            TestItem.SupplierPhoneNumber = "0987654321";
+            TestItem.SupplierCreatedDate = DateTime.Now;
+            AllSuppliers.ThisSupplier = TestItem;
+            AllSuppliers.Update();
+            AllSuppliers.ThisSupplier.Find(PrimaryKey);
+            Assert.AreEqual(AllSuppliers.ThisSupplier, TestItem);
+        }
+
     }
 }
