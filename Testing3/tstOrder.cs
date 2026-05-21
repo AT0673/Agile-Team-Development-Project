@@ -9,12 +9,13 @@ namespace Testing3
     {
 
         /********************************** Declaring some test data **********************************/
+        string OrderID = "1";
         string CustomerID = "1";
-        string OrderDate = DateTime.Now.ToShortDateString();
-        string TotalPrice = "10.00";
-        string OrderStatus = "Pending";
+        string OrderDate = new DateTime(2026, 08, 31).ToString();
+        string TotalPrice = "45.50";
+        string OrderStatus = "Processing";
         string isGuestOrder = "false";
-        string ProductID = "1";
+        string ProductID = "3";
         /********************************** Instance of the class **********************************/
         [TestMethod]
         public void InstanceOK()
@@ -156,11 +157,11 @@ namespace Testing3
             //boolean variable to store the results of the validation
             Boolean Found = false;
             //create some test data to use with the method
-            Int32 OrderID = 4;
+            Int32 OrderID = 1;
             //invoke the method
             Found = AnOrder.Find(OrderID);
             //check the order id
-            if (AnOrder.OrderID != 4)
+            if (AnOrder.OrderID != 1)
             {
                 Found = false;
             }
@@ -176,11 +177,11 @@ namespace Testing3
             //boolean variable to store the results of the validation
             Boolean Found = false;
             //create some test data to use with the method
-            Int32 OrderID = 4;
+            Int32 OrderID = 1;
             //invoke the method
             Found = AnOrder.Find(OrderID);
             //check the customer id
-            if (AnOrder.CustomerID != 13)
+            if (AnOrder.CustomerID != 1)
             {
                 Found = false;
             }
@@ -191,24 +192,14 @@ namespace Testing3
         [TestMethod]
         public void TestOrderDateFound()
         {
-            //create an instance of the class we want to create
             clsOrder AnOrder = new clsOrder();
-            //boolean variable to store the results of the validation
-            Boolean Found = false;
-            //create a boolean to assume the data is OK (assume it is)
-            Boolean OK = true;
-            //create some test data to use with the method
-            Int32 OrderID = 4;
-            //invoke the method
-            Found = AnOrder.Find(OrderID);
-            //Check the OrderDate property
-            if (AnOrder.OrderDate != Convert.ToDateTime("07/05/2026"))
-            {
-                OK = false;
-            }
-            //test to see that the result is correct
-            Assert.IsTrue(OK);
-
+            // invoke Find
+            Int32 OrderID = 1;
+            Boolean Found = AnOrder.Find(OrderID);
+            Assert.IsTrue(Found, $"Order not found for OrderID {OrderID}");
+            // unambiguous expected date
+            DateTime expected = new DateTime(2026, 8, 31);
+            Assert.AreEqual(expected, AnOrder.OrderDate);
         }
 
         [TestMethod]
@@ -221,11 +212,11 @@ namespace Testing3
             //create a boolean to assume the data is OK (assume it is)
             Boolean OK = true;
             //create some test data to use with the method
-            Int32 OrderID = 4;
+            Int32 OrderID = 1;
             //invoke the method
             Found = AnOrder.Find(OrderID);
             //Check the TotalPrice property
-            if (AnOrder.TotalPrice != 20.00m)
+            if (AnOrder.TotalPrice != 45.50m)
             {
                 OK = false;
             }
@@ -243,11 +234,11 @@ namespace Testing3
             //create a boolean to assume the data is OK (assume it is)
             Boolean OK = true;
             //Create some test data to use with the method
-            Int32 OrderID = 4;
+            Int32 OrderID = 1;
             //Invoke the method
             Found = AnOrder.Find(OrderID);
             //Check the Status property
-            if (AnOrder.OrderStatus != "Pending")
+            if (AnOrder.OrderStatus != "Processing")
             {
                 OK = false;
             }
@@ -265,11 +256,11 @@ namespace Testing3
             //create a boolean to assume the data is OK (assume it is)
             Boolean OK = true;
             //Create some test data to use with the method
-            Int32 OrderID = 4;
+            Int32 OrderID = 1;
             //Invoke the method
             Found = AnOrder.Find(OrderID);
             //Check the ProductID property
-            if (AnOrder.ProductID != 1)
+            if (AnOrder.ProductID != 3)
             {
                 OK = false;
             }
