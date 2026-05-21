@@ -192,7 +192,7 @@ namespace Testing3
             //create an instance of the filtered data
             clsOrderCollection FilteredOrders = new clsOrderCollection();
             //apply an order status that should exist in the test data
-            FilteredOrders.ReportByOrderStatus("Pending");
+            FilteredOrders.ReportByOrderStatus("Processing");
             //test to see that filtered records were found
             Assert.AreNotEqual(0, FilteredOrders.Count);
         }
@@ -218,14 +218,14 @@ namespace Testing3
             //variable to store outcome
             Boolean OK = true;
             //apply an OrderStatus known to be in the test data
-            FilteredOrders.ReportByOrderStatus("Pending");
+            FilteredOrders.ReportByOrderStatus("Processing");
 
             if (FilteredOrders.Count > 0)
             {
                 //check that every record has the expected status
                 foreach (clsOrder AnOrder in FilteredOrders.OrderList)
                 {
-                    if (AnOrder.OrderStatus != "Pending")
+                    if (AnOrder.OrderStatus != "Processing")
                     {
                         OK = false;
                     }
@@ -247,7 +247,7 @@ namespace Testing3
             //create an instance of the filtered data
             clsOrderCollection FilteredOrders = new clsOrderCollection();
             //apply a customer id that should exist in the test data
-            FilteredOrders.ReportByCustomerID(13);
+            FilteredOrders.ReportByCustomerID(1);
             //test to see that filtered records were found
             Assert.AreNotEqual(0, FilteredOrders.Count);
         }
@@ -271,13 +271,13 @@ namespace Testing3
             //variable to store outcome
             Boolean OK = true;
             //apply a customer id known to be in the test data
-            FilteredOrders.ReportByCustomerID(13);
+            FilteredOrders.ReportByCustomerID(1);
 
             if (FilteredOrders.Count > 0)
             {
                 foreach (clsOrder AnOrder in FilteredOrders.OrderList)
                 {
-                    if (AnOrder.CustomerID != 13)
+                    if (AnOrder.CustomerID != 1)
                     {
                         OK = false;
                     }
