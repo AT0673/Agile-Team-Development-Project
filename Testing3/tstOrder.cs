@@ -433,6 +433,45 @@ namespace Testing3
             Assert.AreNotEqual(Error, "");
         }
 
+        [TestMethod]
+        public void GuestOrderCustomerIDBlankOK()
+        {
+            //create an instance of the class we want to create
+            clsOrder AnOrder = new clsOrder();
+            //string variable to store any error message
+            String Error = "";
+            //invoke the method with a guest order and no customer id
+            Error = AnOrder.Valid("", OrderDate, TotalPrice, OrderStatus, "true", ProductID);
+            //test to see that the result is correct
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void GuestOrderCustomerIDProvidedInvalid()
+        {
+            //create an instance of the class we want to create
+            clsOrder AnOrder = new clsOrder();
+            //string variable to store any error message
+            String Error = "";
+            //invoke the method with a guest order and a customer id
+            Error = AnOrder.Valid("1", OrderDate, TotalPrice, OrderStatus, "true", ProductID);
+            //test to see that the result is correct
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void CustomerOrderCustomerIDBlankInvalid()
+        {
+            //create an instance of the class we want to create
+            clsOrder AnOrder = new clsOrder();
+            //string variable to store any error message
+            String Error = "";
+            //invoke the method with a customer order and no customer id
+            Error = AnOrder.Valid("", OrderDate, TotalPrice, OrderStatus, "false", ProductID);
+            //test to see that the result is correct
+            Assert.AreNotEqual(Error, "");
+        }
+
         /***** Testing the OrderDate property of the Valid method *****/
         [TestMethod]
         public void OrderDateExtremeMin()

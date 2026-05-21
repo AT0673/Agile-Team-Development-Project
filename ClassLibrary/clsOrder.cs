@@ -149,9 +149,18 @@ namespace ClassLibrary
         {
             String Error = "";
             DateTime DateTemp;
+            Boolean GuestOrder = false;
+            Boolean.TryParse(isGuestOrder, out GuestOrder);
 
             // CustomerID checks
-            if (CustomerID.Length == 0)
+            if (GuestOrder)
+            {
+                if (CustomerID.Length != 0)
+                {
+                    Error = Error + "Guest orders must not have a CustomerID : ";
+                }
+            }
+            else if (CustomerID.Length == 0)
             {
                 Error = Error + "The CustomerID may not be blank : ";
             }
