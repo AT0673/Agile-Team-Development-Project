@@ -32,7 +32,8 @@ namespace ClassLibrary
         }
 
         public List<clsProduct> ProductList
-        {             get
+        {
+            get
             {
                 return mProductList;
             }
@@ -53,7 +54,8 @@ namespace ClassLibrary
             }
         }
         public clsProduct ThisProduct
-        {   get
+        {
+            get
             {
                 return mThisProduct;
             }
@@ -83,6 +85,12 @@ namespace ClassLibrary
             DB.AddParameter("@InStock", mThisProduct.InStock);
             DB.AddParameter("@StockArrivalDate", mThisProduct.StockArrivalDate);
             DB.Execute("sproc_tblProduct_Update");
+        }
+        public void Delete()
+        {
+            clsDataConnection DB = new clsDataConnection();
+            DB.AddParameter("@ProductID", mThisProduct.ProductID);
+            DB.Execute("sproc_tblProduct_Delete");
         }
     }
 }
