@@ -6,6 +6,7 @@ namespace ClassLibrary
     public class clsSupplierCollection
     {
         List<clsSupplier> mSupplierList = new List<clsSupplier>();
+        clsSupplier mThisSupplier = new clsSupplier();
 
         public List<clsSupplier> Supplierlist
         {
@@ -32,7 +33,17 @@ namespace ClassLibrary
         }
 
 
-        public clsSupplier ThisSupplier { get; set; }
+        public clsSupplier ThisSupplier
+        {
+            get
+            {
+                return mThisSupplier;
+            }
+            set
+            {
+                mThisSupplier = value;
+            }
+        }
 
         public clsSupplierCollection()
         {
@@ -56,5 +67,33 @@ namespace ClassLibrary
                 Index++;
             }
         }
+
+        public int Add()
+        {
+            clsDataConnection DB = new clsDataConnection();
+            DB.AddParameter("@SupplierName", mThisSupplier.SupplierName);
+            DB.AddParameter("@Address", mThisSupplier.SupplierAddress);
+            DB.AddParameter("@ContactEmail", mThisSupplier.SupplierEmail);
+            DB.AddParameter("@ContactPhone", mThisSupplier.SupplierPhoneNumber);
+            DB.AddParameter("@CreatedDate", mThisSupplier.SupplierCreatedDate);
+            DB.AddParameter("@IsActive", mThisSupplier.SupplierActive);
+            DB.Execute("sproc_tblSupplier_Insert");
+            return DB.Execute("sproc_tblSupplier_Insert");
+        }
+
+        public void Update()
+        {
+            clsDataConnection DB = new clsDataConnection();
+            DB.AddParameter("@SupplierID", mThisSupplier.SupplierID);
+            DB.AddParameter("@SupplierName", mThisSupplier.SupplierName);
+            DB.AddParameter("@Address", mThisSupplier.SupplierAddress);
+            DB.AddParameter("@ContactEmail", mThisSupplier.SupplierEmail);
+            DB.AddParameter("@ContactPhone", mThisSupplier.SupplierPhoneNumber);
+            DB.AddParameter("@CreatedDate", mThisSupplier.SupplierCreatedDate);
+            DB.AddParameter("@IsActive", mThisSupplier.SupplierActive);
+            DB.Execute("sproc_tblSupplier_Update");
+        }
+
+
     }
 }
