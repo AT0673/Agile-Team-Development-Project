@@ -96,8 +96,15 @@
 
             <span class="section-title">Order Filters</span>
             <div class="filter-row">
-                <asp:TextBox ID="txtFilter" runat="server" placeholder="Enter an Order Status" />
-                <asp:TextBox ID="txtCustomerIDFilter" runat="server" placeholder="Enter a Customer ID" />
+                <asp:DropDownList ID="ddlStatusFilter" runat="server">
+                    <asp:ListItem Text="All Statuses" Value=""></asp:ListItem>
+                    <asp:ListItem Text="Pending" Value="Pending"></asp:ListItem>
+                    <asp:ListItem Text="Processing" Value="Processing"></asp:ListItem>
+                    <asp:ListItem Text="Dispatched" Value="Dispatched"></asp:ListItem>
+                    <asp:ListItem Text="Delivered" Value="Delivered"></asp:ListItem>
+                    <asp:ListItem Text="Cancelled" Value="Cancelled"></asp:ListItem>
+                </asp:DropDownList>
+                <asp:DropDownList ID="ddlCustomerFilter" runat="server"></asp:DropDownList>
                 <asp:DropDownList ID="ddlGuestFilter" runat="server">
                     <asp:ListItem Text="All Orders" Value=""></asp:ListItem>
                     <asp:ListItem Text="Guest Orders" Value="true"></asp:ListItem>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -13,6 +14,8 @@ public partial class _1_List : System.Web.UI.Page
         //if this is the first time the page is displayed
         if (IsPostBack == false)
         {
+            //load customer choices for the filter dropdown
+            LoadCustomerFilter();
             //update the list box
             DisplayOrders();
         }
@@ -89,12 +92,12 @@ public partial class _1_List : System.Web.UI.Page
         //make sure only one filter is used at a time
         Int32 FilterCount = 0;
 
-        if (txtFilter.Text.Length != 0)
+        if (ddlStatusFilter.SelectedValue.Length != 0)
         {
             FilterCount++;
         }
 
-        if (txtCustomerIDFilter.Text.Length != 0)
+        if (ddlCustomerFilter.SelectedValue.Length != 0)
         {
             FilterCount++;
         }
@@ -111,17 +114,17 @@ public partial class _1_List : System.Web.UI.Page
         }
 
         //retrieve the order status to filter by
-        if (txtFilter.Text.Length != 0)
+        if (ddlStatusFilter.SelectedValue.Length != 0)
         {
-            Orders.ReportByOrderStatus(txtFilter.Text);
+            Orders.ReportByOrderStatus(ddlStatusFilter.SelectedValue);
         }
 
         //retrieve the customer id to filter by
-        if (txtCustomerIDFilter.Text.Length != 0)
+        if (ddlCustomerFilter.SelectedValue.Length != 0)
         {
             Int32 CustomerID;
 
-            if (Int32.TryParse(txtCustomerIDFilter.Text, out CustomerID))
+            if (Int32.TryParse(ddlCustomerFilter.SelectedValue, out CustomerID))
             {
                 Orders.ReportByCustomerID(CustomerID);
             }
@@ -158,8 +161,8 @@ public partial class _1_List : System.Web.UI.Page
         //set an empty string to the order status to filter by
         Orders.ReportByOrderStatus("");
         //clear any existing filter to tidy up the interface
-        txtFilter.Text = "";
-        txtCustomerIDFilter.Text = "";
+        ddlStatusFilter.SelectedValue = "";
+        ddlCustomerFilter.SelectedValue = "";
         ddlGuestFilter.SelectedValue = "";
         //set the data source to the list of orders in the collection
         lstOrderList.DataSource = Orders.OrderList;
@@ -169,5 +172,40 @@ public partial class _1_List : System.Web.UI.Page
         lstOrderList.DataTextField = "OrderSummary";
         //bind the data to the list
         lstOrderList.DataBind();
+    }
+
+    void LoadCustomerFilter()
+    {
+        //populate customer filter from tblCustomer so admins do not need to type ids
+        clsDataConnection DB = new clsDataConnection();
+        DB.Execute("sproc_tblCustomer_SelectAll");
+
+        ddlCustomerFilter.Items.Clear();
+        ddlCustomerFilter.Items.Add(new ListItem("All Customers", ""));
+
+        foreach (DataRow Row in DB.DataTable.Rows)
+        {
+            string CustomerID = Convert.ToString(Row["CustomerID"]);
+            string CustomerName = GetColumnText(Row, "CustomerFirstName");
+            string CustomerEmail = GetColumnText(Row, "CustomerEmail");
+            string DisplayText = CustomerID + " - " + CustomerName;
+
+            if (CustomerEmail.Length != 0)
+            {
+                DisplayText = DisplayText + " (" + CustomerEmail + ")";
+            }
+
+            ddlCustomerFilter.Items.Add(new ListItem(DisplayText, CustomerID));
+        }
+    }
+
+    string GetColumnText(DataRow Row, string ColumnName)
+    {
+        if (Row.Table.Columns.Contains(ColumnName) && Row[ColumnName] != DBNull.Value)
+        {
+            return Convert.ToString(Row[ColumnName]);
+        }
+
+        return "";
     }
 }
