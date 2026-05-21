@@ -94,7 +94,7 @@ namespace ClassLibrary
             //Set the primary key value of the new record
             clsDataConnection DB = new clsDataConnection();
             //Add the parameters for the record
-            DB.AddParameter("@CustomerID", mThisOrder.CustomerID);
+            DB.AddParameter("@CustomerID", mThisOrder.isGuestOrder ? (object)DBNull.Value : mThisOrder.CustomerID);
             DB.AddParameter("@OrderDate", mThisOrder.OrderDate);
             DB.AddParameter("@TotalPrice", mThisOrder.TotalPrice);
             DB.AddParameter("@OrderStatus", mThisOrder.OrderStatus);
@@ -112,7 +112,7 @@ namespace ClassLibrary
             clsDataConnection DB = new clsDataConnection();
             //Add the parameters for the record
             DB.AddParameter("@OrderID", mThisOrder.OrderID);
-            DB.AddParameter("@CustomerID", mThisOrder.CustomerID);
+            DB.AddParameter("@CustomerID", mThisOrder.isGuestOrder ? (object)DBNull.Value : mThisOrder.CustomerID);
             DB.AddParameter("@OrderDate", mThisOrder.OrderDate);
             DB.AddParameter("@TotalPrice", mThisOrder.TotalPrice);
             DB.AddParameter("@OrderStatus", mThisOrder.OrderStatus);

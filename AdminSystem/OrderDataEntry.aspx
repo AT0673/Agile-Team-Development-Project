@@ -83,7 +83,7 @@
                 <asp:TextBox ID="txtOrderID" runat="server" CssClass="txt"></asp:TextBox>
 
                 <asp:Label ID="lblCustomerID" runat="server" CssClass="lbl" Text="Customer ID"></asp:Label>
-                <asp:TextBox ID="txtCustomerID" runat="server" CssClass="txt" TextMode="Number"></asp:TextBox>
+                <asp:DropDownList ID="ddlCustomer" runat="server" CssClass="select"></asp:DropDownList>
 
                 <asp:Label ID="lblOrderDate" runat="server" CssClass="lbl" Text="Order Date"></asp:Label>
                 <asp:TextBox ID="txtOrderDate" runat="server" CssClass="txt" TextMode="Date"></asp:TextBox>
@@ -101,11 +101,11 @@
                 </asp:DropDownList>
 
                 <asp:Label ID="lblProductID" runat="server" CssClass="lbl" Text="Product ID"></asp:Label>
-                <asp:TextBox ID="txtProductID" runat="server" CssClass="txt" TextMode="Number"></asp:TextBox>
+                <asp:DropDownList ID="ddlProduct" runat="server" CssClass="select"></asp:DropDownList>
 
                 <span></span>
                 <div class="check-row">
-                    <asp:CheckBox ID="chkIsGuestOrder" runat="server" Text="Guest order" />
+                    <asp:CheckBox ID="chkIsGuestOrder" runat="server" Text="Guest order" AutoPostBack="True" OnCheckedChanged="chkIsGuestOrder_CheckedChanged" />
                 </div>
             </div>
 

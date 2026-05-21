@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -15,6 +16,10 @@ public partial class _1_DataEntry : System.Web.UI.Page
         OrderID = Convert.ToInt32(Session["OrderID"]);
         if (IsPostBack == false)
         {
+            //load the dropdown lists from their related tables
+            LoadCustomers();
+            LoadProducts();
+
             //if this is not a new record
             if (OrderID != -1)
             {
@@ -32,12 +37,13 @@ public partial class _1_DataEntry : System.Web.UI.Page
         OrderList.ThisOrder.Find(OrderID);
         //display the data for this record
         txtOrderID.Text = OrderList.ThisOrder.OrderID.ToString();
-        txtCustomerID.Text = OrderList.ThisOrder.CustomerID.ToString();
+        SetSelectedCustomer(OrderList.ThisOrder.CustomerID);
         txtOrderDate.Text = OrderList.ThisOrder.OrderDate.ToString("yyyy-MM-dd");
         txtTotalPrice.Text = OrderList.ThisOrder.TotalPrice.ToString();
         SetSelectedStatus(OrderList.ThisOrder.OrderStatus);
         chkIsGuestOrder.Checked = OrderList.ThisOrder.isGuestOrder;
-        txtProductID.Text = OrderList.ThisOrder.ProductID.ToString();
+        SetSelectedProduct(OrderList.ThisOrder.ProductID);
+        ToggleCustomerSelection();
     }
 
     protected void btnOK_Click(object sender, EventArgs e)
@@ -47,8 +53,8 @@ public partial class _1_DataEntry : System.Web.UI.Page
         //variable to store any error messages
         String Error = "";
         //validate the data first (Valid accepts strings)
-        Error = AnOrder.Valid(txtCustomerID.Text, txtOrderDate.Text, txtTotalPrice.Text,
-                                ddlStatus.SelectedValue, chkIsGuestOrder.Checked.ToString(), txtProductID.Text);
+        Error = AnOrder.Valid(ddlCustomer.SelectedValue, txtOrderDate.Text, txtTotalPrice.Text,
+                                ddlStatus.SelectedValue, chkIsGuestOrder.Checked.ToString(), ddlProduct.SelectedValue);
         if (Error != "")
         {
             //display the validation error(s)
@@ -64,12 +70,19 @@ public partial class _1_DataEntry : System.Web.UI.Page
 
         AnOrder.OrderID = Convert.ToInt32(Session["OrderID"]);
 
-        if (!int.TryParse(txtCustomerID.Text, out tmpInt))
+        if (tmpBool)
+        {
+            AnOrder.CustomerID = 0;
+        }
+        else if (!int.TryParse(ddlCustomer.SelectedValue, out tmpInt))
         {
             lblError.Text = Error;
             return;
         }
-        AnOrder.CustomerID = tmpInt;
+        else
+        {
+            AnOrder.CustomerID = tmpInt;
+        }
 
         if (!DateTime.TryParse(txtOrderDate.Text, out tmpDate))
         {
@@ -87,7 +100,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
 
         AnOrder.OrderStatus = ddlStatus.SelectedValue;
 
-        if (!int.TryParse(txtProductID.Text, out tmpInt))
+        if (!int.TryParse(ddlProduct.SelectedValue, out tmpInt))
         {
             lblError.Text = Error;
             return;
@@ -138,12 +151,109 @@ public partial class _1_DataEntry : System.Web.UI.Page
         if (Found)
         {
             //display the values of the properties in the form
-            txtCustomerID.Text = AnOrder.CustomerID.ToString();
+            SetSelectedCustomer(AnOrder.CustomerID);
             txtOrderDate.Text = AnOrder.OrderDate.ToString("yyyy-MM-dd");
             txtTotalPrice.Text = AnOrder.TotalPrice.ToString();
             SetSelectedStatus(AnOrder.OrderStatus);
-            txtProductID.Text = AnOrder.ProductID.ToString();
+            SetSelectedProduct(AnOrder.ProductID);
             chkIsGuestOrder.Checked = AnOrder.isGuestOrder;
+            ToggleCustomerSelection();
+        }
+    }
+
+    void LoadCustomers()
+    {
+        //populate customers from the customer table so the user cannot type an invalid id
+        clsDataConnection DB = new clsDataConnection();
+        DB.Execute("sproc_tblCustomer_SelectAll");
+
+        ddlCustomer.Items.Clear();
+        ddlCustomer.Items.Add(new ListItem("-- Select Customer --", ""));
+
+        foreach (DataRow Row in DB.DataTable.Rows)
+        {
+            string CustomerID = Convert.ToString(Row["CustomerID"]);
+            string CustomerName = GetColumnText(Row, "CustomerFirstName");
+            string CustomerEmail = GetColumnText(Row, "CustomerEmail");
+            string DisplayText = CustomerID + " - " + CustomerName;
+
+            if (CustomerEmail.Length != 0)
+            {
+                DisplayText = DisplayText + " (" + CustomerEmail + ")";
+            }
+
+            ddlCustomer.Items.Add(new ListItem(DisplayText, CustomerID));
+        }
+    }
+
+    void LoadProducts()
+    {
+        //populate products from the product table so the user cannot type an invalid id
+        clsDataConnection DB = new clsDataConnection();
+        DB.Execute("sproc_tblProduct_SelectAll");
+
+        ddlProduct.Items.Clear();
+        ddlProduct.Items.Add(new ListItem("-- Select Product --", ""));
+
+        foreach (DataRow Row in DB.DataTable.Rows)
+        {
+            string ProductID = Convert.ToString(Row["ProductID"]);
+            string ProductName = GetColumnText(Row, "ProductName");
+            string DisplayText = ProductID + " - " + ProductName;
+
+            ddlProduct.Items.Add(new ListItem(DisplayText, ProductID));
+        }
+    }
+
+    string GetColumnText(DataRow Row, string ColumnName)
+    {
+        //read optional display columns safely in case another team member changes the select list
+        if (Row.Table.Columns.Contains(ColumnName) && Row[ColumnName] != DBNull.Value)
+        {
+            return Convert.ToString(Row[ColumnName]);
+        }
+
+        return "";
+    }
+
+    void SetSelectedCustomer(Int32 CustomerID)
+    {
+        ListItem CustomerItem = ddlCustomer.Items.FindByValue(CustomerID.ToString());
+
+        if (CustomerItem != null)
+        {
+            ddlCustomer.SelectedValue = CustomerID.ToString();
+        }
+        else
+        {
+            ddlCustomer.SelectedValue = "";
+        }
+    }
+
+    void ToggleCustomerSelection()
+    {
+        if (chkIsGuestOrder.Checked)
+        {
+            ddlCustomer.SelectedValue = "";
+            ddlCustomer.Enabled = false;
+        }
+        else
+        {
+            ddlCustomer.Enabled = true;
+        }
+    }
+
+    void SetSelectedProduct(Int32 ProductID)
+    {
+        ListItem ProductItem = ddlProduct.Items.FindByValue(ProductID.ToString());
+
+        if (ProductItem != null)
+        {
+            ddlProduct.SelectedValue = ProductID.ToString();
+        }
+        else
+        {
+            ddlProduct.SelectedValue = "";
         }
     }
 
@@ -166,5 +276,10 @@ public partial class _1_DataEntry : System.Web.UI.Page
     {
         //redirect to the list page without saving
         Response.Redirect("OrderList.aspx");
+    }
+
+    protected void chkIsGuestOrder_CheckedChanged(object sender, EventArgs e)
+    {
+        ToggleCustomerSelection();
     }
 }
