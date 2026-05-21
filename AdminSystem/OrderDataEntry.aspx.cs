@@ -13,7 +13,16 @@ public partial class _1_DataEntry : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         //get the number of the order to be processed
-        OrderID = Convert.ToInt32(Session["OrderID"]);
+        if (IsPostBack == false)
+        {
+            OrderID = Convert.ToInt32(Session["OrderID"]);
+            ViewState["OrderID"] = OrderID;
+        }
+        else
+        {
+            OrderID = Convert.ToInt32(ViewState["OrderID"]);
+        }
+
         if (IsPostBack == false)
         {
             //load the dropdown lists from their related tables
@@ -68,7 +77,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
         DateTime tmpDate;
         bool tmpBool = chkIsGuestOrder.Checked;
 
-        AnOrder.OrderID = Convert.ToInt32(Session["OrderID"]);
+        AnOrder.OrderID = Convert.ToInt32(ViewState["OrderID"]);
 
         if (tmpBool)
         {
@@ -115,7 +124,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
         // Create an instance of the order collection
         clsOrderCollection OrderList = new clsOrderCollection();
 
-        if (Convert.ToInt32(Session["OrderID"]) == -1)
+        if (AnOrder.OrderID == -1)
         {
             OrderList.ThisOrder = AnOrder;
             OrderList.Add();
@@ -150,6 +159,9 @@ public partial class _1_DataEntry : System.Web.UI.Page
         //if found
         if (Found)
         {
+            Session["OrderID"] = OrderID;
+            ViewState["OrderID"] = OrderID;
+            txtOrderID.Text = OrderID.ToString();
             //display the values of the properties in the form
             SetSelectedCustomer(AnOrder.CustomerID);
             txtOrderDate.Text = AnOrder.OrderDate.ToString("yyyy-MM-dd");
