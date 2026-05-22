@@ -47,26 +47,12 @@ namespace ClassLibrary
 
         public clsSupplierCollection()
         {
-            Int32 Index = 0;
-            Int32 RecordCount = 0;
             clsDataConnection DB = new clsDataConnection();
             DB.Execute("sproc_tblSupplier_SelectAll");
-            clsSupplier TestItem = new clsSupplier();
-            RecordCount = DB.Count;
-            while (Index < RecordCount)
-            {
-                clsSupplier aSupplier = new clsSupplier();
-                aSupplier.SupplierActive = Convert.ToBoolean(DB.DataTable.Rows[Index]["IsActive"]);
-                aSupplier.SupplierID = Convert.ToInt32(DB.DataTable.Rows[Index]["SupplierID"]);
-                aSupplier.SupplierName = Convert.ToString(DB.DataTable.Rows[Index]["SupplierName"]);
-                aSupplier.SupplierEmail = Convert.ToString(DB.DataTable.Rows[Index]["ContactEmail"]);
-                aSupplier.SupplierAddress = Convert.ToString(DB.DataTable.Rows[Index]["Address"]);
-                aSupplier.SupplierPhoneNumber = Convert.ToString(DB.DataTable.Rows[Index]["ContactPhone"]);
-                aSupplier.SupplierCreatedDate = Convert.ToDateTime(DB.DataTable.Rows[Index]["CreatedDate"]);
-                mSupplierList.Add(aSupplier);
-                Index++;
-            }
+            PopulateArray(DB);
         }
+
+
 
         public int Add()
         {
@@ -94,6 +80,38 @@ namespace ClassLibrary
             DB.Execute("sproc_tblSupplier_Update");
         }
 
+        public void Delete()
+        {
+            clsDataConnection DB = new clsDataConnection();
+            DB.AddParameter("@SupplierID", mThisSupplier.SupplierID);
+        }
 
+        public void ReportBySupplierName(string SupplierName)
+        {
+            clsDataConnection DB = new clsDataConnection();
+            DB.AddParameter("@SupplierName", SupplierName);
+            DB.Execute("sproc_tblSupplier_FilterBySupplierName");
+            PopulateArray(DB);
+        }
+
+        public void PopulateArray(clsDataConnection DB)
+        {
+            Int32 Index = 0;
+            Int32 RecordCount = DB.Count;
+            mSupplierList = new List<clsSupplier>();
+            while (Index < RecordCount)
+            {
+                clsSupplier aSupplier = new clsSupplier();
+                aSupplier.SupplierActive = Convert.ToBoolean(DB.DataTable.Rows[Index]["IsActive"]);
+                aSupplier.SupplierID = Convert.ToInt32(DB.DataTable.Rows[Index]["SupplierID"]);
+                aSupplier.SupplierName = Convert.ToString(DB.DataTable.Rows[Index]["SupplierName"]);
+                aSupplier.SupplierEmail = Convert.ToString(DB.DataTable.Rows[Index]["ContactEmail"]);
+                aSupplier.SupplierAddress = Convert.ToString(DB.DataTable.Rows[Index]["Address"]);
+                aSupplier.SupplierPhoneNumber = Convert.ToString(DB.DataTable.Rows[Index]["ContactPhone"]);
+                aSupplier.SupplierCreatedDate = Convert.ToDateTime(DB.DataTable.Rows[Index]["CreatedDate"]);
+                mSupplierList.Add(aSupplier);
+                Index++;
+            }
+        }
     }
 }
