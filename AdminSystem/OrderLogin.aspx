@@ -74,6 +74,7 @@
             </div>
 
             <asp:Button ID="btnLogin" runat="server" Text="Login" CssClass="button" OnClick="btnLogin_Click" />
+            <asp:Button ID="btnCancel" runat="server" Text="Cancel" CssClass="button" OnClick="btnCancel_Click" />
             <asp:Label ID="lblError" runat="server" Text="" CssClass="error-label" />
         </div>
     </form>

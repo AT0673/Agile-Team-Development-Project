@@ -93,6 +93,7 @@
     <form id="form1" runat="server">
         <div class="page">
             <h1>Order Management</h1>
+            <asp:Label ID="lblLoggedInUser" runat="server" Text=""></asp:Label>
 
             <span class="section-title">Order Filters</span>
             <div class="filter-row">
@@ -121,6 +122,7 @@
                 <asp:Button ID="btnAdd" runat="server" Text="Add Order" CssClass="button" OnClick="btnAdd_Click" />
                 <asp:Button ID="btnEdit" runat="server" Text="Edit Order" CssClass="button button-secondary" OnClick="btnEdit_Click" />
                 <asp:Button ID="btnDelete" runat="server" Text="Delete Order" CssClass="button button-danger" OnClick="btnDelete_Click" />
+                <asp:Button ID="btnReturnToMainMenu" runat="server" Text="Return to Main Menu" CssClass="button button-secondary" OnClick="btnReturnToMainMenu_Click" />
             </div>
 
             <asp:Label ID="lblError" runat="server" Text="" CssClass="error-label" />
