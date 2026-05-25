@@ -36,27 +36,21 @@
             grid-template-columns: repeat(2, minmax(0, 1fr));
             gap: 12px;
         }
-        .menu-link {
-            display: block;
+        .menu-button {
+            width: 100%;
             padding: 16px;
             border: 1px solid #b8c2cc;
             border-radius: 6px;
             background-color: #f8fafc;
             color: #1f2933;
-            text-decoration: none;
-        }
-        .menu-link:hover {
-            border-color: #256fae;
-            background-color: #edf6ff;
-        }
-        .menu-title {
-            display: block;
-            margin-bottom: 4px;
             font-size: 17px;
             font-weight: 700;
+            text-align: left;
+            cursor: pointer;
         }
-        .menu-description {
-            color: #52616f;
+        .menu-button:hover {
+            border-color: #256fae;
+            background-color: #edf6ff;
         }
         @media (max-width: 640px) {
             .page {
@@ -75,30 +69,11 @@
             <span class="subtitle">Team Main Menu</span>
 
             <div class="menu-grid">
-                <a class="menu-link" href="StaffList.aspx">
-                    <span class="menu-title">Staff</span>
-                    <span class="menu-description">Manage staff records.</span>
-                </a>
-
-                <a class="menu-link" href="CustomerList.aspx">
-                    <span class="menu-title">Customers</span>
-                    <span class="menu-description">View and manage customer records.</span>
-                </a>
-
-                <a class="menu-link" href="SupplierList.aspx">
-                    <span class="menu-title">Suppliers</span>
-                    <span class="menu-description">Maintain supplier details.</span>
-                </a>
-
-                <a class="menu-link" href="StockList.aspx">
-                    <span class="menu-title">Stock</span>
-                    <span class="menu-description">Manage product and stock records.</span>
-                </a>
-
-                <a class="menu-link" href="OrderLogin.aspx">
-                    <span class="menu-title">Orders</span>
-                    <span class="menu-description">Log in to manage customer and guest orders.</span>
-                </a>
+                <asp:Button ID="btnStaff" runat="server" Text="Staff" CssClass="menu-button" OnClick="btnStaff_Click" />
+                <asp:Button ID="btnCustomers" runat="server" Text="Customers" CssClass="menu-button" OnClick="btnCustomers_Click" />
+                <asp:Button ID="btnSuppliers" runat="server" Text="Suppliers" CssClass="menu-button" OnClick="btnSuppliers_Click" />
+                <asp:Button ID="btnStock" runat="server" Text="Stock" CssClass="menu-button" OnClick="btnStock_Click" />
+                <asp:Button ID="btnOrders" runat="server" Text="Orders" CssClass="menu-button" OnClick="btnOrders_Click" />
             </div>
         </div>
     </form>

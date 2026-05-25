@@ -11,4 +11,29 @@ public partial class TeamMainMenu : System.Web.UI.Page
     {
 
     }
+
+    protected void btnStaff_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("StaffList.aspx");
+    }
+
+    protected void btnCustomers_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("CustomerList.aspx");
+    }
+
+    protected void btnSuppliers_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("SupplierList.aspx");
+    }
+
+    protected void btnStock_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("StockList.aspx");
+    }
+
+    protected void btnOrders_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("OrderLogin.aspx");
+    }
 }
