@@ -20,6 +20,7 @@ public partial class OrderLogin : Page
 
         if (AnUser.FindUser(txtUsername.Text, txtPassword.Text))
         {
+            Session["AnUser"] = AnUser;
             Session["OrderUserID"] = AnUser.UserID;
             Session["OrderUsername"] = AnUser.Username;
             Session["OrderDepartment"] = AnUser.Department;
@@ -29,5 +30,19 @@ public partial class OrderLogin : Page
         {
             lblError.Text = "Username or password is incorrect";
         }
+    }
+
+    protected void btnCancel_Click(object sender, EventArgs e)
+    {
+        ClearOrderLoginSession();
+        Response.Redirect("TeamMainMenu.aspx");
+    }
+
+    void ClearOrderLoginSession()
+    {
+        Session.Remove("AnUser");
+        Session.Remove("OrderUserID");
+        Session.Remove("OrderUsername");
+        Session.Remove("OrderDepartment");
     }
 }

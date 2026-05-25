@@ -114,5 +114,67 @@ namespace Testing4
             Assert.AreEqual(AllSuppliers.ThisSupplier, TestItem);
         }
 
+        [TestMethod]
+        public void DeleteMethodOK()
+        {
+            clsSupplierCollection AllSuppliers = new clsSupplierCollection();
+            clsSupplier TestItem = new clsSupplier();
+            Int32 PrimaryKey = 0;
+            TestItem.SupplierActive = true;
+            TestItem.SupplierID = 1;
+            TestItem.SupplierName = "Test Supplier";
+            TestItem.SupplierEmail = "test@supplier.com";
+            TestItem.SupplierAddress = "123 Test Street";
+            TestItem.SupplierPhoneNumber = "1234567890";
+            TestItem.SupplierCreatedDate = DateTime.Now;
+            AllSuppliers.ThisSupplier = TestItem;
+            PrimaryKey = AllSuppliers.Add();
+            TestItem.SupplierID = PrimaryKey;
+            AllSuppliers.ThisSupplier = TestItem;
+            AllSuppliers.Delete();
+            Boolean Found = AllSuppliers.ThisSupplier.Find(PrimaryKey);
+            Assert.IsFalse(Found);
+
+        }
+
+        [TestMethod]
+        public void ReportBySupplierNameMethodOK()
+        {
+            clsSupplierCollection AllSuppliers = new clsSupplierCollection();
+            clsSupplierCollection FilteredSuppliers = new clsSupplierCollection();
+            FilteredSuppliers.ReportBySupplierName("");
+            Assert.AreEqual(AllSuppliers.Count, FilteredSuppliers.Count);
+        }
+
+        [TestMethod]
+        public void ReportBySupplierNameNoneFound()
+        {
+            clsSupplierCollection FilteredSuppliers = new clsSupplierCollection();
+            FilteredSuppliers.ReportBySupplierName("xxx xxx");
+            Assert.AreEqual(0, FilteredSuppliers.Count);
+        }
+        [TestMethod]
+        public void ReportbySupplierNameFound()
+        {
+            clsSupplierCollection FilteredSuppliers = new clsSupplierCollection();
+            Boolean OK = true;
+            FilteredSuppliers.ReportBySupplierName("Test Supplier");
+            if (FilteredSuppliers.Count == 2)
+            {
+                if (FilteredSuppliers.Supplierlist[0].SupplierID != 1)
+                {
+                    OK = false;
+                }
+                if (FilteredSuppliers.Supplierlist[1].SupplierID != 2)
+                {
+                    OK = false;
+                }
+            }
+            else
+            {
+                OK = false;
+            }
+            Assert.IsTrue(OK);
+        }
     }
 }

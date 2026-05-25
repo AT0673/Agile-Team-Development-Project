@@ -241,6 +241,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="tstCustomer.cs" />
+    <Compile Include="tstCustomerUser.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="tstCustomerCollection.cs" />
   </ItemGroup>

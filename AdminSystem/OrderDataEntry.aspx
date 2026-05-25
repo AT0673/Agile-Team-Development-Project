@@ -115,6 +115,7 @@
                 <asp:Button ID="btnOK" runat="server" Text="Save Order" CssClass="button" OnClick="btnOK_Click" />
                 <asp:Button ID="btnCancel" runat="server" Text="Cancel" CssClass="button button-secondary" OnClick="btnCancel_Click" />
                 <asp:Button ID="btnFind" runat="server" Text="Find Order" CssClass="button button-secondary" OnClick="btnFind_Click" />
+                <asp:Button ID="btnReturnToMainMenu" runat="server" Text="Return to Main Menu" CssClass="button button-secondary" OnClick="btnReturnToMainMenu_Click" />
             </div>
         </div>
 
