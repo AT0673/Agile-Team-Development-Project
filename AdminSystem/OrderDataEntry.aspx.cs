@@ -294,4 +294,18 @@ public partial class _1_DataEntry : System.Web.UI.Page
     {
         ToggleCustomerSelection();
     }
+
+    protected void btnReturnToMainMenu_Click(object sender, EventArgs e)
+    {
+        ClearOrderLoginSession();
+        Response.Redirect("TeamMainMenu.aspx");
+    }
+
+    void ClearOrderLoginSession()
+    {
+        Session.Remove("AnUser");
+        Session.Remove("OrderUserID");
+        Session.Remove("OrderUsername");
+        Session.Remove("OrderDepartment");
+    }
 }

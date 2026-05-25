@@ -11,6 +11,21 @@ public partial class _1_List : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        clsOrderUser AnUser = Session["AnUser"] as clsOrderUser;
+
+        if (AnUser != null)
+        {
+            lblLoggedInUser.Text = "Logged in as: " + AnUser.Username;
+        }
+        else if (Session["OrderUsername"] != null)
+        {
+            lblLoggedInUser.Text = "Logged in as: " + Convert.ToString(Session["OrderUsername"]);
+        }
+        else
+        {
+            lblLoggedInUser.Text = "Logged in as: unknown user";
+        }
+
         //if this is the first time the page is displayed
         if (IsPostBack == false)
         {
@@ -207,5 +222,19 @@ public partial class _1_List : System.Web.UI.Page
         }
 
         return "";
+    }
+
+    protected void btnReturnToMainMenu_Click(object sender, EventArgs e)
+    {
+        ClearOrderLoginSession();
+        Response.Redirect("TeamMainMenu.aspx");
+    }
+
+    void ClearOrderLoginSession()
+    {
+        Session.Remove("AnUser");
+        Session.Remove("OrderUserID");
+        Session.Remove("OrderUsername");
+        Session.Remove("OrderDepartment");
     }
 }
