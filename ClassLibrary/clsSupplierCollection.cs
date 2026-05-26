@@ -63,8 +63,9 @@ namespace ClassLibrary
             DB.AddParameter("@ContactPhone", mThisSupplier.SupplierPhoneNumber);
             DB.AddParameter("@CreatedDate", mThisSupplier.SupplierCreatedDate);
             DB.AddParameter("@IsActive", mThisSupplier.SupplierActive);
-            DB.Execute("sproc_tblSupplier_Insert");
-            return DB.Execute("sproc_tblSupplier_Insert");
+            // execute the stored procedure once and return its return value
+            int result = DB.Execute("sproc_tblSupplier_Insert");
+            return result;
         }
 
         public void Update()
@@ -84,13 +85,22 @@ namespace ClassLibrary
         {
             clsDataConnection DB = new clsDataConnection();
             DB.AddParameter("@SupplierID", mThisSupplier.SupplierID);
+            DB.Execute("sproc_tblSupplier_Delete");
         }
 
         public void ReportBySupplierName(string SupplierName)
         {
             clsDataConnection DB = new clsDataConnection();
-            DB.AddParameter("@SupplierName", SupplierName);
-            DB.Execute("sproc_tblSupplier_FilterBySupplierName");
+            if (SupplierName == "")
+            {
+                DB.Execute("sproc_tblSupplier_SelectAll");
+            }
+            else
+            {
+                // pass wildcards so stored procedure using LIKE will match partial names
+                DB.AddParameter("@SupplierName", "%" + SupplierName + "%");
+                DB.Execute("sproc_tblSupplier_FilterBySupplierName");
+            }
             PopulateArray(DB);
         }
 

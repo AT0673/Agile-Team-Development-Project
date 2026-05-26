@@ -161,11 +161,11 @@ namespace Testing4
             FilteredSuppliers.ReportBySupplierName("Test Supplier");
             if (FilteredSuppliers.Count == 2)
             {
-                if (FilteredSuppliers.Supplierlist[0].SupplierID != 1)
+                if (FilteredSuppliers.Supplierlist[0].SupplierID != 7)
                 {
                     OK = false;
                 }
-                if (FilteredSuppliers.Supplierlist[1].SupplierID != 2)
+                if (FilteredSuppliers.Supplierlist[1].SupplierID != 22)
                 {
                     OK = false;
                 }
