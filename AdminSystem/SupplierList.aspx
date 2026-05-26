@@ -14,7 +14,7 @@
         <asp:Button ID="btnAdd" runat="server" OnClick="btnAdd_Click" style="z-index: 1; left: 17px; top: 345px; position: absolute; height: 25px; width: 51px" Text="Add" />
         <asp:Button ID="btnEdit" runat="server" OnClick="btnEdit_Click" style="z-index: 1; left: 74px; top: 345px; position: absolute; height: 25px; width: 59px" Text="Edit" />
         <asp:Button ID="btnDelete" runat="server" OnClick="btnDelete_Click" Style="z-index: 1; left: 140px; top: 345px; position: absolute; height: 25px; width: 59px" Text="Delete" />
-        <asp:Label ID="lblError" runat="server" style="z-index: 1; left: 22px; top: 380px; position: absolute; right: 505px" Text="Error"></asp:Label>
+        <asp:Label ID="lblError" runat="server" style="z-index: 1; left: 22px; top: 380px; position: absolute; right: 505px"></asp:Label>
            
         <asp:Label ID="lblSupplierName" runat="server" style="z-index: 1; left: 10px; top: 425px; position: absolute" Text="Enter Supplier Name"></asp:Label>
         <asp:TextBox ID="txtFilterSupplierName" runat="server" style="z-index: 1; left: 194px; top: 425px; position: absolute"></asp:TextBox>

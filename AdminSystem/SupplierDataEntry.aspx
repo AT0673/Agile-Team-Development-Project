@@ -21,7 +21,7 @@
         <asp:Label ID="lblDateCreated" runat="server" style="z-index: 1; left: 11px; top: 214px; position: absolute" Text="Date Created"></asp:Label>
         <asp:TextBox ID="txtSupplierCreatedDate" runat="server" style="z-index: 1; left: 129px; top: 215px; position: absolute; width: 110px"></asp:TextBox>
         <asp:CheckBox ID="chkSupplierActive" runat="server" style="z-index: 1; left: 10px; top: 242px; position: absolute" Text="Active" />
-        <asp:Label ID="lblError" runat="server" style="z-index: 1; left: 146px; top: 244px; position: absolute; height: 19px" Text="Error"></asp:Label>
+        <asp:Label ID="lblError" runat="server" style="z-index: 1; left: 146px; top: 244px; position: absolute; height: 19px" Text=""></asp:Label>
         <asp:Button ID="btnOK" runat="server" style="z-index: 1; left: 80px; top: 281px; position: absolute; height: 26px; width: 60px" Text="OK" OnClick="btnOK_Click" />
         <asp:Button ID="btnCancel" runat="server" style="z-index: 1; left: 156px; top: 281px; position: absolute; height: 26px; width: 60px" Text="Cancel" />
         <p>
