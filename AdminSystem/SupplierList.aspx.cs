@@ -10,14 +10,10 @@ public partial class _1_List : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        Int32 SupplierID;
-        SupplierID = Convert.ToInt32(Session["SupplierID"]);
-        if (IsPostBack == false)
+        // show the supplier list on first load
+        if (!IsPostBack)
         {
-            if (SupplierID != -1)
-            {
-                DisplaySuppliers();
-            }
+            DisplaySuppliers();
         }
 
     }
@@ -71,7 +67,7 @@ public partial class _1_List : System.Web.UI.Page
     {
         clsSupplierCollection aSupplier = new clsSupplierCollection();
         aSupplier.ReportBySupplierName(txtFilterSupplierName.Text);
-        lstSupplierList.DataSource = aSupplier;
+        lstSupplierList.DataSource = aSupplier.Supplierlist;
         lstSupplierList.DataValueField = "SupplierID";
         lstSupplierList.DataTextField = "SupplierName";
         lstSupplierList.DataBind();
@@ -82,7 +78,7 @@ public partial class _1_List : System.Web.UI.Page
         clsSupplierCollection aSupplier = new clsSupplierCollection();
         aSupplier.ReportBySupplierName("");
         txtFilterSupplierName.Text = "";
-        lstSupplierList.DataSource = aSupplier;
+        lstSupplierList.DataSource = aSupplier.Supplierlist;
         lstSupplierList.DataValueField = "SupplierID";
         lstSupplierList.DataTextField = "SupplierName";
         lstSupplierList.DataBind();
