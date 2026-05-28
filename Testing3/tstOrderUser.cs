@@ -35,7 +35,7 @@ namespace Testing3
             //create an instance of the class we want to create
             clsOrderUser AnUser = new clsOrderUser();
             //create some test data to assign to the property
-            string TestData = "Dawn";
+            string TestData = "Alfie";
             //assign the data to the property
             AnUser.Username = TestData;
             //test to see that the two values are the same
