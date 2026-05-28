@@ -12,7 +12,7 @@ namespace Testing4
         string supplierAddress = "964 Garry Street";
         string supplierEmail = "michael@outlook.com";
         string supplierPhoneNumber = "26816018680168016";
-        DateTime supplierCreatedDate = Convert.ToDateTime("24/04/2023");
+        DateTime supplierCreatedDate = DateTime.Now.Date;
 
         [TestMethod]
         public void InstanceOK()
@@ -212,7 +212,7 @@ namespace Testing4
         {
             clsSupplier aSupplier = new clsSupplier();
             String Error = "";
-            Error = aSupplier.Valid(supplierName, supplierPhoneNumber, supplierAddress, supplierEmail, supplierCreatedDate);
+            Error = aSupplier.Valid(supplierName, supplierEmail, supplierAddress, supplierPhoneNumber, supplierCreatedDate);
             Assert.AreEqual("", Error);
         }
 

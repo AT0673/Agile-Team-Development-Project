@@ -19,26 +19,31 @@ public partial class _1Viewer : System.Web.UI.Page
         string Username = txtUsername.Text;
         string Password = txtPassword.Text;
         Boolean Found = false;
-        int ID = 1;
-        Username = Convert.ToString(txtUsername.Text);
-        Password = Convert.ToString(txtPassword.Text);
-        Found = AnUser.FindUser(Username, Password);
-        if (txtUsername.Text == "")
+
+        // validate input first
+        if (String.IsNullOrWhiteSpace(Username))
         {
             lblError.Text = "Please enter a username";
 
         }
-        else if (txtPassword.Text == "")
+        else if (String.IsNullOrWhiteSpace(Password))
         {
             lblError.Text = "Please enter a password";
         }
-        else if (Found == true)
-        {
-            Response.Redirect("SupplierListaspx");
-        }
         else
         {
-            lblError.Text = "Incorrect username or password, try again";
+            // attempt to find the user
+            Found = AnUser.FindUser(Username, Password);
+            if (Found)
+            {
+                // ensure SupplierList can read the session value
+                Session["SupplierID"] = -1;
+                Response.Redirect("SupplierList.aspx");
+            }
+            else
+            {
+                lblError.Text = "Incorrect username or password, try again";
+            }
         }
     }
 

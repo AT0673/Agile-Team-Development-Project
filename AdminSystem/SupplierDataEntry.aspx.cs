@@ -16,12 +16,22 @@ public partial class _1_DataEntry : System.Web.UI.Page
     protected void btnOK_Click(object sender, EventArgs e)
     {
         clsSupplier aSupplier = new clsSupplier();
-        int SupplierID = Convert.ToInt32(txtSupplierID.Text);
+        int SupplierID = -1;
+        // safely parse SupplierID, default to -1 when blank/invalid
+        if (!int.TryParse(txtSupplierID.Text, out SupplierID))
+        {
+            SupplierID = -1;
+        }
         string SupplierName = txtSupplierName.Text;
         string SupplierEmail = txtSupplierEmail.Text;   
         string SupplierAddress = txtSupplierAddress.Text;
         string SupplierPhoneNumber = txtSupplierPhoneNumber.Text;
-        DateTime SupplierCreatedDate = Convert.ToDateTime(txtSupplierCreatedDate.Text);
+        // safely parse created date; if invalid leave as DateTime.MinValue so validation can catch it
+        DateTime SupplierCreatedDate;
+        if (!DateTime.TryParse(txtSupplierCreatedDate.Text, out SupplierCreatedDate))
+        {
+            SupplierCreatedDate = DateTime.MinValue;
+        }
         string Active = chkSupplierActive.Checked.ToString();
         string Error = "";
         Error = aSupplier.Valid(SupplierName, SupplierEmail, SupplierAddress, SupplierPhoneNumber, SupplierCreatedDate);
@@ -33,7 +43,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
             aSupplier.SupplierPhoneNumber = SupplierPhoneNumber;
             aSupplier.SupplierAddress = SupplierAddress;
             aSupplier.SupplierPhoneNumber = SupplierPhoneNumber;
-            aSupplier.SupplierCreatedDate = Convert.ToDateTime(SupplierCreatedDate);
+            aSupplier.SupplierCreatedDate = SupplierCreatedDate;
             aSupplier.SupplierActive = chkSupplierActive.Checked;
             clsSupplierCollection SupplierList = new clsSupplierCollection();
             if (SupplierID == -1)
@@ -61,7 +71,12 @@ public partial class _1_DataEntry : System.Web.UI.Page
         clsSupplier aSupplier = new clsSupplier();
         Int32 SupplierID;
         Boolean Found = false;
-        SupplierID = Convert.ToInt32(this.txtSupplierID.Text);
+        // safely parse SupplierID entered by user
+        if (!Int32.TryParse(this.txtSupplierID.Text, out SupplierID))
+        {
+            lblError.Text = "Please enter a valid Supplier ID to find";
+            return;
+        }
         Found = aSupplier.Find(SupplierID);
         if (Found == true)
         {
@@ -76,14 +91,31 @@ public partial class _1_DataEntry : System.Web.UI.Page
 
     protected void DisplaySupplier()
     {
-        int SupplierID = Convert.ToInt32(Session["SupplierID"]);
+        int SupplierID = -1;
+        if (Session["SupplierID"] != null)
+        {
+            Int32.TryParse(Session["SupplierID"].ToString(), out SupplierID);
+        }
         clsSupplierCollection SupplierList = new clsSupplierCollection();
-        SupplierList.ThisSupplier.Find(SupplierID);
-        txtSupplierName.Text = SupplierList.ThisSupplier.SupplierName;
-        txtSupplierEmail.Text = SupplierList.ThisSupplier.SupplierEmail;
-        txtSupplierAddress.Text = SupplierList.ThisSupplier.SupplierAddress;
-        txtSupplierPhoneNumber.Text = SupplierList.ThisSupplier.SupplierPhoneNumber;
-        txtSupplierCreatedDate.Text = SupplierList.ThisSupplier.SupplierCreatedDate.ToString();
-        chkSupplierActive.Checked = SupplierList.ThisSupplier.SupplierActive;
+        if (SupplierID != -1)
+        {
+            SupplierList.ThisSupplier.Find(SupplierID);
+            // populate the hidden id field so btnOK knows this is an update
+            txtSupplierID.Text = SupplierID.ToString();
+            txtSupplierName.Text = SupplierList.ThisSupplier.SupplierName;
+            txtSupplierEmail.Text = SupplierList.ThisSupplier.SupplierEmail;
+            txtSupplierAddress.Text = SupplierList.ThisSupplier.SupplierAddress;
+            txtSupplierPhoneNumber.Text = SupplierList.ThisSupplier.SupplierPhoneNumber;
+            txtSupplierCreatedDate.Text = SupplierList.ThisSupplier.SupplierCreatedDate.ToString();
+            chkSupplierActive.Checked = SupplierList.ThisSupplier.SupplierActive;
+            return;
+        }
+        // If SupplierID is -1 (new record) clear the fields
+        txtSupplierName.Text = string.Empty;
+        txtSupplierEmail.Text = string.Empty;
+        txtSupplierAddress.Text = string.Empty;
+        txtSupplierPhoneNumber.Text = string.Empty;
+        txtSupplierCreatedDate.Text = string.Empty;
+        chkSupplierActive.Checked = false;
     }
 }

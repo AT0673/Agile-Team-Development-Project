@@ -177,7 +177,10 @@ namespace ClassLibrary
             }
 
             // ---------------- Supplier Created Date Validation ----------------
-
+            if (supplierCreatedDate == DateTime.MinValue)
+            {
+                Error = Error + "Created date is not a valid date : ";
+            }       
             if (supplierCreatedDate < DateTime.Now.Date)
             {
                 Error = Error + "Date cannot be in the past : ";
