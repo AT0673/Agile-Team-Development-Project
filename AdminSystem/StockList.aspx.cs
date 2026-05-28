@@ -74,4 +74,25 @@ public partial class _1_List : System.Web.UI.Page
             lblError.Text = "Please select a product to delete.";
         }
     }
+
+    protected void btnApplyFilter_Click(object sender, EventArgs e)
+    {
+        clsProductCollection AllProducts = new clsProductCollection();
+        AllProducts.ReportByProductName(txtProductName.Text);
+        lstProductList.DataSource = AllProducts.ProductList;
+        lstProductList.DataValueField = "ProductID";
+        lstProductList.DataTextField = "ProductName"; 
+        lstProductList.DataBind();
+    }
+
+    protected void btnClearFilter_Click(object sender, EventArgs e)
+    {
+        clsProductCollection AllProducts = new clsProductCollection();
+        AllProducts.ReportByProductName("");
+        txtProductName.Text = "";
+        lstProductList.DataSource = AllProducts.ProductList;
+        lstProductList.DataValueField = "ProductID";
+        lstProductList.DataTextField = "ProductName";
+        lstProductList.DataBind();
+    }
 }
