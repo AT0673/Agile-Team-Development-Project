@@ -45,6 +45,11 @@
             border-radius: 4px;
             font-size: 14px;
         }
+        .choice-row {
+            display: grid;
+            grid-template-columns: 1fr 120px;
+            gap: 8px;
+        }
         .check-row {
             grid-column: 2;
         }
@@ -83,7 +88,10 @@
                 <asp:TextBox ID="txtOrderID" runat="server" CssClass="txt"></asp:TextBox>
 
                 <asp:Label ID="lblCustomerID" runat="server" CssClass="lbl" Text="Customer ID"></asp:Label>
-                <asp:DropDownList ID="ddlCustomer" runat="server" CssClass="select"></asp:DropDownList>
+                <div class="choice-row">
+                    <asp:DropDownList ID="ddlCustomer" runat="server" CssClass="select"></asp:DropDownList>
+                    <asp:TextBox ID="txtCustomerIDManual" runat="server" CssClass="txt" placeholder="Type ID"></asp:TextBox>
+                </div>
 
                 <asp:Label ID="lblOrderDate" runat="server" CssClass="lbl" Text="Order Date"></asp:Label>
                 <asp:TextBox ID="txtOrderDate" runat="server" CssClass="txt" TextMode="Date"></asp:TextBox>
@@ -101,7 +109,10 @@
                 </asp:DropDownList>
 
                 <asp:Label ID="lblProductID" runat="server" CssClass="lbl" Text="Product ID"></asp:Label>
-                <asp:DropDownList ID="ddlProduct" runat="server" CssClass="select"></asp:DropDownList>
+                <div class="choice-row">
+                    <asp:DropDownList ID="ddlProduct" runat="server" CssClass="select"></asp:DropDownList>
+                    <asp:TextBox ID="txtProductIDManual" runat="server" CssClass="txt" placeholder="Type ID"></asp:TextBox>
+                </div>
 
                 <span></span>
                 <div class="check-row">

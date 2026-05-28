@@ -61,9 +61,11 @@ public partial class _1_DataEntry : System.Web.UI.Page
         clsOrder AnOrder = new clsOrder();
         //variable to store any error messages
         String Error = "";
+        string CustomerID = GetCustomerIDInput();
+        string ProductID = GetProductIDInput();
         //validate the data first (Valid accepts strings)
-        Error = AnOrder.Valid(ddlCustomer.SelectedValue, txtOrderDate.Text, txtTotalPrice.Text,
-                                ddlStatus.SelectedValue, chkIsGuestOrder.Checked.ToString(), ddlProduct.SelectedValue);
+        Error = AnOrder.Valid(CustomerID, txtOrderDate.Text, txtTotalPrice.Text,
+                                ddlStatus.SelectedValue, chkIsGuestOrder.Checked.ToString(), ProductID);
         if (Error != "")
         {
             //display the validation error(s)
@@ -83,7 +85,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
         {
             AnOrder.CustomerID = 0;
         }
-        else if (!int.TryParse(ddlCustomer.SelectedValue, out tmpInt))
+        else if (!int.TryParse(CustomerID, out tmpInt))
         {
             lblError.Text = Error;
             return;
@@ -109,7 +111,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
 
         AnOrder.OrderStatus = ddlStatus.SelectedValue;
 
-        if (!int.TryParse(ddlProduct.SelectedValue, out tmpInt))
+        if (!int.TryParse(ProductID, out tmpInt))
         {
             lblError.Text = Error;
             return;
@@ -228,9 +230,30 @@ public partial class _1_DataEntry : System.Web.UI.Page
         return "";
     }
 
+    string GetCustomerIDInput()
+    {
+        if (txtCustomerIDManual.Text.Trim().Length != 0)
+        {
+            return txtCustomerIDManual.Text.Trim();
+        }
+
+        return ddlCustomer.SelectedValue;
+    }
+
+    string GetProductIDInput()
+    {
+        if (txtProductIDManual.Text.Trim().Length != 0)
+        {
+            return txtProductIDManual.Text.Trim();
+        }
+
+        return ddlProduct.SelectedValue;
+    }
+
     void SetSelectedCustomer(Int32 CustomerID)
     {
         ListItem CustomerItem = ddlCustomer.Items.FindByValue(CustomerID.ToString());
+        txtCustomerIDManual.Text = CustomerID == 0 ? "" : CustomerID.ToString();
 
         if (CustomerItem != null)
         {
@@ -248,16 +271,20 @@ public partial class _1_DataEntry : System.Web.UI.Page
         {
             ddlCustomer.SelectedValue = "";
             ddlCustomer.Enabled = false;
+            txtCustomerIDManual.Text = "";
+            txtCustomerIDManual.Enabled = false;
         }
         else
         {
             ddlCustomer.Enabled = true;
+            txtCustomerIDManual.Enabled = true;
         }
     }
 
     void SetSelectedProduct(Int32 ProductID)
     {
         ListItem ProductItem = ddlProduct.Items.FindByValue(ProductID.ToString());
+        txtProductIDManual.Text = ProductID == 0 ? "" : ProductID.ToString();
 
         if (ProductItem != null)
         {
