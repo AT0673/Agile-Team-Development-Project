@@ -12,23 +12,9 @@ namespace ClassLibrary
         clsProduct mThisProduct = new clsProduct();
         public clsProductCollection()
         {
-            Int32 Index = 0;
-            Int32 RecordCount = 0;
             clsDataConnection DB = new clsDataConnection();
             DB.Execute("sproc_tblProduct_SelectAll");
-            RecordCount = DB.Count;
-            while (Index < RecordCount)
-            {
-                clsProduct AProduct = new clsProduct();
-                AProduct.ProductID = Convert.ToInt32(DB.DataTable.Rows[Index]["ProductID"]);
-                AProduct.ProductName = Convert.ToString(DB.DataTable.Rows[Index]["ProductName"]);
-                AProduct.ProductAmount = Convert.ToInt32(DB.DataTable.Rows[Index]["ProductAmount"]);
-                AProduct.SupplierID = Convert.ToInt32(DB.DataTable.Rows[Index]["SupplierID"]);
-                AProduct.InStock = Convert.ToBoolean(DB.DataTable.Rows[Index]["InStock"]);
-                AProduct.StockArrivalDate = Convert.ToDateTime(DB.DataTable.Rows[Index]["StockArrivalDate"]);
-                mProductList.Add(AProduct);
-                Index++;
-            }
+            PopulateArray(DB);
         }
 
         public List<clsProduct> ProductList
@@ -91,6 +77,33 @@ namespace ClassLibrary
             clsDataConnection DB = new clsDataConnection();
             DB.AddParameter("@ProductID", mThisProduct.ProductID);
             DB.Execute("sproc_tblProduct_Delete");
+        }
+
+        public void ReportByProductName(string v)
+        {
+            clsDataConnection DB = new clsDataConnection();
+            DB.AddParameter("@ProductName", v);
+            DB.Execute("sproc_tblProduct_FilterByProductName");
+            PopulateArray(DB);
+
+        }
+        void PopulateArray(clsDataConnection DB)
+        {
+            Int32 Index = 0;
+            Int32 RecordCount = DB.Count;
+            mProductList = new List<clsProduct>();
+            while (Index < RecordCount)
+            {
+                clsProduct AProduct = new clsProduct();
+                AProduct.ProductID = Convert.ToInt32(DB.DataTable.Rows[Index]["ProductID"]);
+                AProduct.ProductName = Convert.ToString(DB.DataTable.Rows[Index]["ProductName"]);
+                AProduct.ProductAmount = Convert.ToInt32(DB.DataTable.Rows[Index]["ProductAmount"]);
+                AProduct.SupplierID = Convert.ToInt32(DB.DataTable.Rows[Index]["SupplierID"]);
+                AProduct.InStock = Convert.ToBoolean(DB.DataTable.Rows[Index]["InStock"]);
+                AProduct.StockArrivalDate = Convert.ToDateTime(DB.DataTable.Rows[Index]["StockArrivalDate"]);
+                mProductList.Add(AProduct);
+                Index++;
+            }
         }
     }
 }

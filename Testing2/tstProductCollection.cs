@@ -122,5 +122,42 @@ namespace Testing2
             Boolean Found = AllProducts.ThisProduct.Find(PrimaryKey);
             Assert.IsFalse(Found);
         }
+        [TestMethod]
+        public void ReportByProductNameMethodOK()
+        {
+            clsProductCollection AllProducts = new clsProductCollection();
+            clsProductCollection FilteredProducts = new clsProductCollection();
+            FilteredProducts.ReportByProductName("");
+            Assert.AreEqual(AllProducts.Count, FilteredProducts.Count);
+        }
+        [TestMethod]
+        public void reportbyProductNameNoneFound()
+        {
+            clsProductCollection FilteredProducts = new clsProductCollection();
+            FilteredProducts.ReportByProductName("xxxxxx");
+            Assert.AreEqual(0, FilteredProducts.Count);
+        }
+        [TestMethod]
+        public void reportbyProductNameTestDataFound()
+        {
+            clsProductCollection FilteredProducts = new clsProductCollection();
+            Boolean OK = true;
+            FilteredProducts.ReportByProductName("Test Product");
+            if (FilteredProducts.Count == 2)
+            {
+                if (FilteredProducts.ProductList[0].ProductID != 1)
+                {
+                    OK = false;
+                }
+                if (FilteredProducts.ProductList[1].ProductID != 2)
+                {
+                    OK = false;
+                }
+            }
+            else
+            {
+                OK = false;
+            }
+        }
     }
 }
