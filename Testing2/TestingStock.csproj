@@ -52,6 +52,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="tstStock.cs" />
     <Compile Include="tstProductCollection.cs" />
+    <Compile Include="TestProductUser.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
