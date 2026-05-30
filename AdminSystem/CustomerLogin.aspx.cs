@@ -1,8 +1,10 @@
 ﻿using ClassLibrary;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -11,7 +13,17 @@ public partial class CustomerLogin : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        //if this is the first time the page has been displayed
+        if (IsPostBack == false)
+        {
+            //clear the error message
+            lblError.Text = "";
+        }
+        //create a new instance of clsCustomerUser
+        clsCustomerUser AnUser = new clsCustomerUser();
+        //get data from the session object and cast it as a clsCustomerUser
+        AnUser = (clsCustomerUser)Session["AnUser"];
+        
     }
 
     protected void btnLogin_Click(object sender, EventArgs e)
@@ -29,6 +41,8 @@ public partial class CustomerLogin : System.Web.UI.Page
         Password = Convert.ToString(txtPassword.Text);
         //find the record of the user that matches the username and password entered
         Found = AnUser.FindUser(Username, Password);
+        //Add a session to capture the username
+        Session["AnUser"] = AnUser;
         //if username and/or password are empty
         if (txtUserName.Text == "")
         {
@@ -51,5 +65,10 @@ public partial class CustomerLogin : System.Web.UI.Page
             //record the error
             lblError.Text = "Incorrect username or password. Please try again";
         }
+    }
+
+    protected void btnCancel_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("TeamMainMenu.aspx");
     }
 }

@@ -12,6 +12,12 @@ public partial class _1_List : System.Web.UI.Page
     Int32 CustomerID;
     protected void Page_Load(object sender, EventArgs e)
     {
+        clsCustomerUser AnUser = Session["AnUser"] as clsCustomerUser;
+        if (AnUser != null)
+        {
+            //display the username
+            Response.Write("Logged in as: " + AnUser.Username);
+        }
         //get the number of the customer to be processed
         CustomerID = Convert.ToInt32(Session["CustomerID"]);
         if (IsPostBack == false)
@@ -22,7 +28,8 @@ public partial class _1_List : System.Web.UI.Page
                 //display the current data for the record
                 DisplayCustomers();
             }
-        }   
+        }
+
     }
 
     protected void btnAdd_Click(object sender, EventArgs e)
@@ -49,7 +56,7 @@ public partial class _1_List : System.Web.UI.Page
         }
         else //if no record has been selected
         {
-            //lblError.Text = "Please select a record to edit from the list";
+            lblError.Text = "Please select a record to edit from the list";
         }
     }
 
@@ -70,7 +77,7 @@ public partial class _1_List : System.Web.UI.Page
         else //if no record has been selected
         {
             //display an error message
-            //lblError.Text = "Please select a record from the list to delete";
+            lblError.Text = "Please select a record from the list to delete";
         }
      }
 

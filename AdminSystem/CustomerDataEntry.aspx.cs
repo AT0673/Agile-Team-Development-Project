@@ -135,4 +135,9 @@ public partial class _1_DataEntry : System.Web.UI.Page
             lblError.Text = "Record not found";
         }
     }
+
+    protected void btnMainMenu_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("TeamMainMenu.aspx");
+    }
 }
