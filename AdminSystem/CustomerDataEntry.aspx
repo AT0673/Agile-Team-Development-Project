@@ -17,7 +17,7 @@
         <asp:TextBox ID="txtCustomerFirstName" runat="server" height="29px" style="z-index: 1; left: 168px; top: 92px; position: absolute" width="188px"></asp:TextBox>
         
         <asp:Label ID="lblCustomerEmail" runat="server" style="z-index: 1; left: 16px; top: 168px; position: absolute" Text="Email" width="145px"></asp:Label>
-        <asp:TextBox ID="txtCustomerEmail" runat="server" height="29px" style="z-index: 1; left: 168px; top: 165px; position: absolute" width="188px"></asp:TextBox>
+        <asp:TextBox ID="txtCustomerEmail" runat="server" Height="29px" Style="z-index: 1; left: 168px; top: 165px; position: absolute" Width="188px"></asp:TextBox>
 
         <asp:Label ID="lblCustomerPassword" runat="server" style="z-index: 1; left: 16px; top: 204px; position: absolute" Text="Password" width="145px"></asp:Label>
         <asp:TextBox ID="txtCustomerPassword" runat="server" height="29px" style="z-index: 1; left: 168px; top: 202px; position: absolute" width="188px"></asp:TextBox>
@@ -27,8 +27,8 @@
         
         <asp:Label ID ="lblError" runat="server" style="z-index: 1; left: 227px; top: 331px; position: absolute" Text=""></asp:Label>
 
-        <asp:Button ID="btnOK" runat="server" OnClick="btnOK_Click" style="z-index: 1; left: 172px; top: 332px; position: absolute" Text="OK" />
-        <asp:Button ID="btnCancel" runat="server" style="z-index: 1; left: 227px; top: 331px; position: absolute" Text="Cancel" />
+        <asp:Button ID="btnOK" runat="server" OnClick="btnOK_Click" style="z-index: 1; left: 172px; top: 332px; position: absolute" Text="OK"></asp:Button>
+        <asp:Button ID="btnCancel" runat="server" style="z-index: 1; left: 227px; top: 331px; position: absolute" Text="Cancel"></asp:Button>
         
         <asp:Label ID="lblDateAdded" runat="server" style="z-index: 1; left: 227px; top: 331px; position: absolute" Text="Date Added"></asp:Label>
         <asp:TextBox ID="txtDateAdded" runat="server" style="z-index: 1; left: 227px; top: 331px; position: absolute" ></asp:TextBox>
@@ -39,6 +39,8 @@
         <asp:Label ID="lblCustomerDOB" runat="server" style="z-index: 1; left: 227px; top: 331px; position: absolute" Text="Date of Birth"></asp:Label>
         <asp:TextBox ID="txtCustomerDOB" runat="server" style="z-index: 1; left: 227px; top: 331px; position: absolute"></asp:TextBox>
         <asp:Calendar ID="calCustomerDOB" runat="server" style="z-index: 1; left: 227px; top: 331px; position: absolute"></asp:Calendar>
+
+        <asp:Button ID="btnMainMenu" runat="server" OnClick="btnMainMenu_Click" style="z-index: 1; left: 172px; top: 33px; position: absolute" Text="Return to Main Menu"></asp:Button>
     </form>
 </body>
 </html>
