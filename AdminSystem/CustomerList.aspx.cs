@@ -13,23 +13,18 @@ public partial class _1_List : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         clsCustomerUser AnUser = Session["AnUser"] as clsCustomerUser;
+
         if (AnUser != null)
         {
             //display the username
             Response.Write("Logged in as: " + AnUser.Username);
         }
-        //get the number of the customer to be processed
-        CustomerID = Convert.ToInt32(Session["CustomerID"]);
+
         if (IsPostBack == false)
         {
-            //if this is not a new record
-            if (CustomerID != -1)
-            {
-                //display the current data for the record
-                DisplayCustomers();
-            }
+            //display all customers when the page loads
+            DisplayCustomers();
         }
-
     }
 
     protected void btnAdd_Click(object sender, EventArgs e)

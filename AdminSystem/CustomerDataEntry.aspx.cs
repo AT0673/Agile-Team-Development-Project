@@ -79,14 +79,13 @@ public partial class _1_DataEntry : System.Web.UI.Page
             //create a new instance of the customer collection
             clsCustomerCollection CustomerList = new clsCustomerCollection();
             //if this is a new record i.e. CustomerID = -1 then add the data
-            if (aCustomer.CustomerID == -1)
+            if (Convert.ToInt32(Session["CustomerID"]) == -1)
             {
                 //set the ThisCustomer property
                 CustomerList.ThisCustomer = aCustomer;
                 //add the new record
                 CustomerList.Add();
             }
-            //otherwise it must be an update
             else
             {
                 //find the record to update
