@@ -25,6 +25,8 @@
 
         <asp:Label ID="lblLoggedInUser" runat="server"  width="145px"></asp:Label>
         <asp:Label ID="lblError" runat="server"  width="145px"></asp:Label>
+
+        <asp:Button ID="btnMainMenu" runat="server" height="40px" width="150px" Text="Return to Main Menu" OnClick="btnMainMenu_Click"></asp:Button>
     </form>
 </body>
 </html>

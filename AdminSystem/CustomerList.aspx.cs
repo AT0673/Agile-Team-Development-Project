@@ -110,6 +110,14 @@ public partial class _1_List : System.Web.UI.Page
         lstCustomerList.DataBind();
     }
 
+    protected void btnMainMenu_Click(object sender, EventArgs e)
+    {
+        //clear the session
+        Session.Clear();
+        //redirect to the login page
+        Response.Redirect("TeamMainMenu.aspx");
+    }
+
     void DisplayCustomers()
     {
         //create an instance of the customer collection
