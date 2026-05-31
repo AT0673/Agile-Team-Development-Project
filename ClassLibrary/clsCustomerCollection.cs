@@ -102,7 +102,7 @@ namespace ClassLibrary
             //send the first name parameter to the database
             DB.AddParameter("@CustomerFirstName", v);
             //execute the stored procedure
-            DB.Execute("sproc_tblCustomer_FilterByCustomerFirstName");
+            DB.Execute("sproc_tblCustomer_FilterByFirstName");
             //populate the array list with the data table
             PopulateArray(DB);
         }

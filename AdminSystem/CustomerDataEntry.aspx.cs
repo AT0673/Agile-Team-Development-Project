@@ -88,8 +88,8 @@ public partial class _1_DataEntry : System.Web.UI.Page
             }
             else
             {
-                //find the record to update
-                CustomerList.ThisCustomer.Find(aCustomer.CustomerID);
+                //set the customer ID from the session
+                aCustomer.CustomerID = Convert.ToInt32(Session["CustomerID"]);
                 //set the ThisCustomer property
                 CustomerList.ThisCustomer = aCustomer;
                 //update the record
