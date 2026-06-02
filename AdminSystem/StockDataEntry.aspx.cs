@@ -11,8 +11,16 @@ public partial class _1_DataEntry : System.Web.UI.Page
     Int32 ProductID;
     protected void Page_Load(object sender, EventArgs e)
     {
-        ProductID = Convert.ToInt32(Session["ProductID"]);
-        if (IsPostBack == false)
+        if (Session["ProductID"] != null)
+        {
+            ProductID = Convert.ToInt32(Session["ProductID"]);
+        }
+        else
+        {
+            ProductID = -1;
+        }
+
+        if (!IsPostBack)
         {
             if (ProductID != -1)
             {
@@ -25,24 +33,22 @@ public partial class _1_DataEntry : System.Web.UI.Page
     {
         clsProduct AnProduct = new clsProduct();
 
-        AnProduct.ProductID = Convert.ToInt32(txtProductID.Text);
-        AnProduct.ProductName = txtProductName.Text;
-        AnProduct.ProductAmount -= Convert.ToInt32(txtProductAmount.Text);
-        AnProduct.StockArrivalDate = Convert.ToDateTime(txtStockArrivalDate.Text);
-        AnProduct.SupplierID = Convert.ToInt32(txtSupplierID.Text);
-        AnProduct.InStock = InStock.Checked;
         //varable to store any error messages
         String Error = "";
         //validate the data
         Error = AnProduct.Valid(txtProductName.Text, txtProductAmount.Text, txtStockArrivalDate.Text, txtSupplierID.Text);
         if (Error == "")
         {
-            AnProduct.ProductID = ProductID;
             AnProduct.ProductName = txtProductName.Text;
             AnProduct.ProductAmount = Convert.ToInt32(txtProductAmount.Text);
             AnProduct.StockArrivalDate = Convert.ToDateTime(txtStockArrivalDate.Text);
             AnProduct.SupplierID = Convert.ToInt32(txtSupplierID.Text);
             AnProduct.InStock = InStock.Checked;
+
+            if (ProductID != -1)
+            {
+                AnProduct.ProductID = ProductID;
+            }
             clsProductCollection ProductList = new clsProductCollection();
 
             if (ProductID == -1)
@@ -90,13 +96,14 @@ public partial class _1_DataEntry : System.Web.UI.Page
 
     protected void btnCancel_Click(object sender, EventArgs e)
     {
-
+        Response.Redirect("StockList.aspx");
     }
 
     void DisplayProduct()
     {
         clsProductCollection ProductList = new clsProductCollection();
         ProductList.ThisProduct.Find(ProductID);
+        txtProductID.Text = ProductList.ThisProduct.ProductID.ToString();
         txtProductName.Text = ProductList.ThisProduct.ProductName;
         txtProductAmount.Text = ProductList.ThisProduct.ProductAmount.ToString();
         txtStockArrivalDate.Text = ProductList.ThisProduct.StockArrivalDate.ToString();

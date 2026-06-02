@@ -26,23 +26,10 @@ public partial class _1_List : System.Web.UI.Page
     }
 
     
-    protected void Button1_Click(object sender, EventArgs e)
+    protected void btnAdd_Click(object sender, EventArgs e)
     {
         Session["ProductID"] = -1;
         Response.Redirect("StockDataEntry.aspx");
-    }
-
-    protected void lstProductList_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        if (lstProductList.SelectedValue != null)
-        {
-            int productId;
-            if (int.TryParse(lstProductList.SelectedValue, out productId))
-            {
-                Session["ProductID"] = productId;
-                Response.Redirect("StockDataEntry.aspx");
-            }
-        }
     }
 
     protected void btnEdit_Click(object sender, EventArgs e)
