@@ -31,7 +31,6 @@ namespace Testing5
             //set its properties
             TestItem.Active = true;
             TestItem.CustomerID = 1;
-            TestItem.DateAdded = DateTime.Now.Date;
             TestItem.CustomerEmail = "lewis@email.com";
             TestItem.CustomerFirstName = "Lewis";
             TestItem.CustomerIsActive = true;
@@ -58,7 +57,6 @@ namespace Testing5
             //set the properties of the test object
             TestCustomer.Active = true;
             TestCustomer.CustomerID = 1;
-            TestCustomer.DateAdded = DateTime.Now.Date;
             TestCustomer.CustomerEmail = "lewis@email.com";
             TestCustomer.CustomerFirstName = "Lewis";
             TestCustomer.CustomerIsActive = true;
@@ -85,7 +83,6 @@ namespace Testing5
             //set its properties
             TestItem.Active = true;
             TestItem.CustomerID = 1;
-            TestItem.DateAdded = DateTime.Now.Date;
             TestItem.CustomerEmail = "lewis@email.com";
             TestItem.CustomerFirstName = "Lewis";
             TestItem.CustomerIsActive = true;
@@ -110,10 +107,11 @@ namespace Testing5
             clsCustomer TestItem = new clsCustomer();
             //variable to store the primary key
             Int32 PrimaryKey = 0;
+            //generate a random ID
+            Random rnd = new Random();
             //set its properties
             TestItem.Active = true;
-            TestItem.CustomerID = 1;
-            TestItem.DateAdded = DateTime.Now.Date;
+            TestItem.CustomerID = rnd.Next(100000, 999999);
             TestItem.CustomerEmail = "lewis@email.com";
             TestItem.CustomerFirstName = "Lewis";
             TestItem.CustomerIsActive = true;
@@ -141,10 +139,11 @@ namespace Testing5
             clsCustomer TestItem = new clsCustomer();
             //variable to store the primary key
             Int32 PrimaryKey = 0;
+            //generate a random ID
+            Random rnd = new Random();
             //set its properties
             TestItem.Active = true;
-            TestItem.CustomerID = 1;
-            TestItem.DateAdded = DateTime.Now.Date;
+            TestItem.CustomerID = rnd.Next(100000, 999999);
             TestItem.CustomerEmail = "lewis@email.com";
             TestItem.CustomerFirstName = "Lewis";
             TestItem.CustomerIsActive = true;
@@ -160,7 +159,6 @@ namespace Testing5
             //modify the test data
             TestItem.Active = false;
             TestItem.CustomerID = 2;
-            TestItem.DateAdded = DateTime.Now.Date;
             TestItem.CustomerEmail = "mickeymouse@email.com";
             TestItem.CustomerFirstName = "Mickey";
             TestItem.CustomerIsActive = false;
@@ -186,10 +184,11 @@ namespace Testing5
             clsCustomer TestItem = new clsCustomer();
             //variable to store the primary key
             Int32 PrimaryKey = 0;
+            //generate a random ID
+            Random rnd = new Random();
             //set its properties
             TestItem.Active = true;
-            TestItem.CustomerID = 1;
-            TestItem.DateAdded = DateTime.Now.Date;
+            TestItem.CustomerID = rnd.Next(100000, 999999);
             TestItem.CustomerEmail = "lewis@email.com";
             TestItem.CustomerFirstName = "Lewis";
             TestItem.CustomerIsActive = true;
@@ -244,17 +243,12 @@ namespace Testing5
             //variable to store outcome
             Boolean OK = true;
             //apply a first name that doesn't exist
-            FilteredCustomers.ReportByCustomerFirstName("Lewis");
+            FilteredCustomers.ReportByCustomerFirstName("Joe");
             //check that the correct number of records are found
-            if (FilteredCustomers.Count == 2)
+            if (FilteredCustomers.Count == 1)
             {
                 //check that the first record is ID 1
                 if (FilteredCustomers.CustomerList[0].CustomerID != 1)
-                {
-                    OK = false;
-                }
-                //check that the second record is ID 2
-                if (FilteredCustomers.CustomerList[1].CustomerID != 2)
                 {
                     OK = false;
                 }

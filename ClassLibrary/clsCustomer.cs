@@ -6,8 +6,6 @@ namespace ClassLibrary
 
     public class clsCustomer
     {
-
-
         //private data member for the customer id property
         private Boolean mActive;
         //CustomerID public property
@@ -22,24 +20,6 @@ namespace ClassLibrary
             {
                 //this line of code allows data into the property
                 mActive = value;
-            }
-        }
-
-        //private data member for the date added property
-        private DateTime mDateAdded;
-
-        //dateAdded public property
-        public DateTime DateAdded
-        {
-            get
-            {
-                //this line of code sends data out of the property
-                return mDateAdded;
-            }
-            set
-            {
-                //this line of code allows data into the property
-                mDateAdded = value;
             }
         }
 
@@ -174,7 +154,7 @@ namespace ClassLibrary
             {
                 //copy the data from the database to the private data members
                 mCustomerID = Convert.ToInt32(DB.DataTable.Rows[0]["CustomerID"]);
-                mCustomerFirstName = Convert.ToString(DB.DataTable.Rows[0]["CustomerFirstName"]);
+                mCustomerFirstName = Convert.ToString(DB.DataTable.Rows[0]["CustomerFirstName"]).Trim();
                 mCustomerIsActive = Convert.ToBoolean(DB.DataTable.Rows[0]["CustomerIsActive"]);
                 mCustomerEmail = Convert.ToString(DB.DataTable.Rows[0]["CustomerEmail"]);
                 mCustomerPassword = Convert.ToString(DB.DataTable.Rows[0]["CustomerPassword"]);

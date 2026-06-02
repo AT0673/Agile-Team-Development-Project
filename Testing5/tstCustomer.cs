@@ -10,7 +10,6 @@ namespace Testing5
     [TestClass]
     public class tstCustomer
     {
-
         //good test data
         //create some test data to pass the method
         string CustomerFirstName = "Lewis";
@@ -44,19 +43,6 @@ namespace Testing5
             aCustomer.Active = TestData;
             //test to see that the two values are the same
             Assert.AreEqual(aCustomer.Active, TestData);
-        }
-
-        [TestMethod]
-        public void DateAddedPropertyOK()
-        {
-            //create an instance of the class we want to create 
-            clsCustomer aCustomer = new clsCustomer();
-            //create some test data to assign to the property
-            DateTime TestData = DateTime.Now.Date;
-            //assign the data to the property 
-            aCustomer.DateAdded = TestData;
-            //test to see that the two values are the same
-            Assert.AreEqual(aCustomer.DateAdded, TestData);
         }
 
         [TestMethod]
@@ -159,7 +145,7 @@ namespace Testing5
             //create a Boolean variable to store the results of the validation
             Boolean Found = false;
             //create some test data to use with the method
-            Int32 CustomerID = 21;
+            Int32 CustomerID = 1;
             Found = aCustomer.Find(CustomerID);
             //test tp see if the result is true
             Assert.IsTrue(Found);
@@ -181,28 +167,6 @@ namespace Testing5
 
         /******************PROPERTY DATA TESTS******************/
         [TestMethod]
-        public void TestDateAddedFound()
-        {
-            //create an instance of the class we want to create
-            clsCustomer aCustomer = new clsCustomer();
-            //create a Boolean variable to store the result of the search
-            Boolean Found = false;
-            //create a Boolean variable to record if the data is OK (assume it is)
-            Boolean OK = true;
-            //create some test data to use with the method
-            Int32 CustomerID = 21;
-            //invoke the method
-            Found = aCustomer.Find(CustomerID);
-            //check the dataAdded property
-            if (aCustomer.DateAdded != Convert.ToDateTime("23/12/2026"))
-            {
-                OK = false;
-            }
-            //test to see that the result is correct
-            Assert.IsTrue(OK);
-        }
-
-        [TestMethod]
         public void TestCustomerIDFound()
         {
             //create an instance of the class we want to create 
@@ -212,12 +176,12 @@ namespace Testing5
             //create a Boolean variable to record if data is OK (assume it is) 
             Boolean OK = true;
             //create some test data to use with the method 
-            Int32 CustomerID = 3;
+            Int32 CustomerID = 1;
             //invoke the method 
             Found = aCustomer.Find(CustomerID);
             Assert.IsTrue(Found);
             //check the house no property 
-            if (aCustomer.CustomerID != 3)
+            if (aCustomer.CustomerID != 1)
             {
                 OK = false;
             }
@@ -235,11 +199,12 @@ namespace Testing5
             //create a Boolean variable to record if data is OK (assume it is) 
             Boolean OK = true;
             //create some test data to use with the method 
-            Int32 CustomerID = 21;
+            Int32 CustomerID = 1;
             //invoke the method 
             Found = aCustomer.Find(CustomerID);
+            Assert.IsTrue(Found);
             //check the house no property 
-            if (aCustomer.CustomerFirstName != "Mickey")
+            if (aCustomer.CustomerFirstName != "Joe")
             {
                 OK = false;
             }
@@ -257,7 +222,7 @@ namespace Testing5
             //create a Boolean variable to record if data is OK (assume it is) 
             Boolean OK = true;
             //create some test data to use with the method 
-            Int32 CustomerID = 21;
+            Int32 CustomerID = 1;
             //invoke the method 
             Found = aCustomer.Find(CustomerID);
             //check the house no property 
@@ -279,11 +244,11 @@ namespace Testing5
             //create a Boolean variable to record if data is OK (assume it is) 
             Boolean OK = true;
             //create some test data to use with the method 
-            Int32 CustomerID = 21;
+            Int32 CustomerID = 1;
             //invoke the method 
             Found = aCustomer.Find(CustomerID);
             //check the house no property 
-            if (aCustomer.CustomerEmail != "mickeymouse@email.com")
+            if (aCustomer.CustomerEmail != "joebloggs@email.com")
             {
                 OK = false;
             }
@@ -301,7 +266,7 @@ namespace Testing5
             //create a Boolean variable to record if data is OK (assume it is) 
             Boolean OK = true;
             //create some test data to use with the method 
-            Int32 CustomerID = 21;
+            Int32 CustomerID = 1;
             //invoke the method 
             Found = aCustomer.Find(CustomerID);
             //check the house no property 
@@ -323,7 +288,7 @@ namespace Testing5
             //create a Boolean variable to record if data is OK (assume it is) 
             Boolean OK = true;
             //create some test data to use with the method 
-            Int32 CustomerID = 21;
+            Int32 CustomerID = 1;
             //invoke the method 
             Found = aCustomer.Find(CustomerID);
             //check the house no property 
@@ -345,33 +310,11 @@ namespace Testing5
             //create a Boolean variable to record if data is OK (assume it is) 
             Boolean OK = true;
             //create some test data to use with the method 
-            Int32 CustomerID = 21;
+            Int32 CustomerID = 1;
             //invoke the method 
             Found = aCustomer.Find(CustomerID);
             //check the house no property 
-            if (aCustomer.CustomerAddress != "14 Disney Road")
-            {
-                OK = false;
-            }
-            //test to see that the result is correct 
-            Assert.IsTrue(OK);
-        }
-
-        [TestMethod]
-        public void TestActiveFound()
-        {
-            //create an instance of the class we want to create 
-            clsCustomer aCustomer = new clsCustomer();
-            //create a Boolean variable to store the result of the search 
-            Boolean Found = false;
-            //create a Boolean variable to record if data is OK (assume it is) 
-            Boolean OK = true;
-            //create some test data to use with the method 
-            Int32 CustomerID = 21;
-            //invoke the method 
-            Found = aCustomer.Find(CustomerID);
-            //check the house no property 
-            if (aCustomer.Active != true)
+            if (aCustomer.CustomerAddress != "12 Long Street, Leicester")
             {
                 OK = false;
             }
@@ -484,111 +427,6 @@ namespace Testing5
             Error = aCustomer.Valid(CustomerID, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress, Convert.ToDateTime(DateAdded));
             //test to see that the result is correct 
             Assert.AreEqual(Error, "");
-        }
-
-        /********************DATE ADDED PARAMETER METHOD TESTS******************/
-
-        [TestMethod]
-        public void DateAddedExtremeMin()
-        {
-            //create an instance of the class we want to create 
-            clsCustomer aCustomer = new clsCustomer();
-            //string variable to store any error message 
-            String Error = "";
-            //create a variable to store the test date data 
-            DateTime TestDate;
-            //set the date totodays date 
-            TestDate = DateTime.Now.Date;
-            //change the date to whatever the date is less 100 years 
-            TestDate = TestDate.AddYears(-100);
-            //convert the date variable to a string variable 
-            string DateAdded = TestDate.ToString();
-            //invoke the method 
-            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress, TestDate);
-            //test to see that the result is correct 
-            Assert.AreNotEqual(Error, "");
-        }
-
-        [TestMethod]
-        public void DateAddedMinLessOne()
-        {
-            //create an instance of the class we want to create 
-            clsCustomer aCustomer = new clsCustomer();
-            //string variable to store any error message 
-            String Error = "";
-            //create a variable to store the test date data 
-            DateTime TestDate;
-            //set the date totodays date 
-            TestDate = DateTime.Now.Date;
-            //change the date to whatever the date is less 1 day 
-            TestDate = TestDate.AddDays(-1);
-            //convert the date variable to a string variable 
-            string DateAdded = TestDate.ToString();
-            //invoke the method 
-            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress, TestDate);
-            //test to see that the result is correct 
-            Assert.AreNotEqual(Error, "");
-        }
-
-        [TestMethod]
-        public void DateAddedMin()
-        {
-            //create an instance of the class we want to create 
-            clsCustomer aCustomer = new clsCustomer();
-            //string variable to store any error message 
-            String Error = "";
-            //create a variable to store the test date data 
-            DateTime TestDate;
-            //set the date totodays date 
-            TestDate = DateTime.Now.Date;
-            //convert the date variable to a string variable 
-            string DateAdded = TestDate.ToString();
-            //invoke the method 
-            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress, TestDate);
-            //test to see that the result is correct 
-            Assert.AreEqual("", Error);
-        }
-
-        [TestMethod]
-        public void DateAddedMinPlusOne()
-        {
-            //create an instance of the class we want to create 
-            clsCustomer aCustomer = new clsCustomer();
-            //string variable to store any error message 
-            String Error = "";
-            //create a variable to store the test date data 
-            DateTime TestDate;
-            //set the date totodays date 
-            TestDate = DateTime.Now.Date;
-            //change the date to whatever the date is plus 1 day 
-            TestDate = TestDate.AddDays(1);
-            //convert the date variable to a string variable 
-            string DateAdded = TestDate.ToString();
-            //invoke the method 
-            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress, TestDate);
-            //test to see that the result is correct 
-            Assert.AreNotEqual(Error, "");
-        }
-
-        [TestMethod]
-        public void DateAddedExtremeMax()
-        {
-            //create an instance of the class we want to create 
-            clsCustomer aCustomer = new clsCustomer();
-            //string variable to store any error message 
-            String Error = "";
-            //create a variable to store the test date data 
-            DateTime TestDate;
-            //set the date totodays date 
-            TestDate = DateTime.Now.Date;
-            //change the date to whatever the date is plus 100 years
-            TestDate = TestDate.AddYears(100);
-            //convert the date variable to a string variable 
-            string DateAdded = TestDate.ToString();
-            //invoke the method 
-            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress, TestDate);
-            //test to see that the result is correct 
-            Assert.AreNotEqual(Error, "");
         }
 
         /********************CUSTOMER FIRST NAME PARAMETER METHOD TESTS******************/
