@@ -48,8 +48,6 @@ public partial class _1_DataEntry : System.Web.UI.Page
         aCustomer.CustomerPassword = txtCustomerPassword.Text;
         //capture the customer address
         aCustomer.CustomerAddress = txtCustomerAddress.Text;
-        //capture the date added
-        aCustomer.DateAdded = DateTime.Now.Date;
         //capture the active status
         aCustomer.Active = chkActive.Checked;
         //capture the customer DOB
@@ -57,7 +55,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
         //variable to store any error messages
         String Error = "";
         //validate the data
-        Error = aCustomer.Valid(aCustomer.CustomerID, aCustomer.CustomerFirstName, aCustomer.Active, aCustomer.CustomerEmail, aCustomer.CustomerPassword, aCustomer.CustomerDOB, aCustomer.CustomerAddress, aCustomer.DateAdded);
+        Error = aCustomer.Valid(aCustomer.CustomerID, aCustomer.CustomerFirstName, aCustomer.Active, aCustomer.CustomerEmail, aCustomer.CustomerPassword, aCustomer.CustomerDOB, aCustomer.CustomerAddress);
         if (Error == "")
         {
             //capture the customer ID
@@ -70,8 +68,6 @@ public partial class _1_DataEntry : System.Web.UI.Page
             aCustomer.CustomerPassword = txtCustomerPassword.Text;
             //capture the customer address
             aCustomer.CustomerAddress = txtCustomerAddress.Text;
-            //capture the date added
-            aCustomer.DateAdded = DateTime.Now.Date;
             //capture the active status
             aCustomer.Active = chkActive.Checked;
             //capture the customer DOB
@@ -125,7 +121,6 @@ public partial class _1_DataEntry : System.Web.UI.Page
             lblCustomerEmail.Text = aCustomer.CustomerEmail;
             lblCustomerPassword.Text = aCustomer.CustomerPassword;
             lblCustomerAddress.Text = aCustomer.CustomerAddress;
-            lblDateAdded.Text = aCustomer.DateAdded.ToString();
             lblActive.Text = aCustomer.Active.ToString();
         }
         else
