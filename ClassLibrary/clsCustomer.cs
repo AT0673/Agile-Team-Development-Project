@@ -173,30 +173,15 @@ namespace ClassLibrary
 
         /****** VALIDATION METHOD ******/
 
-        public string Valid(int customerID, string customerFirstName, bool customerIsActive, string customerEmail, string customerPassword, DateTime customerDOB, string customerAddress, DateTime dateAdded)
+        public string Valid(int customerID, string customerFirstName, bool customerIsActive, string customerEmail, string customerPassword, DateTime customerDOB, string customerAddress)
         {
             //create a string variable to store the error
             String Error = "";
-            //create a temporary variable to store the data values
-            DateTime DateTemp;
             //if the ID is less than 1
             if (customerID < 0)
             {
                 //record the error
                 Error = Error + "The Customer ID number may not be less than 0 : ";
-            }
-            //copy the dateAdded value to the DateTemp variable
-            DateTemp = Convert.ToDateTime(dateAdded);
-            //check to see if the date is less than today's date
-            if (DateTemp < DateTime.Now.Date)
-            {
-                Error = Error + "The date cannot be in the past : ";
-            }
-            //check to see if the date is greater than today's date 
-            if (DateTemp > DateTime.Now.Date)
-            {
-                //record the error 
-                Error = Error + "The date cannot be in the future : ";
             }
             //if the customer first name is blank
             if (customerFirstName.Length == 0)
