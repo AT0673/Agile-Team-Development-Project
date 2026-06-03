@@ -8,8 +8,6 @@ using ClassLibrary;
 
 public partial class _1_List : System.Web.UI.Page
 {
-    //variable to store the primary key with page level scope
-    Int32 CustomerID;
     protected void Page_Load(object sender, EventArgs e)
     {
         clsCustomerUser AnUser = Session["AnUser"] as clsCustomerUser;

@@ -364,6 +364,7 @@ namespace Testing5
             int CustomerID = 1; //this should be ok 
             //invoke the method 
             Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress);
+            Error = aCustomer.Valid(CustomerID, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress);
             //test to see that the result is correct 
             Assert.AreEqual("", Error);
         }
@@ -379,6 +380,7 @@ namespace Testing5
             int CustomerID = 0; //this should be ok 
             //invoke the method 
             Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress);
+            Error = aCustomer.Valid(CustomerID, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress);
             //test to see that the result is correct 
             Assert.AreEqual(Error, "");
         }
@@ -394,6 +396,7 @@ namespace Testing5
             int CustomerID = 0; //this should be ok 
             //invoke the method 
             Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress);
+            Error = aCustomer.Valid(CustomerID, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress);
             //test to see that the result is correct 
             Assert.AreEqual(Error, "");
         }
@@ -410,6 +413,7 @@ namespace Testing5
             int CustomerID = 0; //this should be ok 
             //invoke the method 
             Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress);
+            Error = aCustomer.Valid(CustomerID, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress);
             //test to see that the result is correct 
             Assert.AreEqual(Error, "");
         }
@@ -425,6 +429,7 @@ namespace Testing5
             int CustomerID = 0; //this should be ok 
             //invoke the method 
             Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress);
+            Error = aCustomer.Valid(CustomerID, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress);
             //test to see that the result is correct 
             Assert.AreEqual(Error, "");
         }
