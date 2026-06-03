@@ -160,7 +160,7 @@ namespace Testing5
             //string variable to store any error message
             String Error = "";
             //invoke the method
-            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress, DateTime.Now.Date);
+            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress);
             //test to see that the result is correct
             Assert.AreEqual("", Error);
         }
@@ -333,7 +333,7 @@ namespace Testing5
             //create some test data to pass to the method 
             int CustomerID = -1; //this should trigger an error
             //invoke the method 
-            Error = aCustomer.Valid(CustomerID, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress, DateTime.Now.Date);
+            Error = aCustomer.Valid(CustomerID, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress);
             //test to see that the result is correct 
             Assert.AreEqual("The Customer ID number may not be less than 0 : ", Error);
         }
@@ -348,7 +348,7 @@ namespace Testing5
             //create some test data to pass to the method 
             int CustomerID = 0; //this should be ok
             //invoke the method 
-            Error = aCustomer.Valid(CustomerID, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress, Convert.ToDateTime(DateAdded));
+            Error = aCustomer.Valid(CustomerID, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress);
             //test to see that the result is correct 
             Assert.AreEqual("", Error);
         }
@@ -363,7 +363,8 @@ namespace Testing5
             //create some test data to pass to the method 
             int CustomerID = 1; //this should be ok 
             //invoke the method 
-            Error = aCustomer.Valid(CustomerID, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress, Convert.ToDateTime(DateAdded));
+            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress);
+            Error = aCustomer.Valid(CustomerID, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress);
             //test to see that the result is correct 
             Assert.AreEqual("", Error);
         }
@@ -378,7 +379,8 @@ namespace Testing5
             //create some test data to pass to the method 
             int CustomerID = 0; //this should be ok 
             //invoke the method 
-            Error = aCustomer.Valid(CustomerID, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress, Convert.ToDateTime(DateAdded));
+            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress);
+            Error = aCustomer.Valid(CustomerID, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress);
             //test to see that the result is correct 
             Assert.AreEqual(Error, "");
         }
@@ -393,7 +395,8 @@ namespace Testing5
             //create some test data to pass to the method 
             int CustomerID = 0; //this should be ok 
             //invoke the method 
-            Error = aCustomer.Valid(CustomerID, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress, Convert.ToDateTime(DateAdded));
+            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress);
+            Error = aCustomer.Valid(CustomerID, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress);
             //test to see that the result is correct 
             Assert.AreEqual(Error, "");
         }
@@ -409,7 +412,8 @@ namespace Testing5
             //create some test data to pass to the method 
             int CustomerID = 0; //this should be ok 
             //invoke the method 
-            Error = aCustomer.Valid(CustomerID, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress, Convert.ToDateTime(DateAdded));
+            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress);
+            Error = aCustomer.Valid(CustomerID, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress);
             //test to see that the result is correct 
             Assert.AreEqual(Error, "");
         }
@@ -424,7 +428,8 @@ namespace Testing5
             //create some test data to pass to the method 
             int CustomerID = 0; //this should be ok 
             //invoke the method 
-            Error = aCustomer.Valid(CustomerID, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress, Convert.ToDateTime(DateAdded));
+            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress);
+            Error = aCustomer.Valid(CustomerID, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress);
             //test to see that the result is correct 
             Assert.AreEqual(Error, "");
         }
@@ -440,7 +445,7 @@ namespace Testing5
             //create some test data to pass to the method 
             string CustomerFirstName = ""; //this should trigger an error
                                            //invoke the method 
-            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress, DateTime.Now.Date);
+            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress);
             //test to see that the result is correct 
             Assert.AreNotEqual("", Error);
         }
@@ -455,7 +460,7 @@ namespace Testing5
             //create some test data to pass to the method 
             string CustomerFirstName = "a"; //this should be ok
                                             //invoke the method 
-            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress, DateTime.Now.Date);
+            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress);
             //test to see that the result is correct 
             Assert.AreEqual("", Error);
         }
@@ -470,7 +475,7 @@ namespace Testing5
             //create some test data to pass to the method 
             string CustomerFirstName = "aa"; //this should be ok
                                              //invoke the method 
-            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress, DateTime.Now.Date);
+            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress);
             //test to see that the result is correct 
             Assert.AreEqual("", Error);
         }
@@ -486,7 +491,7 @@ namespace Testing5
             string CustomerFirstName = "";
             CustomerFirstName = CustomerFirstName.PadRight(49, 'a'); //this should be ok
                                                                      //invoke the method 
-            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress, DateTime.Now.Date);
+            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress);
             //test to see that the result is correct 
             Assert.AreEqual("", Error);
         }
@@ -502,7 +507,7 @@ namespace Testing5
             string CustomerFirstName = "";
             CustomerFirstName = CustomerFirstName.PadRight(50, 'a'); //this should be ok
                                                                      //invoke the method 
-            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress, DateTime.Now.Date);
+            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress);
             //test to see that the result is correct 
             Assert.AreEqual("", Error);
         }
@@ -518,7 +523,7 @@ namespace Testing5
             string CustomerFirstName = "";
             CustomerFirstName = CustomerFirstName.PadRight(51, 'a'); //this should trigger an error
                                                                      //invoke the method 
-            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress, DateTime.Now.Date);
+            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress);
             //test to see that the result is correct 
             Assert.AreNotEqual("", Error);
         }
@@ -534,7 +539,7 @@ namespace Testing5
             string CustomerFirstName = "";
             CustomerFirstName = CustomerFirstName.PadRight(25, 'a'); //this should be ok
                                                                      //invoke the method 
-            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress, DateTime.Now.Date);
+            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress);
             //test to see that the result is correct 
             Assert.AreEqual("", Error);
         }
@@ -550,7 +555,7 @@ namespace Testing5
             string CustomerFirstName = "";
             CustomerFirstName = CustomerFirstName.PadRight(500, 'a'); //this should trigger an error
                                                                       //invoke the method 
-            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress, DateTime.Now.Date);
+            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress);
             //test to see that the result is correct 
             Assert.AreNotEqual("", Error);
         }
@@ -566,7 +571,7 @@ namespace Testing5
             //create some test data to pass to the method 
             bool CustomerIsActive = false; //this should be ok
             //invoke the method                               
-            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress, DateTime.Now.Date);
+            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress);
             //test to see that the result is correct 
             Assert.AreEqual("", Error);
         }
@@ -581,7 +586,7 @@ namespace Testing5
             //create some test data to pass to the method 
             bool CustomerIsActive = true; //this should be ok
             //invoke the method 
-            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress, DateTime.Now.Date);
+            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress);
             //test to see that the result is correct 
             Assert.AreEqual("", Error);
         }
@@ -597,7 +602,7 @@ namespace Testing5
             //create some test data to pass to the method 
             string CustomerEmail = ""; //this should trigger an error
             //invoke the method                           
-            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress, DateTime.Now.Date);
+            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress);
             //test to see that the result is correct 
             Assert.AreNotEqual("", Error);
         }
@@ -612,7 +617,7 @@ namespace Testing5
             //create some test data to pass to the method 
             string CustomerEmail = "a@a.com"; //this should be ok
                                               //invoke the method 
-            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress, DateTime.Now.Date);
+            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress);
             //test to see that the result is correct 
             Assert.AreEqual("", Error);
         }
@@ -628,7 +633,7 @@ namespace Testing5
             string CustomerEmail = "";
             CustomerEmail = CustomerEmail.PadRight(49, 'a'); //this should be ok
                                                              //invoke the method 
-            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress, DateTime.Now.Date);
+            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress);
             //test to see that the result is correct 
             Assert.AreEqual("", Error);
         }
@@ -644,7 +649,7 @@ namespace Testing5
             string CustomerEmail = "";
             CustomerEmail = CustomerEmail.PadRight(50, 'a'); //this should be ok
                                                              //invoke the method 
-            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress, DateTime.Now.Date);
+            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress);
             //test to see that the result is correct 
             Assert.AreEqual("", Error);
         }
@@ -660,7 +665,7 @@ namespace Testing5
             string CustomerEmail = "";
             CustomerEmail = CustomerEmail.PadRight(51, 'a'); //this should trigger an error
                                                              //invoke the method 
-            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress, DateTime.Now.Date);
+            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress);
             //test to see that the result is correct 
             Assert.AreNotEqual("", Error);
         }
@@ -676,7 +681,7 @@ namespace Testing5
             string CustomerEmail = "";
             CustomerEmail = CustomerEmail.PadRight(25, 'a'); //this should be ok
                                                              //invoke the method 
-            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress, DateTime.Now.Date);
+            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress);
             //test to see that the result is correct 
             Assert.AreEqual("", Error);
         }
@@ -692,7 +697,7 @@ namespace Testing5
             string CustomerEmail = "";
             CustomerEmail = CustomerEmail.PadRight(500, 'a'); //this should trigger an error
                                                               //invoke the method 
-            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress, DateTime.Now.Date);
+            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress);
             //test to see that the result is correct 
             Assert.AreNotEqual("", Error);
         }
@@ -708,7 +713,7 @@ namespace Testing5
             //create some test data to pass to the method 
             string CustomerPassword = ""; //this should trigger an error
                                           //invoke the method 
-            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress, DateTime.Now.Date);
+            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress);
             //test to see that the result is correct 
             Assert.AreNotEqual("", Error);
         }
@@ -723,7 +728,7 @@ namespace Testing5
             //create some test data to pass to the method 
             string CustomerPassword = "a"; //this should be ok
                                            //invoke the method 
-            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress, DateTime.Now.Date);
+            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress);
             //test to see that the result is correct 
             Assert.AreEqual("", Error);
         }
@@ -739,7 +744,7 @@ namespace Testing5
             string CustomerPassword = "";
             CustomerPassword = CustomerPassword.PadRight(49, 'a'); //this should be ok
                                                                    //invoke the method 
-            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress, DateTime.Now.Date);
+            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress);
             //test to see that the result is correct 
             Assert.AreEqual("", Error);
         }
@@ -755,7 +760,7 @@ namespace Testing5
             string CustomerPassword = "";
             CustomerPassword = CustomerPassword.PadRight(50, 'a'); //this should be ok
                                                                    //invoke the method 
-            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress, DateTime.Now.Date);
+            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress);
             //test to see that the result is correct 
             Assert.AreEqual("", Error);
         }
@@ -771,7 +776,7 @@ namespace Testing5
             string CustomerPassword = "";
             CustomerPassword = CustomerPassword.PadRight(51, 'a'); //this should trigger an error
                                                                    //invoke the method 
-            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress, DateTime.Now.Date);
+            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress);
             //test to see that the result is correct 
             Assert.AreNotEqual("", Error);
         }
@@ -787,7 +792,7 @@ namespace Testing5
             string CustomerPassword = "";
             CustomerPassword = CustomerPassword.PadRight(25, 'a'); //this should be ok
                                                                    //invoke the method 
-            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress, DateTime.Now.Date);
+            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress);
             //test to see that the result is correct 
             Assert.AreEqual("", Error);
         }
@@ -803,7 +808,7 @@ namespace Testing5
             string CustomerPassword = "";
             CustomerPassword = CustomerPassword.PadRight(500, 'a'); //this should trigger an error
                                                                     //invoke the method 
-            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress, DateTime.Now.Date);
+            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress);
             //test to see that the result is correct 
             Assert.AreNotEqual("", Error);
         }
@@ -823,7 +828,7 @@ namespace Testing5
             //change the date to whatever the date is less 100 years 
             TestDate = TestDate.AddYears(-100);
             //invoke the method 
-            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, TestDate, CustomerAddress, DateTime.Now.Date);
+            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, TestDate, CustomerAddress);
             //test to see that the result is correct 
             Assert.AreEqual("", Error);
         }
@@ -842,7 +847,7 @@ namespace Testing5
             //change the date to whatever the date is less 1 day 
             TestDate = TestDate.AddDays(-1);
             //invoke the method 
-            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, TestDate, CustomerAddress, DateTime.Now.Date);
+            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, TestDate, CustomerAddress);
             //test to see that the result is correct 
             Assert.AreEqual("", Error);
         }
@@ -859,7 +864,7 @@ namespace Testing5
             //set the date to todays date 
             TestDate = DateTime.Now.Date;
             //invoke the method 
-            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, TestDate, CustomerAddress, DateTime.Now.Date);
+            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, TestDate, CustomerAddress);
             //test to see that the result is correct 
             Assert.AreEqual("", Error);
         }
@@ -878,7 +883,7 @@ namespace Testing5
             //change the date to whatever the date is plus 1 day 
             TestDate = TestDate.AddDays(1);
             //invoke the method 
-            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, TestDate, CustomerAddress, DateTime.Now.Date);
+            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, TestDate, CustomerAddress);
             //test to see that the result is correct 
             Assert.AreEqual("", Error);
         }
@@ -897,7 +902,7 @@ namespace Testing5
             //change the date to whatever the date is plus 100 years
             TestDate = TestDate.AddYears(100);
             //invoke the method 
-            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, TestDate, CustomerAddress, DateTime.Now.Date);
+            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, TestDate, CustomerAddress);
             //test to see that the result is correct 
             Assert.AreEqual("", Error);
         }
@@ -913,7 +918,7 @@ namespace Testing5
             //create some test data to pass to the method 
             string CustomerAddress = ""; //this should trigger an error
                                          //invoke the method 
-            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress, DateTime.Now.Date);
+            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress);
             //test to see that the result is correct 
             Assert.AreNotEqual("", Error);
         }
@@ -928,7 +933,7 @@ namespace Testing5
             //create some test data to pass to the method 
             string CustomerAddress = "a"; //this should be ok
                                           //invoke the method 
-            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress, DateTime.Now.Date);
+            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress);
             //test to see that the result is correct 
             Assert.AreEqual("", Error);
         }
@@ -944,7 +949,7 @@ namespace Testing5
             string CustomerAddress = "";
             CustomerAddress = CustomerAddress.PadRight(49, 'a'); //this should be ok
                                                                  //invoke the method 
-            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress, DateTime.Now.Date);
+            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress);
             //test to see that the result is correct 
             Assert.AreEqual("", Error);
         }
@@ -960,7 +965,7 @@ namespace Testing5
             string CustomerAddress = "";
             CustomerAddress = CustomerAddress.PadRight(50, 'a'); //this should be ok
                                                                  //invoke the method 
-            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress, DateTime.Now.Date);
+            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress);
             //test to see that the result is correct 
             Assert.AreEqual("", Error);
         }
@@ -976,7 +981,7 @@ namespace Testing5
             string CustomerAddress = "";
             CustomerAddress = CustomerAddress.PadRight(51, 'a'); //this should trigger an error
                                                                  //invoke the method 
-            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress, DateTime.Now.Date);
+            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress);
             //test to see that the result is correct 
             Assert.AreNotEqual("", Error);
         }
@@ -992,7 +997,7 @@ namespace Testing5
             string CustomerAddress = "";
             CustomerAddress = CustomerAddress.PadRight(25, 'a'); //this should be ok
                                                                  //invoke the method 
-            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress, DateTime.Now.Date);
+            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress);
             //test to see that the result is correct 
             Assert.AreEqual("", Error);
         }
@@ -1008,7 +1013,7 @@ namespace Testing5
             string CustomerAddress = "";
             CustomerAddress = CustomerAddress.PadRight(500, 'a'); //this should trigger an error
                                                                   //invoke the method 
-            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress, DateTime.Now.Date);
+            Error = aCustomer.Valid(0, CustomerFirstName, CustomerIsActive, CustomerEmail, CustomerPassword, CustomerDOB, CustomerAddress);
             //test to see that the result is correct 
             Assert.AreNotEqual("", Error);
         }

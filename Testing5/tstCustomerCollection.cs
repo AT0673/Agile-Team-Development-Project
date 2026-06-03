@@ -112,12 +112,12 @@ namespace Testing5
             //set its properties
             TestItem.Active = true;
             TestItem.CustomerID = rnd.Next(100000, 999999);
-            TestItem.CustomerEmail = "lewis@email.com";
-            TestItem.CustomerFirstName = "Lewis";
+            TestItem.CustomerEmail = "test@email.com";
+            TestItem.CustomerFirstName = "Test Data";
             TestItem.CustomerIsActive = true;
             TestItem.CustomerPassword = "Pa$$w0rd";
             TestItem.CustomerDOB = DateTime.Now.Date;
-            TestItem.CustomerAddress = "11 Leicester Road";
+            TestItem.CustomerAddress = "11 Test Road";
             //set ThisCustomer to the test data
             AllCustomers.ThisCustomer = TestItem;
             //add the record
