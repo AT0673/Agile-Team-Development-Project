@@ -12,7 +12,13 @@ public partial class _1Viewer : System.Web.UI.Page
     {
         clsSupplier aSupplier = new clsSupplier();
         aSupplier = (clsSupplier)Session["aSupplier"];
-        Response.Write(aSupplier.SupplierName);
-       
+        Response.Write("Supplier ID: " + aSupplier.SupplierID + "<br />");
+        Response.Write("Supplier Name: " + aSupplier.SupplierName + "<br />");
+        Response.Write("Address: " + aSupplier.SupplierAddress + "<br />");
+        Response.Write("Contact Email: " + aSupplier.SupplierEmail + "<br />");
+        Response.Write("Contact Phone: " + aSupplier.SupplierPhoneNumber + "<br />");
+        Response.Write("Created Date: " + aSupplier.SupplierCreatedDate + "<br />");
+        Response.Write("Is Active: " + aSupplier.SupplierActive + "<br />");
+
     }
 }

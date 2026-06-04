@@ -1,6 +1,7 @@
 ﻿using ClassLibrary;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.SessionState;
@@ -11,7 +12,11 @@ public partial class _1_DataEntry : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        // Populate fields when the page is first loaded for editing an existing record
+        if (!IsPostBack)
+        {
+            DisplaySupplier();
+        }
     }
     protected void btnOK_Click(object sender, EventArgs e)
     {
@@ -23,7 +28,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
             SupplierID = -1;
         }
         string SupplierName = txtSupplierName.Text;
-        string SupplierEmail = txtSupplierEmail.Text;   
+        string SupplierEmail = txtSupplierEmail.Text;
         string SupplierAddress = txtSupplierAddress.Text;
         string SupplierPhoneNumber = txtSupplierPhoneNumber.Text;
         // safely parse created date; if invalid leave as DateTime.MinValue so validation can catch it
@@ -117,5 +122,10 @@ public partial class _1_DataEntry : System.Web.UI.Page
         txtSupplierPhoneNumber.Text = string.Empty;
         txtSupplierCreatedDate.Text = string.Empty;
         chkSupplierActive.Checked = false;
+
+    }
+    protected void btnCancel_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("SupplierList.aspx");
     }
 }
