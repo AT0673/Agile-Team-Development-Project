@@ -158,14 +158,14 @@ namespace Testing4
         {
             clsSupplierCollection FilteredSuppliers = new clsSupplierCollection();
             Boolean OK = true;
-            FilteredSuppliers.ReportBySupplierName("Test Supplier");
+            FilteredSuppliers.ReportBySupplierName("Same Supplier");
             if (FilteredSuppliers.Count == 2)
             {
-                if (FilteredSuppliers.Supplierlist[0].SupplierID != 7)
+                if (FilteredSuppliers.Supplierlist[0].SupplierID != 47)
                 {
                     OK = false;
                 }
-                if (FilteredSuppliers.Supplierlist[1].SupplierID != 22)
+                if (FilteredSuppliers.Supplierlist[1].SupplierID != 48)
                 {
                     OK = false;
                 }

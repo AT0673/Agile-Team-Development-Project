@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 namespace ClassLibrary
 {
     public class clsSupplierCollection
@@ -112,16 +113,18 @@ namespace ClassLibrary
             while (Index < RecordCount)
             {
                 clsSupplier aSupplier = new clsSupplier();
-                aSupplier.SupplierActive = Convert.ToBoolean(DB.DataTable.Rows[Index]["IsActive"]);
                 aSupplier.SupplierID = Convert.ToInt32(DB.DataTable.Rows[Index]["SupplierID"]);
                 aSupplier.SupplierName = Convert.ToString(DB.DataTable.Rows[Index]["SupplierName"]);
                 aSupplier.SupplierEmail = Convert.ToString(DB.DataTable.Rows[Index]["ContactEmail"]);
                 aSupplier.SupplierAddress = Convert.ToString(DB.DataTable.Rows[Index]["Address"]);
                 aSupplier.SupplierPhoneNumber = Convert.ToString(DB.DataTable.Rows[Index]["ContactPhone"]);
                 aSupplier.SupplierCreatedDate = Convert.ToDateTime(DB.DataTable.Rows[Index]["CreatedDate"]);
+                aSupplier.SupplierActive = Convert.ToBoolean(DB.DataTable.Rows[Index]["IsActive"]);
                 mSupplierList.Add(aSupplier);
                 Index++;
             }
+            // ensure deterministic ordering (ascending by SupplierID) so callers/tests get predictable results
+            mSupplierList = mSupplierList.OrderBy(s => s.SupplierID).ToList();
         }
     }
 }

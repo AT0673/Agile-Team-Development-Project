@@ -180,12 +180,9 @@ namespace ClassLibrary
             if (supplierCreatedDate == DateTime.MinValue)
             {
                 Error = Error + "Created date is not a valid date : ";
-            }       
-            if (supplierCreatedDate < DateTime.Now.Date)
-            {
-                Error = Error + "Date cannot be in the past : ";
             }
 
+            // Allow past created dates (existing records). Only reject future dates.
             if (supplierCreatedDate > DateTime.Now.Date)
             {
                 Error = Error + "Date cannot be in the future : ";
