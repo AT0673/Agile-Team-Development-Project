@@ -10,8 +10,7 @@
     style="height: 403px">
     <form id="form1" runat="server">
         <div>
-            <asp:Label ID="lblError" runat="server" style="z-index: 1; left: 8px; top: 359px; position: absolute; bottom: 158px" width="75px"></asp:Label>
-            This is the Staff Data Entry Page<br />
+            Staff Data Entry<br />
         </div>
         <asp:Label ID="lblStaffID" runat="server" style="z-index: 1; left: 10px; top: 53px; position: absolute" Text="Staff ID" width="75px"></asp:Label>
         <asp:TextBox ID="TextBox1" runat="server" OnTextChanged="TextBox1_TextChanged" style="z-index: 1; left: 98px; top: 52px; position: absolute"></asp:TextBox>
@@ -34,7 +33,7 @@
             <asp:TextBox ID="TextBox5" runat="server" style="z-index: 1; left: 95px; top: 222px; position: absolute; height: 22px;" width="128px"></asp:TextBox>
         </p>
         <p style="height: 32px">
-            <asp:Label ID="lblStaffDate" runat="server" style="z-index: 1; left: 10px; top: 283px; position: absolute" Text="Date Added"></asp:Label>
+            <asp:Label ID="lblStaffDOB" runat="server" style="z-index: 1; left: 10px; top: 282px; position: absolute" Text="DOB"></asp:Label>
             <asp:TextBox ID="TextBox6" runat="server" style="z-index: 1; left: 99px; top: 281px; position: absolute" width="128px"></asp:TextBox>
         </p>
         <asp:CheckBox ID="chkActive" runat="server" style="z-index: 1; left: 97px; top: 333px; position: absolute" Text="Active" />

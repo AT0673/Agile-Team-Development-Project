@@ -62,6 +62,7 @@
     <Compile Include="clsStaff.cs" />
     <Compile Include="clsProductCollection.cs" />
     <Compile Include="clsStaffCollection.cs" />
+    <Compile Include="clsStaffUser.cs" />
     <Compile Include="clsSupplier.cs" />
     <Compile Include="clsSupplierCollection.cs" />
     <Compile Include="clsSupplierUser.cs" />
