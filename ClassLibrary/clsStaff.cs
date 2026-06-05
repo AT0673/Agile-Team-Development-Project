@@ -12,7 +12,7 @@ namespace ClassLibrary
         private string mStaffPassword;
         private string mStaffAddress;
         private bool mActive;
-        private DateTime mDateAdded;
+        private DateTime mStaffDOB;
 
         //public property for StaffID
         public int StaffID
@@ -105,16 +105,16 @@ namespace ClassLibrary
             }
         }
 
-        //public property for DateAdded
-        public DateTime DateAdded
+        //public property for StaffDOB
+        public DateTime StaffDOB
         {
             get
             {
-                return mDateAdded;
+                return mStaffDOB;
             }
             set
             {
-                mDateAdded = value;
+                mStaffDOB = value;
             }
         }
 
@@ -130,7 +130,7 @@ namespace ClassLibrary
                 mStaffUsername = Convert.ToString("StaffUsername");
                 mStaffPassword = Convert.ToString("StaffPassword");
                 mStaffAddress = Convert.ToString("StaffAddress");
-
+                mStaffDOB = Convert.ToDateTime("StaffDOB");
                 //return true because the record was found
                 return true;
             }
@@ -147,7 +147,7 @@ namespace ClassLibrary
                             string StaffPassword,
                             string StaffAddress,
                             bool StaffIsActive,
-                            DateTime DateAdded)
+                            DateTime StaffDOB)
         {
             //string variable to store the error message
             String Error = "";
@@ -196,13 +196,13 @@ namespace ClassLibrary
                 Error = Error + "The address must be less than 100 characters : ";
             }
 
-            //validation for DateAdded
-            if (DateAdded < DateTime.Now.Date)
+            //validation for StaffDOB
+            if (StaffDOB < DateTime.Now.Date)
             {
                 Error = Error + "The date cannot be in the past : ";
             }
 
-            if (DateAdded > DateTime.Now.Date)
+            if (StaffDOB > DateTime.Now.Date)
             {
                 Error = Error + "The date cannot be in the future : ";
             }

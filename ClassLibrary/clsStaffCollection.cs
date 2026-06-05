@@ -73,7 +73,7 @@ namespace ClassLibrary
                 DB.AddParameter("@StaffUsername", mThisStaff.StaffUsername);
                 DB.AddParameter("@StaffPassword", mThisStaff.StaffPassword);
                 DB.AddParameter("@StaffAddress", mThisStaff.StaffAddress);
-                DB.AddParameter("@DateAdded", mThisStaff.DateAdded);
+                DB.AddParameter("@StaffDOB", mThisStaff.StaffDOB);
 
                 return DB.Execute("sproc_tblStaff_Insert");
             }
@@ -89,7 +89,7 @@ namespace ClassLibrary
                 DB.AddParameter("@StaffUsername", mThisStaff.StaffUsername);
                 DB.AddParameter("@StaffPassword", mThisStaff.StaffPassword);
                 DB.AddParameter("@StaffAddress", mThisStaff.StaffAddress);
-                DB.AddParameter("@DateAdded", mThisStaff.DateAdded);
+                DB.AddParameter("@StaffDOB", mThisStaff.StaffDOB);
 
                 DB.Execute("sproc_tblStaff_Update");
             }
@@ -134,7 +134,7 @@ namespace ClassLibrary
                     AStaff.StaffUsername = Convert.ToString(DB.DataTable.Rows[Index]["StaffUsername"]);
                     AStaff.StaffPassword = Convert.ToString(DB.DataTable.Rows[Index]["StaffPassword"]);
                     AStaff.StaffAddress = Convert.ToString(DB.DataTable.Rows[Index]["StaffAddress"]);
-                    AStaff.DateAdded = Convert.ToDateTime(DB.DataTable.Rows[Index]["DateAdded"]);
+                    AStaff.StaffDOB = Convert.ToDateTime(DB.DataTable.Rows[Index]["StaffDOB"]);
 
                     mStaffList.Add(AStaff);
 
