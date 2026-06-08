@@ -6,12 +6,8 @@ namespace Testing1
     [TestClass]
     public class tstStaffCollection
     {
-        [TestMethod]
-        public void TestMethod1()
-        {
-            [TestClass]
-            public class tstStaffCollection
-        {
+        
+            
             [TestMethod]
             public void InstanceOK()
             {
@@ -237,12 +233,6 @@ namespace Testing1
 
                 Assert.IsTrue(OK);
             }
-        }
-
-
-
-
-
-    }
     }
 }
+

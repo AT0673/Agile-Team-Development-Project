@@ -36,15 +36,15 @@ namespace ClassLibrary
 
         public bool FindUser(string username, string password)
         {
-            
+
             clsDataConnection DB = new clsDataConnection();
             //add the parameters using lowercase so it uses the passed arguments
             DB.AddParameter("@Username", username);
             DB.AddParameter("@Password", password);
-            
+
             DB.Execute("sproc_tblUsers_FindUsernamePW");
-          
-           
+
+
             if (DB.Count == 1)
             {
                 //copy the data from the database to the private data memebers
@@ -52,7 +52,7 @@ namespace ClassLibrary
                 mUsername = Convert.ToString(DB.DataTable.Rows[0]["Username"]);
                 mPassword = Convert.ToString(DB.DataTable.Rows[0]["Password"]);
                 mDepartment = Convert.ToString(DB.DataTable.Rows[0]["Department"]);
-            
+
                 return true;
             }
             else
@@ -63,3 +63,4 @@ namespace ClassLibrary
         }
 
     }
+}
