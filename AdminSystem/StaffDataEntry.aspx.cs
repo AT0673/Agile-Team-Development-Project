@@ -40,7 +40,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
         AStaff.StaffAddress = lblStaffAddress.Text;
 
         //capture the date added
-        AStaff.DateAdded = DateTime.Now.Date;
+        AStaff.StaffDOB = DateTime.Now.Date;
 
         //capture the active status
         AStaff.Active = chkActive.Checked;
@@ -55,7 +55,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
             AStaff.StaffPassword,
             AStaff.StaffAddress,
             AStaff.Active,
-            AStaff.DateAdded);
+            AStaff.StaffDOB);
 
         if (Error == "")
         {
@@ -100,5 +100,16 @@ public partial class _1_DataEntry : System.Web.UI.Page
     protected void btnCancel_Click(object sender, EventArgs e)
     {
 
+    }
+
+    protected void calCustomerDOB_SelectionChanged(object sender, EventArgs e)
+    {
+
+    }
+
+
+    protected void btnMainMenu_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("TeamMainMenu.aspx");
     }
 }
